@@ -3,32 +3,46 @@
     <div>
       <p v-if="pet.name && stage >= 2">
         I am a
-        <span v-if="pet.sex">{{pet.sex}}</span>
-        dog named {{pet.name}}.
+        <span class="bold" v-if="pet.sex">{{pet.sex}}</span>
+        dog named
+        <span class="bold">{{pet.name}}</span>.
       </p>
-      <p v-if="pet.breed && stage >= 4">My breed is {{pet.breed}}.</p>
+      <p v-if="pet.breed && stage >= 4">
+        My breed is
+        <span class="bold">{{pet.breed}}</span>.
+      </p>
       <p v-if="pet.age && stage >= 5">
-        I am {{pet.age}} years old
-        <span v-if="pet.weight && stage >= 6">and weigh {{pet.weight}}kg</span>.
+        I am
+        <span class="bold">{{pet.age}} years</span> old
+        <span v-if="pet.weight && stage >= 6">
+          and weigh
+          <span class="bold">{{pet.weight}}kg</span>
+        </span>.
       </p>
       <p v-if="stage >= 7">
         In temperment, I'm
-        <span v-if="pet.activity === 'potato'">a bit of a couch potato</span>
-        <span v-if="pet.activity === 'notso'">not very active</span>
-        <span v-if="pet.activity === 'active'">an active dog</span>
-        <span v-if="pet.activity === 'more'">more active than most</span>
-        <span v-if="pet.activity === 'super'">super active</span>
+        <span
+          class="bold"
+          v-if="pet.activity === 'potato'"
+        >a bit of a couch potato</span>
+        <span class="bold" v-if="pet.activity === 'notso'">not very active</span>
+        <span class="bold" v-if="pet.activity === 'active'">an active dog</span>
+        <span class="bold" v-if="pet.activity === 'more'">more active than most</span>
+        <span class="bold" v-if="pet.activity === 'super'">super active</span>
 
         <span v-if="stage >= 8">
           and
-          <span v-if="pet.body === 'underweight'">very underweight</span>
-          <span v-if="pet.body === 'slightlyunder'">slightly underweight</span>
-          <span v-if="pet.body === 'average'">average</span>
-          <span v-if="pet.body === 'slightlyover'">slightly overweight</span>
-          <span v-if="pet.body === 'overweight'">very overweight</span>
+          <span class="bold" v-if="pet.body === 'underweight'">very underweight</span>
+          <span class="bold" v-if="pet.body === 'slightlyunder'">slightly underweight</span>
+          <span class="bold" v-if="pet.body === 'average'">average</span>
+          <span class="bold" v-if="pet.body === 'slightlyover'">slightly overweight</span>
+          <span class="bold" v-if="pet.body === 'overweight'">very overweight</span>
         </span>
       </p>
-      <p v-if="stage >= 9">I am {{pet.working ? "a working dog" : "not a working dog"}}</p>
+      <p v-if="stage >= 9">
+        I am
+        <span class="bold">{{pet.working ? "a working dog" : "not a working dog"}}</span>
+      </p>
     </div>
 
     <h2>{{ message }}</h2>
@@ -92,7 +106,7 @@
       <ul class="wizard-list">
         <li>
           <input type="checkbox" name="health" id="health0" value="bloat" />
-          <label for="health0">None (This wont be here final version, will just skip physical)</label>
+          <label for="health0">None</label>
         </li>
         <li>
           <input type="checkbox" name="health" id="health1" value="bloat" v-model="pet.health" />
@@ -352,16 +366,16 @@ export default {
     handleWorkingDog(isWorking) {
       this.pet.working = isWorking;
       this.stage = 9;
-      this.message = `Does ${this.pet.name} suffer from any health issues?`;
+      this.message = `Does ${this.pet.name} suffer from any if these health issues?`;
     },
     doPhysical() {
       console.log(this.pet.health);
       this.stage = 10;
-      this.message = `Does ${this.pet.name} suffer from any physical issues?`;
+      this.message = `Does ${this.pet.name} suffer from any of these physical issues?`;
     },
     doBehavioral() {
       this.stage = 11;
-      this.message = `Does ${this.pet.name} suffer from any diseases?`;
+      this.message = `Does ${this.pet.name} suffer from any of these diseases?`;
     },
     doDiseases() {
       this.stage = 12;
@@ -390,5 +404,9 @@ export default {
 .wizard-list {
   list-style: none;
   text-align: left;
+}
+
+.bold {
+  font-weight: 700;
 }
 </style>
