@@ -67,7 +67,41 @@
         </div>
 
         <div class="question-form">
-            <h3 class="question">{{ question }}</h3>
+            <h3 v-if="stage === 1" class="question">What is your dogs name?</h3>
+            <h3 v-if="stage === 2" class="question">
+                What sex is {{ pet.name }}?
+            </h3>
+            <h3 v-if="stage === 3" class="question">
+                What breed is {{ pet.name }}?
+            </h3>
+            <h3 v-if="stage === 4" class="question">
+                What age is {{ pet.name }}?
+            </h3>
+            <h3 v-if="stage === 5" class="question">
+                What does {{ pet.name }} weigh? (kg)
+            </h3>
+            <h3 v-if="stage === 6" class="question">
+                How active is {{ pet.name }}?
+            </h3>
+            <h3 v-if="stage === 7" class="question">
+                What is {{ pet.name }}s body type?
+            </h3>
+            <h3 v-if="stage === 8" class="question">
+                Is {{ pet.name }} a working dog?
+            </h3>
+            <h3 v-if="stage === 9" class="question">
+                Does {{ pet.name }} suffer from any of these health issues?
+            </h3>
+            <h3 v-if="stage === 10" class="question">
+                Does {{ pet.name }} suffer from any of these physical issues?
+            </h3>
+            <h3 v-if="stage === 11" class="question">
+                Does {{ pet.name }} suffer from any of these diseases?
+            </h3>
+            <h3 v-if="stage === 12" class="question">
+                Is this your first time using raw dog food?
+            </h3>
+
             <form v-if="stage === 1" v-on:submit.prevent="handleNameInput">
                 <input
                     type="text"
@@ -301,7 +335,7 @@
                         <label for="health12">Ticks & Fleas</label>
                     </li>
                 </ul>
-                <button>To behavioral issues</button>
+                <button class="multi-buttons">NEXT</button>
             </form>
             <form
                 class="wizard-health"
@@ -391,117 +425,120 @@
                         <label for="health18">Separation Anxiety</label>
                     </li>
                 </ul>
-                <button>To diseases</button>
+                <button class="multi-buttons">NEXT</button>
             </form>
             <form
                 class="wizard-health"
                 v-if="stage === 11"
                 v-on:submit.prevent="doDiseases"
             >
-                <li>
-                    <input type="checkbox" name="health" id="health" />
-                    <label for="health">None</label>
-                </li>
-                <li>
-                    <input
-                        type="checkbox"
-                        name="health"
-                        id="health"
-                        value="cardiomyopathy"
-                        v-model="pet.health"
-                    />
-                    <label for="health">Cardiomyopathy (DCM)</label>
-                </li>
-                <li>
-                    <input
-                        type="checkbox"
-                        name="health"
-                        id="health"
-                        value="chronicKidney"
-                        v-model="pet.health"
-                    />
-                    <label for="health">Chronic Kidney Disease</label>
-                </li>
-                <li>
-                    <input
-                        type="checkbox"
-                        name="health"
-                        id="health"
-                        value="cushings"
-                        v-model="pet.health"
-                    />
-                    <label for="health">Cushing's Disease</label>
-                </li>
-                <li>
-                    <input
-                        type="checkbox"
-                        name="health"
-                        id="health"
-                        value="diabetes"
-                        v-model="pet.health"
-                    />
-                    <label for="health">Diabetes</label>
-                </li>
-                <li>
-                    <input
-                        type="checkbox"
-                        name="health"
-                        id="health"
-                        value="epilespy"
-                        v-model="pet.health"
-                    />
-                    <label for="health">Epilepsy</label>
-                </li>
-                <li>
-                    <input
-                        type="checkbox"
-                        name="health"
-                        id="health"
-                        value="hipDysplasia"
-                        v-model="pet.health"
-                    />
-                    <label for="health">Hip Dysplasia</label>
-                </li>
-                <li>
-                    <input
-                        type="checkbox"
-                        name="health"
-                        id="health"
-                        value="hyperthyroidism"
-                        v-model="pet.health"
-                    />
-                    <label for="health">Hyperthyroidism</label>
-                </li>
-                <li>
-                    <input
-                        type="checkbox"
-                        name="health"
-                        id="health"
-                        value="hypothyroidism"
-                        v-model="pet.health"
-                    />
-                    <label for="health">Hypothyroidism</label>
-                </li>
-                <li>
-                    <input
-                        type="checkbox"
-                        name="health"
-                        id="health"
-                        value="luxatingPatella"
-                        v-model="pet.health"
-                    />
-                    <label for="health">Luxating Patella</label>
-                </li>
-                <li>
-                    <input
-                        type="checkbox"
-                        name="health"
-                        id="health"
-                        value="pancreatitus"
-                        v-model="pet.health"
-                    />
-                    <label for="health">Pancreatitis</label>
-                </li>
+                <ul class="wizard-list">
+                    <li>
+                        <input type="checkbox" name="health" id="health" />
+                        <label for="health">None</label>
+                    </li>
+                    <li>
+                        <input
+                            type="checkbox"
+                            name="health"
+                            id="health"
+                            value="cardiomyopathy"
+                            v-model="pet.health"
+                        />
+                        <label for="health">Cardiomyopathy (DCM)</label>
+                    </li>
+                    <li>
+                        <input
+                            type="checkbox"
+                            name="health"
+                            id="health"
+                            value="chronicKidney"
+                            v-model="pet.health"
+                        />
+                        <label for="health">Chronic Kidney Disease</label>
+                    </li>
+                    <li>
+                        <input
+                            type="checkbox"
+                            name="health"
+                            id="health"
+                            value="cushings"
+                            v-model="pet.health"
+                        />
+                        <label for="health">Cushing's Disease</label>
+                    </li>
+                    <li>
+                        <input
+                            type="checkbox"
+                            name="health"
+                            id="health"
+                            value="diabetes"
+                            v-model="pet.health"
+                        />
+                        <label for="health">Diabetes</label>
+                    </li>
+                    <li>
+                        <input
+                            type="checkbox"
+                            name="health"
+                            id="health"
+                            value="epilespy"
+                            v-model="pet.health"
+                        />
+                        <label for="health">Epilepsy</label>
+                    </li>
+                    <li>
+                        <input
+                            type="checkbox"
+                            name="health"
+                            id="health"
+                            value="hipDysplasia"
+                            v-model="pet.health"
+                        />
+                        <label for="health">Hip Dysplasia</label>
+                    </li>
+                    <li>
+                        <input
+                            type="checkbox"
+                            name="health"
+                            id="health"
+                            value="hyperthyroidism"
+                            v-model="pet.health"
+                        />
+                        <label for="health">Hyperthyroidism</label>
+                    </li>
+                    <li>
+                        <input
+                            type="checkbox"
+                            name="health"
+                            id="health"
+                            value="hypothyroidism"
+                            v-model="pet.health"
+                        />
+                        <label for="health">Hypothyroidism</label>
+                    </li>
+                    <li>
+                        <input
+                            type="checkbox"
+                            name="health"
+                            id="health"
+                            value="luxatingPatella"
+                            v-model="pet.health"
+                        />
+                        <label for="health">Luxating Patella</label>
+                    </li>
+                    <li>
+                        <input
+                            type="checkbox"
+                            name="health"
+                            id="health"
+                            value="pancreatitus"
+                            v-model="pet.health"
+                        />
+                        <label for="health">Pancreatitis</label>
+                    </li>
+                </ul>
+                <button class="multi-buttons">NEXT</button>
             </form>
             <form v-if="stage === 13">
                 <button v-on:click="handleRawExperience('new')">Yes</button>
@@ -514,7 +551,7 @@
             </form>
         </div>
         <div class="bottom-buttons">
-            <button>Back</button>
+            <button @click="goBack">Back</button>
             <button>Help</button>
             <button>Save</button>
         </div>
@@ -554,52 +591,44 @@ export default {
         handleClick() {},
         handleNameInput() {
             this.stage = 2;
-            this.question = `What sex is ${this.pet.name}?`;
         },
         handleSexSelect() {
             this.stage = 3;
-            this.question = `What breed is ${this.pet.name}?`;
         },
         handleBreedInput() {
             this.stage = 4;
-            this.question = `What age is ${this.pet.name}`;
         },
         handleAgeInput() {
             this.stage = 5;
-            this.question = `What does ${this.pet.name} weigh?`;
         },
         handleWeightInput() {
             this.stage = 6;
-            this.question = `How active is ${this.pet.name}?`;
         },
         handleActivitySelect() {
             this.stage = 7;
-            this.question = `What is ${this.pet.name}s body type?`;
         },
         handleBodySelect() {
             this.stage = 8;
-            this.question = `Is ${this.pet.name} a working dog?`;
         },
         handleWorkingDog(isWorking) {
             this.pet.working = isWorking;
             this.stage = 9;
-            this.question = `Does ${this.pet.name} suffer from any if these health issues?`;
         },
         doPhysical() {
             console.log(this.pet.health);
             this.stage = 10;
-            this.question = `Does ${this.pet.name} suffer from any of these physical issues?`;
         },
         doBehavioral() {
             this.stage = 11;
-            this.question = `Does ${this.pet.name} suffer from any of these diseases?`;
         },
         doDiseases() {
             this.stage = 12;
-            this.question = "Is this your first time using raw dog food?";
         },
         handleRawExperience(experience) {
             this.pet.experience === experience;
+        },
+        goBack() {
+            this.stage--;
         },
     },
 };
@@ -618,10 +647,17 @@ export default {
 
 .wizard-health {
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .wizard-list {
     list-style: none;
     text-align: left;
+}
+.multi-buttons {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
 }
 
 .question-form {
