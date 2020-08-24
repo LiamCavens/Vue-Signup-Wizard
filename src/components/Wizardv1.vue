@@ -384,20 +384,18 @@
         </ul>
         <button class="multi-buttons">NEXT</button>
       </form>
-      <div class="stage12">
-        <button v-if="stage === 12" class="experienceButton" @click="handleRawExperience('yes')">Yes</button>
-        <button
-          v-if="stage === 12"
-          class="experienceButton"
-          @click="handleRawExperience('occasional')"
-        >Occasional</button>
-        <button
-          v-if="stage === 12"
-          class="experienceButton"
-          @click="handleRawExperience('experienced')"
-        >Experienced</button>
+      <div class="stage12" v-if="stage === 12">
+        <button class="experienceButton" @click="handleRawExperience('yes')">Yes</button>
+        <button class="experienceButton" @click="handleRawExperience('occasional')">Occasional</button>
+        <button class="experienceButton" @click="handleRawExperience('experienced')">Experienced</button>
       </div>
-      <form v-if="stage === 13" class="wizard-health">
+      <form v-if="pet.experience === 'experienced'" class="wizard-experience">
+        <p>
+          If you are an experienced raw feeder and want to select a
+          specific range now, choose below. If you don't know,
+          you can ignore this section as we will recommend the best
+          food for your dog.
+        </p>
         <ul class="wizard-list">
           <li>
             <input
@@ -516,7 +514,6 @@ export default {
       this.stage = 9;
     },
     doPhysical() {
-      console.log(this.pet.health);
       this.stage = 10;
     },
     doBehavioral() {
@@ -526,10 +523,8 @@ export default {
       this.stage = 12;
     },
     handleRawExperience(experience) {
-      console.log("Liam: experience");
-      console.log(experience);
-      this.pet.experience === experience;
-      if (experience === "yes" || experience === "occasional") this.stage = 13;
+      this.pet.experience = experience;
+      //   if (experience === "yes" || experience === "occasional") this.stage = 13;
     },
     doFoodPreference() {
       console.log(this.pet);
@@ -544,16 +539,23 @@ export default {
 <style scoped>
 .wizard {
   font-family: Montserrat;
-  padding: 10px 0;
+  padding: 10px 33%;
   background-color: antiquewhite;
   display: flex;
   flex-direction: column;
-  width: 100%;
   flex: 1;
 }
 
 .wizard-health {
   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wizard-experience {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -607,5 +609,11 @@ export default {
 
 .grey-text {
   color: sandybrown;
+}
+
+@media (max-width: 480px) {
+  .wizard {
+    padding: 10px 0;
+  }
 }
 </style>
