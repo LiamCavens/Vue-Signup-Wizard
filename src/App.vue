@@ -1,24 +1,28 @@
 <template>
   <div id="app">
     <img class="headerLogo" alt="BnD Logo" src="./assets/BnDinline.png" />
-    <Wizardv1 subActive="Active" />
+    <Wizardv2 />
   </div>
 </template>
 
 <script>
-import Wizardv1 from "./components/Wizardv1.vue";
+import Wizardv2 from "./components/Wizardv2.vue";
 
 export default {
   name: "App",
   components: {
-    Wizardv1,
+    Wizardv2,
   },
 };
 </script>
 
 <style>
+@font-face {
+  font-family: Montserrat;
+  src: local("Merienda"), url(./fonts/Montserrat/Montserrat-Regular.ttf);
+}
 #app {
-  font-family: Montserrat, Helvetica, Arial, sans-serif;
+  font-family: Montserrat;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
