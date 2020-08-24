@@ -390,7 +390,7 @@
         <button class="experienceButton" @click="handleRawExperience('experienced')">Experienced</button>
       </div>
       <form v-if="pet.experience === 'experienced'" class="wizard-experience">
-        <p>
+        <p class="experience-text">
           If you are an experienced raw feeder and want to select a
           specific range now, choose below. If you don't know,
           you can ignore this section as we will recommend the best
@@ -539,10 +539,11 @@ export default {
 <style scoped>
 .wizard {
   font-family: Montserrat;
-  padding: 10px 33%;
+  padding: 10px 0;
   background-color: antiquewhite;
   display: flex;
   flex-direction: column;
+  width: 450px;
   flex: 1;
 }
 
@@ -607,13 +608,11 @@ export default {
   transition: 0.2s linear;
 }
 
-.grey-text {
-  color: sandybrown;
+.experience-text {
+  padding: 20px;
 }
 
-@media (max-width: 480px) {
-  .wizard {
-    padding: 10px 0;
-  }
+.grey-text {
+  color: sandybrown;
 }
 </style>
