@@ -85,10 +85,13 @@ export default {
     border-radius: 3px;
     outline: none;
     height: 32px;
+    transition: 0.3s ease;
 }
 
 .next-button:hover {
     cursor: pointer;
+    background-color: #617a04;
+    transition: 0.3s ease;
 }
 
 .fade-enter-active {
