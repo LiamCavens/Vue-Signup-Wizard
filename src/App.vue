@@ -19,7 +19,12 @@ export default {
 <style>
 @font-face {
   font-family: Montserrat;
-  src: local("Merienda"), url(./fonts/Montserrat/Montserrat-Regular.ttf);
+  src: local("Montserrat"), url(./fonts/Montserrat/Montserrat-Regular.ttf);
+}
+
+@font-face {
+  font-family: Montserrat-Bold;
+  src: local("Montserrat-Bold"), url(./fonts/Montserrat/Montserrat-Bold.ttf);
 }
 #app {
   font-family: Montserrat;
