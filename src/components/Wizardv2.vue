@@ -6,25 +6,42 @@
                 :name.sync="pet.name"
                 @nameSubmit="handleName"
             />
+            <DogGender
+                v-if="stage === 2"
+                :name="pet.name"
+                :gender.sync="pet.gender"
+                @genderSubmit="handleGender"
+            />
+            <DogAge
+                v-if="stage === 3"
+                :name="pet.name"
+                :age.sync="pet.age"
+                @ageSubmit="handleAge"
+            />
+            <button @click="checkPet">CHECK PET (For Testing Console)</button>
         </div>
     </div>
 </template>
 
 <script>
+import DogAge from "./DogAge";
 import DogName from "./DogName";
+import DogGender from "./DogGender";
+
 export default {
     name: "Wizardv2",
     components: {
+        DogAge,
         DogName,
+        DogGender,
     },
     props: {},
     data: () => {
         return {
-            blurred: false,
             stage: 1,
             pet: {
                 name: "",
-                sex: "",
+                gender: "",
                 age: {
                     years: "",
                     months: "",
@@ -48,11 +65,15 @@ export default {
         },
     },
     methods: {
-        handleNext() {
-            this.blurred = false;
-        },
         handleName() {
-            console.log("name submitted");
+            this.stage = 2;
+        },
+        handleGender(gender) {
+            this.pet.gender = gender;
+            this.stage = 3;
+        },
+        handleAge() {
+            console.log(this.pet.age);
         },
         checkPet() {
             console.log("Liam: this.pet");

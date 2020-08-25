@@ -10,11 +10,7 @@
             required
         />
         <transition name="fade"
-            ><button
-                class="next-button"
-                v-if="blurred"
-                @click="$emit('name-submit')"
-            >
+            ><button class="next-button" v-if="blurred" @click="handleNext">
                 Next
             </button></transition
         >
@@ -24,11 +20,18 @@
 <script>
 export default {
     name: "DogName",
-    props: ["name"],
+    props: {
+        name: String,
+    },
     data: () => {
         return {
             blurred: false,
         };
+    },
+    methods: {
+        handleNext() {
+            this.$emit("ageSubmit");
+        },
     },
     mounted() {
         window.addEventListener("keyup", (event) => {
