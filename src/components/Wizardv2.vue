@@ -18,7 +18,7 @@
                 :age.sync="pet.age"
                 @ageSubmit="handleAge"
             />
-            <button @click="checkPet">CHECK PET (For Testing Console)</button>
+            <!-- <button @click="checkPet">CHECK PET (For Testing Console)</button> -->
         </div>
     </div>
 </template>
