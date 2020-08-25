@@ -22,6 +22,17 @@
             </transition>
 
             <!-- <button @click="checkPet">CHECK PET (For Testing Console)</button> -->
+            <div class="footer-buttons">
+                <button>
+                    <font-awesome-icon :icon="['fas', 'arrow-left']" />
+                </button>
+                <button>
+                    <font-awesome-icon :icon="['far', 'comment-dots']" />
+                </button>
+                <button>
+                    <font-awesome-icon :icon="['far', 'save']" />
+                </button>
+            </div>
         </div>
     </div>
 </template>
@@ -93,11 +104,37 @@ export default {
 
 .wizard-components {
     margin: 10px;
-    padding: 10px;
+    padding: 10px 10px 0 10px;
     width: 350px;
     background-color: white;
     color: #00263a;
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-buttons {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    padding: 5px;
+    border-bottom: #ee7623 solid 2px;
+}
+
+.footer-buttons button {
+    width: 50px;
+    font-size: 30px;
+    border: none;
+    color: #ee7623;
+    background-color: white;
+    transition: 0.3s ease;
+}
+
+.footer-buttons button:hover {
+    cursor: pointer;
+    color: #a35219;
+    transition: 0.3s ease;
 }
 
 .slide-fade-enter-active {

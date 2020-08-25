@@ -59,7 +59,6 @@ export default {
 }
 
 .dog-name-input {
-    flex: 1;
     box-sizing: border-box;
     border: 1px solid #c2c2c2;
     box-shadow: 1px 1px 4px #ebebeb;
