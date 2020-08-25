@@ -2,6 +2,7 @@
     <div class="dog-name">
         <p class="dog-name-label">What is your dog's name?</p>
         <input
+            placeholder="Name"
             class="dog-name-input"
             type="text"
             :value="name"
