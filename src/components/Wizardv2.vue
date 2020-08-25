@@ -4,13 +4,8 @@
             <DogName
                 v-if="stage === 1"
                 :name.sync="pet.name"
-                @blurred="handleBlur"
+                @nameSubmit="handleName"
             />
-            <transition name="fade"
-                ><button class="next-button" v-if="blurred" @click="handleNext">
-                    Next
-                </button></transition
-            >
         </div>
     </div>
 </template>
@@ -53,11 +48,11 @@ export default {
         },
     },
     methods: {
-        handleBlur() {
-            this.blurred = true;
-        },
         handleNext() {
             this.blurred = false;
+        },
+        handleName() {
+            console.log("name submitted");
         },
         checkPet() {
             console.log("Liam: this.pet");
@@ -84,27 +79,5 @@ export default {
     background-color: white;
     color: #00263a;
     border-radius: 10px;
-}
-
-.next-button {
-    font-family: Montserrat;
-    background-color: #789904;
-    width: 300px;
-    margin: 5px 0;
-    padding: 5px 0;
-    box-sizing: border-box;
-    border: 1px solid #c2c2c2;
-    box-shadow: 1px 1px 4px #ebebeb;
-    border-radius: 3px;
-    outline: none;
-    height: 32px;
-}
-
-.fade-enter-active {
-    transition: opacity 0.3s linear;
-    transition-delay: 1s;
-}
-.fade-enter {
-    opacity: 0;
 }
 </style>
