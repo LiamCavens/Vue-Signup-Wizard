@@ -32,7 +32,7 @@ export default {
     },
     methods: {
         handleNext() {
-            this.$emit("ageSubmit");
+            this.$emit("nameSubmit");
         },
     },
     mounted() {
@@ -88,9 +88,13 @@ export default {
     height: 32px;
 }
 
+.next-button:hover {
+    cursor: pointer;
+}
+
 .fade-enter-active {
     transition: opacity 0.3s linear;
-    transition-delay: 1s;
+    transition-delay: 0.5s;
 }
 .fade-enter {
     opacity: 0;

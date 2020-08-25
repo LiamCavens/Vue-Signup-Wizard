@@ -1,23 +1,26 @@
 <template>
     <div class="wizard">
         <div class="wizard-components">
-            <DogName
-                v-if="stage === 1"
-                :name.sync="pet.name"
-                @nameSubmit="handleName"
-            />
-            <DogGender
-                v-if="stage === 2"
-                :name="pet.name"
-                :gender.sync="pet.gender"
-                @genderSubmit="handleGender"
-            />
-            <DogAge
-                v-if="stage === 3"
-                :name="pet.name"
-                :age.sync="pet.age"
-                @ageSubmit="handleAge"
-            />
+            <transition name="slide-fade">
+                <DogName
+                    v-if="stage === 1"
+                    :name.sync="pet.name"
+                    @nameSubmit="handleName"
+                />
+                <DogGender
+                    v-if="stage === 2"
+                    :name="pet.name"
+                    :gender.sync="pet.gender"
+                    @genderSubmit="handleGender"
+                />
+                <DogAge
+                    v-if="stage === 3"
+                    :name="pet.name"
+                    :age.sync="pet.age"
+                    @ageSubmit="handleAge"
+                />
+            </transition>
+
             <!-- <button @click="checkPet">CHECK PET (For Testing Console)</button> -->
         </div>
     </div>
@@ -95,5 +98,22 @@ export default {
     background-color: white;
     color: #00263a;
     border-radius: 10px;
+}
+
+.slide-fade-enter-active {
+    transition: all 0.8s ease;
+    transition-delay: 0.4s;
+}
+.slide-fade-leave-active {
+    transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter {
+    transform: translateX(10px);
+    opacity: 0;
+}
+
+.slide-fade-leave-to {
+    transform: translateX(-10px);
+    opacity: 0;
 }
 </style>
