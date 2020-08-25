@@ -1,15 +1,35 @@
 <template>
     <div class="dog-age">
         <p class="dog-age-label">What age is {{ name }}?</p>
-        <select v-model="age.years" name="years" id="age-years">
-            <option v-for="n in 22" :key="n.id">{{ n }}</option>
-        </select>
+        <div class="dog-age-selects">
+            <select
+                class="dog-age-select"
+                v-model="age.years"
+                name="years"
+                id="age-years"
+                @change="ageSubmit"
+            >
+                <option value="" disabled selected>Years</option>
+                <option value="0">0 Years</option>
+                <option v-for="n in 22" :key="n.id" :value="n"
+                    >{{ n }} Years</option
+                >
+            </select>
 
-        <transition name="fade"
-            ><button class="next-button" v-if="blurred" @click="handleNext">
-                Next
-            </button></transition
-        >
+            <select
+                class="dog-age-select"
+                v-model="age.months"
+                name="months"
+                id="age-months"
+                @change="ageSubmit"
+            >
+                <option value="" disabled selected>Months</option>
+                <option value="0">0 Months</option>
+                <option v-for="n in 11" :key="n.id" :value="n"
+                    >{{ n }} Months</option
+                >
+            </select>
+        </div>
     </div>
 </template>
 
@@ -17,6 +37,7 @@
 export default {
     name: "DogAge",
     props: {
+        name: String,
         age: {
             years: Number,
             months: Number,
@@ -27,7 +48,11 @@ export default {
             blurred: false,
         };
     },
-    methods: {},
+    methods: {
+        ageSubmit() {
+            this.$emit("ageSubmit");
+        },
+    },
     computed: {},
 };
 </script>
@@ -45,7 +70,8 @@ export default {
     margin-bottom: 5px;
 }
 
-.dog-age-input {
+.dog-age-select {
+    font-family: Montserrat;
     flex: 1;
     box-sizing: border-box;
     border: 1px solid #c2c2c2;
@@ -57,7 +83,7 @@ export default {
     transition: 0.2s linear;
 }
 
-.dog-age-input:focus {
+.dog-age-select:focus {
     border: 1px solid #00263a;
     transition: 0.2s linear;
 }

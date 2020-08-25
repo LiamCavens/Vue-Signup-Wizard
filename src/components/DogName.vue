@@ -8,6 +8,7 @@
             @input="$emit('update:name', $event.target.value)"
             @blur="blurred = true"
             required
+            autofocus
         />
         <transition name="fade"
             ><button class="next-button" v-if="blurred" @click="handleNext">

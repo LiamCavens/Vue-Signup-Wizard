@@ -57,13 +57,6 @@ export default {
             },
         };
     },
-    directives: {
-        focus: {
-            inserted: (el) => {
-                el.focus();
-            },
-        },
-    },
     methods: {
         handleName() {
             this.stage = 2;
@@ -73,7 +66,9 @@ export default {
             this.stage = 3;
         },
         handleAge() {
-            console.log(this.pet.age);
+            if (this.pet.age.years && this.pet.age.months) {
+                this.stage = 4;
+            }
         },
         checkPet() {
             console.log("Liam: this.pet");
