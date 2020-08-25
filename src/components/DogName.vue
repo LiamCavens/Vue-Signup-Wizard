@@ -73,7 +73,6 @@ export default {
 .next-button {
     font-family: Montserrat;
     background-color: #789904;
-    width: 300px;
     margin: 5px 5%;
     padding: 5px 0;
     box-sizing: border-box;
