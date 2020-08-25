@@ -6,6 +6,7 @@
             type="text"
             :value="name"
             @input="$emit('update:name', $event.target.value)"
+            @blur="$emit('blurred')"
             required
         />
     </div>
