@@ -1,6 +1,6 @@
 <template>
     <div class="dog-name">
-        <p class="dog-name-label">What is your dog's name?</p>
+        <p class="dog-name-label">What's your dog's name?</p>
         <input
             placeholder="Name"
             class="dog-name-input"
@@ -11,11 +11,11 @@
             required
             autofocus
         />
-        <transition name="fade"
-            ><button class="next-button" v-if="blurred" @click="handleNext">
+        <transition name="fade">
+            <button class="next-button" v-if="blurred" @click="handleNext">
                 Next
-            </button></transition
-        >
+            </button>
+        </transition>
     </div>
 </template>
 
@@ -32,6 +32,7 @@ export default {
     },
     methods: {
         handleNext() {
+            if (!this.name) return alert("You must input a name");
             this.$emit("nameSubmit");
         },
     },
@@ -98,6 +99,7 @@ export default {
     transition: opacity 0.3s linear;
     transition-delay: 0.5s;
 }
+
 .fade-enter {
     opacity: 0;
 }

@@ -19,6 +19,12 @@
                     :age.sync="pet.age"
                     @ageSubmit="handleAge"
                 />
+                <DogBreed
+                    v-if="stage === 4"
+                    :name="pet.name"
+                    :breed.sync="pet.breed"
+                    @breedSubmit="handleBreed"
+                />
             </transition>
 
             <!-- <button @click="checkPet">CHECK PET (For Testing Console)</button> -->
@@ -40,6 +46,7 @@
 <script>
 import DogAge from "./DogAge";
 import DogName from "./DogName";
+import DogBreed from "./DogBreed";
 import DogGender from "./DogGender";
 
 export default {
@@ -47,6 +54,7 @@ export default {
     components: {
         DogAge,
         DogName,
+        DogBreed,
         DogGender,
     },
     props: {},
@@ -60,7 +68,11 @@ export default {
                     years: "",
                     months: "",
                 },
-                breed: "",
+                breed: {
+                    type: "",
+                    parent1: "",
+                    parent2: "",
+                },
                 weight: "",
                 activity: "",
                 body: "",
@@ -83,6 +95,10 @@ export default {
             if (this.pet.age.years && this.pet.age.months) {
                 this.stage = 4;
             }
+        },
+        handleBreed() {
+            console.log("Liam: this.pet.breed");
+            console.log(this.pet.breed);
         },
         checkPet() {
             console.log("Liam: this.pet");
