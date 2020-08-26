@@ -97,8 +97,7 @@ export default {
             }
         },
         handleBreed() {
-            console.log("Liam: this.pet.breed");
-            console.log(this.pet.breed);
+            this.stage = 5;
         },
         checkPet() {
             console.log("Liam: this.pet");
