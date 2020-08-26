@@ -29,7 +29,7 @@
 
             <!-- <button @click="checkPet">CHECK PET (For Testing Console)</button> -->
             <div class="footer-buttons">
-                <button>
+                <button @click="handleBack">
                     <font-awesome-icon :icon="['fas', 'arrow-left']" />
                 </button>
                 <button>
@@ -99,6 +99,11 @@ export default {
         handleBreed() {
             this.stage = 5;
         },
+        handleBack() {
+            if (this.stage > 1) {
+                this.stage--;
+            }
+        },
         checkPet() {
             console.log("Liam: this.pet");
             console.log(this.pet);
@@ -150,6 +155,10 @@ export default {
     cursor: pointer;
     color: #a35219;
     transition: 0.3s ease;
+}
+
+.footer-buttons button:focus {
+    outline: none;
 }
 
 .slide-fade-enter-active {
