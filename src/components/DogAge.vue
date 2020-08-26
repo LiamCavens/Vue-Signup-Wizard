@@ -30,6 +30,16 @@
                 >
             </select>
         </div>
+        <transition name="fade">
+            <button
+                class="next-button"
+                v-if="ageSubmitted"
+                @click="handleNext"
+                key="next-button"
+            >
+                Next
+            </button>
+        </transition>
     </div>
 </template>
 
@@ -45,11 +55,16 @@ export default {
     },
     data: () => {
         return {
-            blurred: false,
+            ageSubmitted: false,
         };
     },
     methods: {
         ageSubmit() {
+            if (this.age.years && this.age.months) {
+                this.ageSubmitted = true;
+            }
+        },
+        handleNext() {
             this.$emit("ageSubmit");
         },
     },
@@ -86,5 +101,26 @@ export default {
 .dog-age-select:focus {
     border: 1px solid #00263a;
     transition: 0.2s linear;
+}
+
+.next-button {
+    font-family: Montserrat;
+    background-color: #789904;
+    margin: 10px auto;
+    padding: 5px 0;
+    box-sizing: border-box;
+    border: 1px solid #c2c2c2;
+    box-shadow: 1px 1px 4px #ebebeb;
+    border-radius: 3px;
+    outline: none;
+    height: 32px;
+    transition: 0.3s ease;
+    width: 300px;
+}
+
+.next-button:hover {
+    cursor: pointer;
+    background-color: #617a04;
+    transition: 0.3s ease;
 }
 </style>
