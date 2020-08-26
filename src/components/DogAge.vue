@@ -115,7 +115,7 @@ export default {
     outline: none;
     height: 32px;
     transition: 0.3s ease;
-    width: 300px;
+    width: 238px;
 }
 
 .next-button:hover {

@@ -25,6 +25,12 @@
                     :breed.sync="pet.breed"
                     @breedSubmit="handleBreed"
                 />
+                <DogWeight
+                    v-if="stage === 5"
+                    :name="pet.name"
+                    :weight.sync="pet.weight"
+                    @weightSubmit="handleWeight"
+                />
             </transition>
 
             <!-- <button @click="checkPet">CHECK PET (For Testing Console)</button> -->
@@ -48,6 +54,7 @@ import DogAge from "./DogAge";
 import DogName from "./DogName";
 import DogBreed from "./DogBreed";
 import DogGender from "./DogGender";
+import DogWeight from "./DogWeight";
 
 export default {
     name: "Wizardv2",
@@ -56,6 +63,7 @@ export default {
         DogName,
         DogBreed,
         DogGender,
+        DogWeight,
     },
     props: {},
     data: () => {
@@ -73,7 +81,10 @@ export default {
                     parent1: "",
                     parent2: "",
                 },
-                weight: "",
+                weight: {
+                    unit: "kg",
+                    amount: "",
+                },
                 activity: "",
                 body: "",
                 working: "",
@@ -103,6 +114,9 @@ export default {
             if (this.stage > 1) {
                 this.stage--;
             }
+        },
+        handleWeight() {
+            alert("You finished the wizard (so far), well done");
         },
         checkPet() {
             console.log("Liam: this.pet");
