@@ -1,34 +1,45 @@
 <template>
   <div class="wizard">
     <div class="wizard-components">
-      <transition name="slide-fade">
-        <DogName v-if="stage === 1" :name.sync="pet.name" @nameSubmit="handleName" />
+      <transition-group name="slide-fade">
+        <DogStory :pet.sync="pet" :stage.sync="stage" key="story" />
+        <DogName v-if="stage === 1" :name.sync="pet.name" @nameSubmit="handleName" key="name" />
         <DogGender
           v-if="stage === 2"
           :name="pet.name"
           :gender.sync="pet.gender"
           @genderSubmit="handleGender"
+          key="gender"
         />
-        <DogAge v-if="stage === 3" :name="pet.name" :age.sync="pet.age" @ageSubmit="handleAge" />
+        <DogAge
+          v-if="stage === 3"
+          :name="pet.name"
+          :age.sync="pet.age"
+          @ageSubmit="handleAge"
+          key="age"
+        />
         <DogBreed
           v-if="stage === 4"
           :name="pet.name"
           :breed.sync="pet.breed"
           @breedSubmit="handleBreed"
+          key="breed"
         />
         <DogWeight
           v-if="stage === 5"
           :name="pet.name"
           :weight.sync="pet.weight"
           @weightSubmit="handleWeight"
+          key="weight"
         />
         <DogBodyType
           v-if="stage === 6"
           :name="pet.name"
           :body.sync="pet.body"
           @bodySubmit="handleBody"
+          key="bodytype"
         />
-      </transition>
+      </transition-group>
 
       <!-- <button @click="checkPet">CHECK PET (For Testing Console)</button> -->
       <div class="footer-buttons">
@@ -49,6 +60,7 @@
 <script>
 import DogAge from "./DogAge";
 import DogName from "./DogName";
+import DogStory from "./DogStory";
 import DogBreed from "./DogBreed";
 import DogGender from "./DogGender";
 import DogWeight from "./DogWeight";
@@ -60,6 +72,7 @@ export default {
     DogAge,
     DogName,
     DogBreed,
+    DogStory,
     DogGender,
     DogWeight,
     DogBodyType,
