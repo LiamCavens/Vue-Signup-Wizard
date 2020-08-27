@@ -94,8 +94,9 @@ export default {
 .dog-body-item:hover,
 .active {
   cursor: pointer;
-  border: 1px solid #789904;
+  border: 2px solid #789904;
   color: #789904;
+  margin: 2px 3px;
   transition: all 0.3s ease;
 }
 
@@ -132,7 +133,7 @@ export default {
   border-radius: 50%;
 }
 
-.dog-body-next {
+/* .dog-body-next {
   height: 79px !important;
   width: 79px !important;
   padding: 0;
@@ -142,12 +143,12 @@ export default {
   border: 2px #789904 solid;
   border-radius: 50%;
   cursor: pointer;
-}
+} */
 
-.dog-body-item:hover .dog-body-next {
+/* .dog-body-item:hover .dog-body-next {
   color: #00263a;
   transition: all 0.3s ease;
-}
+} */
 
 @media screen and (max-height: 700px) {
   .dog-body-item-text {
