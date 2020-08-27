@@ -67,7 +67,7 @@ export default {
   props: {},
   data: () => {
     return {
-      stage: 5,
+      stage: 1,
       pet: {
         name: "",
         gender: "",
