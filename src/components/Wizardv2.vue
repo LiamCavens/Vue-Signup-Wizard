@@ -1,60 +1,75 @@
 <template>
-  <div class="wizard">
-    <div class="wizard-components">
-      <transition-group name="slide-fade">
-        <DogStory :pet.sync="pet" :stage.sync="stage" key="story" />
-        <DogName v-if="stage === 1" :name.sync="pet.name" @nameSubmit="handleName" key="name" />
-        <DogGender
-          v-if="stage === 2"
-          :name="pet.name"
-          :gender.sync="pet.gender"
-          @genderSubmit="handleGender"
-          key="gender"
-        />
-        <DogAge
-          v-if="stage === 3"
-          :name="pet.name"
-          :age.sync="pet.age"
-          @ageSubmit="handleAge"
-          key="age"
-        />
-        <DogBreed
-          v-if="stage === 4"
-          :name="pet.name"
-          :breed.sync="pet.breed"
-          @breedSubmit="handleBreed"
-          key="breed"
-        />
-        <DogWeight
-          v-if="stage === 5"
-          :name="pet.name"
-          :weight.sync="pet.weight"
-          @weightSubmit="handleWeight"
-          key="weight"
-        />
-        <DogBodyType
-          v-if="stage === 6"
-          :name="pet.name"
-          :body.sync="pet.body"
-          @bodySubmit="handleBody"
-          key="bodytype"
-        />
-      </transition-group>
+    <div class="wizard">
+        <div class="wizard-components">
+            <transition-group name="slide-fade">
+                <DogStory
+                    :pet.sync="pet"
+                    :stage.sync="stage"
+                    key="story"
+                    v-if="stage < 7"
+                />
+                <DogName
+                    v-if="stage === 1"
+                    :name.sync="pet.name"
+                    @nameSubmit="handleName"
+                    key="name"
+                />
+                <DogGender
+                    v-if="stage === 2"
+                    :name="pet.name"
+                    :gender.sync="pet.gender"
+                    @genderSubmit="handleGender"
+                    key="gender"
+                />
+                <DogAge
+                    v-if="stage === 3"
+                    :name="pet.name"
+                    :age.sync="pet.age"
+                    @ageSubmit="handleAge"
+                    key="age"
+                />
+                <DogBreed
+                    v-if="stage === 4"
+                    :name="pet.name"
+                    :breed.sync="pet.breed"
+                    @breedSubmit="handleBreed"
+                    key="breed"
+                />
+                <DogWeight
+                    v-if="stage === 5"
+                    :name="pet.name"
+                    :weight.sync="pet.weight"
+                    @weightSubmit="handleWeight"
+                    key="weight"
+                />
+                <DogBodyType
+                    v-if="stage === 6"
+                    :name="pet.name"
+                    :body.sync="pet.body"
+                    @bodySubmit="handleBody"
+                    key="bodytype"
+                />
+                <Recommendation
+                    v-if="stage === 7"
+                    :name="pet.name"
+                    key="recommendation"
+                />
+                <Nutrition v-if="stage === 8" key="nutrition" />
+            </transition-group>
 
-      <!-- <button @click="checkPet">CHECK PET (For Testing Console)</button> -->
-      <div class="footer-buttons">
-        <button @click="handleBack">
-          <font-awesome-icon :icon="['fas', 'arrow-left']" />
-        </button>
-        <button>
-          <font-awesome-icon :icon="['far', 'comment-dots']" />
-        </button>
-        <button>
-          <font-awesome-icon :icon="['far', 'save']" />
-        </button>
-      </div>
+            <div class="footer-buttons">
+                <button @click="handleBack">
+                    <font-awesome-icon :icon="['fas', 'arrow-left']" />
+                </button>
+                <button>
+                    <font-awesome-icon :icon="['far', 'comment-dots']" />
+                </button>
+                <button>
+                    <font-awesome-icon :icon="['far', 'save']" />
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -66,146 +81,146 @@ import DogGender from "./DogGender";
 import DogWeight from "./DogWeight";
 import DogBodyType from "./DogBodyType";
 
+import Nutrition from "./Nutrition";
+import Recommendation from "./Recommendation";
+
 export default {
-  name: "Wizardv2",
-  components: {
-    DogAge,
-    DogName,
-    DogBreed,
-    DogStory,
-    DogGender,
-    DogWeight,
-    DogBodyType,
-  },
-  props: {},
-  data: () => {
-    return {
-      stage: 1,
-      pet: {
-        name: "",
-        gender: "",
-        age: {
-          years: "",
-          months: "",
+    name: "Wizardv2",
+    components: {
+        DogAge,
+        DogName,
+        DogBreed,
+        DogStory,
+        DogGender,
+        DogWeight,
+        DogBodyType,
+        Nutrition,
+        Recommendation,
+    },
+    props: {},
+    data: () => {
+        return {
+            stage: 1,
+            pet: {
+                name: "Duke",
+                gender: "",
+                age: {
+                    years: "",
+                    months: "",
+                },
+                breed: {
+                    type: "",
+                    parent1: "",
+                    parent2: "",
+                },
+                weight: {
+                    unit: "kg",
+                    amount: "",
+                },
+                activity: "",
+                body: "",
+                working: "",
+                health: [],
+                experience: "",
+                foodPreference: "",
+            },
+        };
+    },
+    methods: {
+        handleName() {
+            this.stage = 2;
         },
-        breed: {
-          type: "",
-          parent1: "",
-          parent2: "",
+        handleGender(gender) {
+            this.pet.gender = gender;
+            this.stage = 3;
         },
-        weight: {
-          unit: "kg",
-          amount: "",
+        handleAge() {
+            if (this.pet.age.years && this.pet.age.months) {
+                this.stage = 4;
+            }
         },
-        activity: "",
-        body: "",
-        working: "",
-        health: [],
-        experience: "",
-        foodPreference: "",
-      },
-    };
-  },
-  methods: {
-    handleName() {
-      this.stage = 2;
+        handleBreed() {
+            this.stage = 5;
+        },
+        handleBack() {
+            if (this.stage > 1) {
+                this.stage--;
+            }
+        },
+        handleWeight() {
+            this.stage = 6;
+        },
+        handleBody(bodyType) {
+            this.pet.body = bodyType;
+            this.stage = 7;
+        },
     },
-    handleGender(gender) {
-      this.pet.gender = gender;
-      this.stage = 3;
-    },
-    handleAge() {
-      if (this.pet.age.years && this.pet.age.months) {
-        this.stage = 4;
-      }
-    },
-    handleBreed() {
-      this.stage = 5;
-    },
-    handleBack() {
-      if (this.stage > 1) {
-        this.stage--;
-      }
-    },
-    handleWeight() {
-      this.stage = 6;
-    },
-    handleBody(bodyType) {
-      this.pet.body = bodyType;
-      this.stage = 7;
-      alert("End of proto");
-    },
-    checkPet() {
-      console.log("Liam: this.pet");
-      console.log(this.pet);
-    },
-  },
 };
 </script>
 
 <style>
 .wizard {
-  background-color: #00263a;
-  color: #e1b77e;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex: 1;
+    background-color: #00263a;
+    color: #e1b77e;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex: 1;
 }
 
 .wizard-components {
-  margin: 10px;
-  padding: 10px 10px 0 10px;
-  width: 350px;
-  background-color: white;
-  color: #00263a;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
+    margin: 10px;
+    padding: 10px 10px 0 10px;
+    width: 350px;
+    background-color: white;
+    color: #00263a;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .footer-buttons {
-  margin-top: auto;
-  display: flex;
-  justify-content: space-between;
-  background-color: white;
-  padding: 5px;
-  border-bottom: #ee7623 solid 2px;
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    padding: 5px;
+    border-bottom: #ee7623 solid 2px;
 }
 
 .footer-buttons button {
-  width: 50px;
-  font-size: 30px;
-  border: none;
-  color: #ee7623;
-  background-color: white;
-  transition: 0.3s ease;
+    width: 50px;
+    font-size: 30px;
+    border: none;
+    color: #ee7623;
+    background-color: white;
+    transition: 0.3s ease;
 }
 
 .footer-buttons button:hover {
-  cursor: pointer;
-  color: #a35219;
-  transition: 0.3s ease;
+    cursor: pointer;
+    color: #a35219;
+    transition: 0.3s ease;
 }
 
 .footer-buttons button:focus {
-  outline: none;
+    outline: none;
 }
 
 .slide-fade-enter-active {
-  transition: all 0.8s ease;
-  transition-delay: 0.4s;
+    transition: all 0.8s ease;
+    transition-delay: 0.4s;
 }
 .slide-fade-leave-active {
-  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+    transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
 }
 .slide-fade-enter {
-  transform: translateX(10px);
-  opacity: 0;
+    transform: translateX(10px);
+    opacity: 0;
 }
 
 .slide-fade-leave-to {
-  transform: translateX(-10px);
-  opacity: 0;
+    transform: translateX(-10px);
+    opacity: 0;
 }
 </style>
