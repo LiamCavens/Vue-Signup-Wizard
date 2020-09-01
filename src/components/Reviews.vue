@@ -62,8 +62,8 @@ export default {
           name: "Dexter & Ross, Jervie",
           imageUrl: "RossCat.jpg",
           description: `Duke & Bella's raw dog food is so good that I feed it to my cat, 
-            he suffered from explosive diarrhea and now suffers no more, 
-            I cannot recomment any more`,
+            he suffered from explosive diarrhea over the carpets and now suffers no more, 
+            I cannot recommend any more`,
         },
         {
           name: "Babe & Jim, The Globe",
