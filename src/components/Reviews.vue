@@ -91,7 +91,7 @@ export default {
     playReview() {
       this.playReviews = setInterval(() => {
         this.nextReview();
-      }, 2000);
+      }, 7500);
     },
     pauseReview() {
       clearInterval(this.playReviews);
