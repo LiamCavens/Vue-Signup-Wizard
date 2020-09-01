@@ -52,6 +52,7 @@
           @handleNext="nextStage"
           @handlePrev="prevStage"
         />
+        <Reviews v-if="stage === 9" key="reviews" @handleNext="nextStage" @handlePrev="prevStage" />
       </transition-group>
 
       <div class="footer-buttons">
@@ -78,6 +79,7 @@ import DogGender from "./DogGender";
 import DogWeight from "./DogWeight";
 import DogBodyType from "./DogBodyType";
 
+import Reviews from "./Reviews";
 import Nutrition from "./Nutrition";
 import Recommendation from "./Recommendation";
 
@@ -91,6 +93,7 @@ export default {
     DogGender,
     DogWeight,
     DogBodyType,
+    Reviews,
     Nutrition,
     Recommendation,
   },
@@ -98,7 +101,7 @@ export default {
   data: () => {
     return {
       help: false,
-      stage: 1,
+      stage: 9,
       pet: {
         name: "",
         gender: "",
