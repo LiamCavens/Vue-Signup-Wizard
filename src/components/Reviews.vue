@@ -18,6 +18,12 @@
           </div>
         </transition>
       </div>
+      <button class="previous-chevron">
+        <font-awesome-icon :icon="['fas', 'chevron-left']" />
+      </button>
+      <button class="next-chevron" @click="handleNext">
+        <font-awesome-icon :icon="['fas', 'chevron-right']" />
+      </button>
     </div>
     <div class="reviews-controls">
       <button @click="prevReview">
@@ -103,11 +109,15 @@ export default {
   flex-direction: column;
   position: relative;
 }
-
+.reviews-header {
+  border-bottom: 1px #d1d1d1 solid;
+  max-width: 275px;
+  margin: 0 auto;
+}
 .reviews-carousel {
   display: flex;
   flex-direction: row;
-  height: 300px;
+  height: 265px;
 }
 
 .reviews-review {
@@ -157,6 +167,30 @@ export default {
   border-radius: 50%;
   height: 100px;
   width: 100px;
+}
+
+.next-chevron {
+  font-size: 30px;
+  color: orange;
+  align-self: center;
+  margin-left: auto;
+  background-color: white;
+  border: none;
+}
+
+.previous-chevron {
+  font-size: 30px;
+  color: orange;
+  align-self: center;
+  float: left;
+  background-color: white;
+  border: none;
+}
+
+@media screen and (max-width: 340px) {
+  .reviews-carousel {
+    height: 300px;
+  }
 }
 </style>
 

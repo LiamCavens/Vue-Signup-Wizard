@@ -101,7 +101,7 @@ export default {
   data: () => {
     return {
       help: false,
-      stage: 9,
+      stage: 1,
       pet: {
         name: "",
         gender: "",
