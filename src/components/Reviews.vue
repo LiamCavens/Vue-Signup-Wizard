@@ -18,7 +18,7 @@
           </div>
         </transition>
       </div>
-      <button class="previous-chevron">
+      <button class="previous-chevron" @click="handlePrev">
         <font-awesome-icon :icon="['fas', 'chevron-left']" />
       </button>
       <button class="next-chevron" @click="handleNext">
@@ -95,6 +95,12 @@ export default {
     },
     pauseReview() {
       clearInterval(this.playReviews);
+    },
+    handleNext() {
+      this.$emit("handleNext");
+    },
+    handlePrev() {
+      this.$emit("handlePrev");
     },
   },
   mounted() {
