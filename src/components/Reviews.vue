@@ -70,7 +70,7 @@ export default {
           imageUrl: "JimDog.jpg",
           description: `I can honestly say after a few days, Babe was a different dog, 
             her stool is so firm I can now pick it up and throw it, 
-            it makes it a lot of fun now taking the dog for longer walks, I rate 10/10`,
+            it makes it a lot of fun taking the dog for longer walks, I rate 8/8`,
         },
       ],
     };
