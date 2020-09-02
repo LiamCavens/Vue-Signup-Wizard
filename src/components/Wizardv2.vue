@@ -1,7 +1,17 @@
 <template>
   <div class="wizard">
     <div class="wizard-components">
-      <transition-group name="slide-fade">
+      <div class="help-button">
+        <button @click="openHelp">
+          <!-- <font-awesome-icon :icon="['far', 'question-circle']" /> -->
+          <span class="help-icon">
+            <font-awesome-icon :icon="['fas', 'info']" />
+          </span>
+        </button>
+      </div>
+
+      <transition-group v-bind:name="transitionName">
+        <Help v-if="help" class="help-component" :stage="stage" @closeHelp="closeHelp" key="help" />
         <DogStory :pet.sync="pet" :stage.sync="stage" key="story" v-if="stage < 7" />
         <DogName v-if="stage === 1" :name.sync="pet.name" @nameSubmit="handleName" key="name" />
         <DogGender
@@ -79,6 +89,7 @@ import DogGender from "./DogGender";
 import DogWeight from "./DogWeight";
 import DogBodyType from "./DogBodyType";
 
+import Help from "./Help";
 import Reviews from "./Reviews";
 import Nutrition from "./Nutrition";
 import Recommendation from "./Recommendation";
@@ -93,6 +104,7 @@ export default {
     DogGender,
     DogWeight,
     DogBodyType,
+    Help,
     Reviews,
     Nutrition,
     Recommendation,
@@ -101,6 +113,7 @@ export default {
   data: () => {
     return {
       help: false,
+      transitionName: "slide-fade",
       stage: 1,
       pet: {
         name: "",
@@ -158,6 +171,18 @@ export default {
       this.pet.body = bodyType;
       this.stage = 7;
     },
+    openHelp() {
+      this.transitionName = "help-transition";
+      setTimeout(() => {
+        this.help = true;
+      }, 0);
+    },
+    closeHelp() {
+      this.help = false;
+      setTimeout(() => {
+        this.transitionName = "slide-fade";
+      }, 0);
+    },
   },
 };
 </script>
@@ -172,6 +197,45 @@ export default {
   flex: 1;
 }
 
+.help-button {
+  position: absolute;
+  top: 40%;
+  right: 0;
+}
+
+.help-button button {
+  font-size: 14px;
+  height: 32px;
+  color: white;
+  background-color: #00263a;
+  border-radius: 5px 0 0 5px;
+  border-bottom: #789904 2px solid;
+  border-left: #789904 2px solid;
+  border-right: none;
+  border-top: #789904 2px solid;
+  padding: 2px 1px;
+  cursor: pointer;
+}
+
+.help-button button:focus {
+  outline: none;
+}
+
+.help-button button p {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  text-transform: lowercase;
+  font-variant: small-caps;
+  margin: 0;
+}
+
+.help-icon {
+  padding: 2px 6px;
+  margin: 2px;
+  border: white solid 2px;
+  border-radius: 50%;
+}
+
 .wizard-components {
   margin: 10px;
   padding: 10px 10px 0 10px;
@@ -181,6 +245,7 @@ export default {
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .footer-buttons {
@@ -227,5 +292,20 @@ export default {
 .slide-fade-leave-to {
   transform: translateX(-10px);
   opacity: 0;
+}
+
+.help-transition-leave-active,
+.help-transition-enter-active {
+  transition: opacity 0.5s ease;
+}
+
+.help-transition-enter,
+.help-transition-leave-to {
+  opacity: 0;
+}
+
+.help-transition-enter-to,
+.help-transition-leave {
+  opacity: 1;
 }
 </style>

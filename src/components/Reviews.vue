@@ -26,18 +26,18 @@
       </button>
     </div>
     <div class="reviews-controls">
-      <button @click="prevReview">
+      <!-- <button @click="prevReview">
         <font-awesome-icon :icon="['fas', 'backward']" />
-      </button>
+      </button>-->
       <button @click="playReview">
         <font-awesome-icon :icon="['fas', 'play']" />
       </button>
       <button @click="pauseReview">
         <font-awesome-icon :icon="['fas', 'pause']" />
       </button>
-      <button @click="nextReview">
+      <!-- <button @click="nextReview">
         <font-awesome-icon :icon="['fas', 'forward']" />
-      </button>
+      </button>-->
     </div>
   </div>
 </template>
@@ -51,7 +51,7 @@ export default {
       currentReview: 0,
       reviews: [
         {
-          name: "Smithy, Ozzy & Paul, North",
+          name: "Smithy, Ozzy & Paul, Norf",
           imageUrl: "PaulPit.jpg",
           description: `I now feed both my dogs B&D Raw dog food, 
           its the best thing ever, sometimes I help myself to some! 
@@ -156,7 +156,7 @@ export default {
 .reviews-controls {
   display: flex;
   justify-content: space-around;
-  margin: 0 30px;
+  margin: 0 50px;
   padding: 10px;
 }
 
