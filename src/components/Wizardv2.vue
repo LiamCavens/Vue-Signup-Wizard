@@ -204,8 +204,8 @@ export default {
 }
 
 .help-button button {
-  font-size: 14px;
-  height: 32px;
+  font-size: 13px;
+  height: 31px;
   color: white;
   background-color: #00263a;
   border-radius: 5px 0 0 5px;

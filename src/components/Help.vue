@@ -75,7 +75,7 @@ export default {
   height: 100%;
   background-color: #f3c88b;
   z-index: 100;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .help-message {
@@ -84,6 +84,7 @@ export default {
   padding: 20px 15px;
   text-align: left;
   box-shadow: inset 0 0 4px #584931;
+  border-radius: 5px;
 }
 
 .help-close {
