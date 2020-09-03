@@ -53,6 +53,8 @@ export default {
           this.helpMessage = `Weight is a critical input for our recommendation engine. If you don’t know your pet’s weight, there are a couple of ways to estimate.`;
           break;
         default:
+          this.helpTitle = `No help here`;
+          this.helpMessage = `Either the button wont show, or the help message is to still be written`;
           break;
       }
     },

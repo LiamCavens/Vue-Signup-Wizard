@@ -182,6 +182,7 @@ export default {
   margin-left: auto;
   background-color: white;
   border: none;
+  z-index: 20;
 }
 
 .previous-chevron {
@@ -191,6 +192,7 @@ export default {
   float: left;
   background-color: white;
   border: none;
+  z-index: 20;
 }
 
 @media screen and (max-width: 340px) {

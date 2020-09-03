@@ -1,11 +1,12 @@
 <template>
   <div class="wizard">
     <div class="wizard-components">
-      <div class="help-button">
+      <div v-if="stage != 2" class="help-button">
         <button @click="openHelp">
-          <!-- <font-awesome-icon :icon="['far', 'question-circle']" /> -->
+          <p class="help-text">HELP</p>
           <span class="help-icon">
-            <font-awesome-icon :icon="['fas', 'info']" />
+            <font-awesome-icon :icon="['far', 'question-circle']" />
+            <!-- <font-awesome-icon :icon="['fas', 'info']" /> -->
           </span>
         </button>
       </div>
@@ -63,6 +64,12 @@
           @handlePrev="prevStage"
         />
         <Reviews v-if="stage === 9" key="reviews" @handleNext="nextStage" @handlePrev="prevStage" />
+        <Delivery
+          v-if="stage === 10"
+          key="delivery"
+          @handleNext="nextStage"
+          @handlePrev="prevStage"
+        />
       </transition-group>
 
       <div class="footer-buttons">
@@ -91,6 +98,7 @@ import DogBodyType from "./DogBodyType";
 
 import Help from "./Help";
 import Reviews from "./Reviews";
+import Delivery from "./Delivery";
 import Nutrition from "./Nutrition";
 import Recommendation from "./Recommendation";
 
@@ -106,6 +114,7 @@ export default {
     DogBodyType,
     Help,
     Reviews,
+    Delivery,
     Nutrition,
     Recommendation,
   },
@@ -114,7 +123,7 @@ export default {
     return {
       help: false,
       transitionName: "slide-fade",
-      stage: 1,
+      stage: 10,
       pet: {
         name: "",
         gender: "",
@@ -183,6 +192,11 @@ export default {
         this.transitionName = "slide-fade";
       }, 0);
     },
+    helpNeeded() {
+      if (this.stage === 2) {
+        return false;
+      } else return true;
+    },
   },
 };
 </script>
@@ -199,13 +213,14 @@ export default {
 
 .help-button {
   position: absolute;
-  top: 40%;
+  top: 5%;
   right: 0;
+  z-index: 10;
 }
 
 .help-button button {
   font-size: 13px;
-  height: 31px;
+  height: 60px;
   color: white;
   background-color: #00263a;
   border-radius: 5px 0 0 5px;
@@ -213,7 +228,7 @@ export default {
   border-left: #789904 2px solid;
   border-right: none;
   border-top: #789904 2px solid;
-  padding: 2px 1px;
+  padding: 2px;
   cursor: pointer;
 }
 
@@ -221,19 +236,15 @@ export default {
   outline: none;
 }
 
-.help-button button p {
+.help-icon {
+  margin: 2px 0;
+}
+
+.help-text {
   writing-mode: vertical-rl;
-  text-orientation: upright;
   text-transform: lowercase;
   font-variant: small-caps;
   margin: 0;
-}
-
-.help-icon {
-  padding: 2px 6px;
-  margin: 2px;
-  border: white solid 2px;
-  border-radius: 50%;
 }
 
 .wizard-components {
