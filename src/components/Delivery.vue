@@ -4,24 +4,16 @@
     <p class="delivery-date">{{delivery1 | moment("dddd Do MMM[.] YYYY")}}</p>
     <p class="delivery-date-title">Your second delivery date:</p>
     <p class="delivery-date">{{delivery2 | moment("dddd Do MMM[.] YYYY")}}</p>
-    <div class="delivery-button-group">
-      <button class="previous-chevron" @click="handlePrev">
-        <font-awesome-icon :icon="['fas', 'chevron-left']" />
-      </button>
-      <button
-        v-if="!datePicking"
-        class="btn-green delivery-date-button"
-        @click="pickDates"
-      >Change first delivery</button>
-      <button
-        v-if="datePicking"
-        class="btn-green delivery-date-button"
-        @click="saveDates"
-      >Save delivery date</button>
-      <button class="next-chevron">
-        <font-awesome-icon :icon="['fas', 'chevron-right']" />
-      </button>
-    </div>
+    <button
+      v-if="!datePicking"
+      class="btn-green delivery-date-button"
+      @click="pickDates"
+    >Change first delivery</button>
+    <button
+      v-if="datePicking"
+      class="btn-green delivery-date-button"
+      @click="saveDates"
+    >Save delivery date</button>
 
     <div class="delivery-calendar">
       <v-calendar v-if="!loading && !datePicking" :attributes="attributes" />
@@ -52,14 +44,6 @@ export default {
             visibility: "click",
           },
         },
-        {
-          highlight: { color: "orange", class: "bella-duke-orange" },
-          dates: "",
-          popover: {
-            label: "Second Delivery",
-            visibility: "click",
-          },
-        },
       ],
     };
   },
@@ -80,9 +64,9 @@ export default {
   mounted() {
     let today = new Date();
     this.delivery1 = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
-    this.delivery2 = new Date(today.getTime() + 14 * 24 * 60 * 60 * 1000);
+    // this.delivery2 = new Date(today.getTime() + 14 * 24 * 60 * 60 * 1000);
     this.attributes[0].dates = this.delivery1;
-    this.attributes[1].dates = this.delivery2;
+    // this.attributes[1].dates = this.delivery2;
 
     this.loading = false;
   },
@@ -113,25 +97,6 @@ export default {
 .delivery-button-group {
   display: flex;
   width: 350px;
-}
-
-.previous-chevron {
-  font-size: 30px;
-  color: orange;
-  align-self: center;
-  margin-right: auto;
-  background-color: white;
-  border: none;
-}
-
-.next-chevron {
-  visibility: hidden;
-  font-size: 30px;
-  color: orange;
-  align-self: center;
-  margin-left: auto;
-  background-color: white;
-  border: none;
 }
 </style>
 <style>

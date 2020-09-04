@@ -1,19 +1,10 @@
 <template>
   <div class="nutrition">
-    <BnDPictorialChart />
-    <div class="nutrition-next-statement">
-      <button class="previous-chevron" @click="handlePrev">
-        <font-awesome-icon :icon="['fas', 'chevron-left']" />
-      </button>
-
-      <div class="nutrition-meal-statement">
-        <p class="nutrition-meal">{{ name }}'s nutritional plan</p>
-        <p class="nutrition-statement">100% natural & nutritious</p>
-      </div>
-      <button class="next-chevron" @click="handleNext">
-        <font-awesome-icon :icon="['fas', 'chevron-right']" />
-      </button>
+    <div class="nutrition-meal-statement">
+      <p class="nutrition-meal">{{ name }}'s nutritional plan</p>
+      <p class="nutrition-statement">100% natural & nutritious</p>
     </div>
+    <BnDPictorialChart />
     <transition name="slide-down-read">
       <div class="nutrition-read" v-if="readMore">
         <p>
@@ -86,24 +77,6 @@ export default {
 
 .nutrition-statement {
   margin: 2px;
-}
-
-.next-chevron {
-  font-size: 30px;
-  color: orange;
-  align-self: center;
-  margin-left: auto;
-  background-color: white;
-  border: none;
-}
-
-.previous-chevron {
-  font-size: 30px;
-  color: orange;
-  align-self: center;
-  margin-right: auto;
-  background-color: white;
-  border: none;
 }
 
 .nutrition-read {

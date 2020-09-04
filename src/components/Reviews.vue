@@ -18,12 +18,6 @@
           </div>
         </transition>
       </div>
-      <button class="previous-chevron" @click="handlePrev">
-        <font-awesome-icon :icon="['fas', 'chevron-left']" />
-      </button>
-      <button class="next-chevron" @click="handleNext">
-        <font-awesome-icon :icon="['fas', 'chevron-right']" />
-      </button>
     </div>
     <div class="reviews-controls">
       <!-- <button @click="prevReview">
@@ -173,26 +167,6 @@ export default {
   border-radius: 50%;
   height: 100px;
   width: 100px;
-}
-
-.next-chevron {
-  font-size: 30px;
-  color: orange;
-  align-self: center;
-  margin-left: auto;
-  background-color: white;
-  border: none;
-  z-index: 20;
-}
-
-.previous-chevron {
-  font-size: 30px;
-  color: orange;
-  align-self: center;
-  float: left;
-  background-color: white;
-  border: none;
-  z-index: 20;
 }
 
 @media screen and (max-width: 340px) {

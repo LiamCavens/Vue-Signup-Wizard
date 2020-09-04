@@ -1,13 +1,7 @@
 <template>
   <div class="recommendation">
     <div class="recommendation-logo-next">
-      <button class="previous-chevron">
-        <font-awesome-icon :icon="['fas', 'chevron-left']" />
-      </button>
       <img class="recommendation-logo" alt="recommendation image" src="../assets/BeefShot.png" />
-      <button class="next-chevron" @click="handleNext">
-        <font-awesome-icon :icon="['fas', 'chevron-right']" />
-      </button>
     </div>
     <p class="recommendation-meal">{{ name }}'s meal plan</p>
     <p class="recommendation-meal">Premium Complete</p>
@@ -83,24 +77,6 @@ export default {
 
 .recommendation-amount {
   margin: 2px;
-}
-
-.next-chevron {
-  font-size: 30px;
-  color: orange;
-  align-self: center;
-  margin-left: auto;
-  background-color: white;
-  border: none;
-}
-
-.previous-chevron {
-  visibility: hidden;
-  font-size: 30px;
-  color: orange;
-  align-self: center;
-  margin-right: auto;
-  border: none;
 }
 
 .recommendation-read {

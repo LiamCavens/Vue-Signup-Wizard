@@ -47,6 +47,9 @@ export default {
         this.$emit("weightSubmit");
       }
     });
+    if (this.weight.amount) {
+      this.blurred = true;
+    }
   },
 };
 </script>

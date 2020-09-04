@@ -11,6 +11,15 @@
         </button>
       </div>
 
+      <div v-if="stage >= 7" class="chevrons">
+        <button class="previous-chevron" @click="prevStage">
+          <font-awesome-icon :icon="['fas', 'chevron-left']" />
+        </button>
+        <button class="next-chevron" @click="nextStage">
+          <font-awesome-icon :icon="['fas', 'chevron-right']" />
+        </button>
+      </div>
+
       <transition-group v-bind:name="transitionName">
         <Help v-if="help" class="help-component" :stage="stage" @closeHelp="closeHelp" key="help" />
         <DogStory :pet.sync="pet" :stage.sync="stage" key="story" v-if="stage < 7" />
@@ -123,9 +132,9 @@ export default {
     return {
       help: false,
       transitionName: "slide-fade",
-      stage: 10,
+      stage: 1,
       pet: {
-        name: "",
+        name: "Winston Churchill",
         gender: "",
         age: {
           years: "",
@@ -257,6 +266,37 @@ export default {
   display: flex;
   flex-direction: column;
   position: relative;
+}
+
+.chevrons {
+  position: absolute;
+  top: 40%;
+  width: inherit;
+  z-index: 100;
+}
+
+.next-chevron {
+  font-size: 30px;
+  color: orange;
+  align-self: center;
+  margin-left: auto;
+  background-color: white;
+  border: none;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+
+.previous-chevron {
+  font-size: 30px;
+  color: orange;
+  align-self: center;
+  margin-right: auto;
+  background-color: white;
+  border: none;
+  position: absolute;
+  left: 0;
+  cursor: pointer;
 }
 
 .footer-buttons {

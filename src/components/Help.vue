@@ -90,7 +90,7 @@ export default {
 }
 
 .help-close {
-  margin: auto 0 40px;
+  margin: 20px;
   font-family: Montserrat;
   text-transform: lowercase;
   font-variant: small-caps;

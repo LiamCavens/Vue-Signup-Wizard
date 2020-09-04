@@ -145,6 +145,11 @@ export default {
       }
     },
   },
+  mounted() {
+    if (this.breed.parent1) {
+      this.genderSubmitted = true;
+    }
+  },
 };
 </script>
 
