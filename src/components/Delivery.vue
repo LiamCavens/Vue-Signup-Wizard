@@ -64,9 +64,7 @@ export default {
   mounted() {
     let today = new Date();
     this.delivery1 = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
-    // this.delivery2 = new Date(today.getTime() + 14 * 24 * 60 * 60 * 1000);
     this.attributes[0].dates = this.delivery1;
-    // this.attributes[1].dates = this.delivery2;
 
     this.loading = false;
   },

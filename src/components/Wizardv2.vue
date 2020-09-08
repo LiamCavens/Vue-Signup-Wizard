@@ -6,7 +6,6 @@
           <p class="help-text">HELP</p>
           <span class="help-icon">
             <font-awesome-icon :icon="['far', 'question-circle']" />
-            <!-- <font-awesome-icon :icon="['fas', 'info']" /> -->
           </span>
         </button>
       </div>
