@@ -134,7 +134,7 @@ export default {
       transitionName: "slide-fade",
       stage: 1,
       pet: {
-        name: "Winston Churchill",
+        name: "",
         gender: "",
         age: {
           years: "",
@@ -193,18 +193,19 @@ export default {
       this.transitionName = "help-transition";
       setTimeout(() => {
         this.help = true;
+        // let classToBlur = document.querySelector(".wizard-components");
+        // let helpComponent = document.querySelector(".help-component");
+        // classToBlur.style.filter = "";
+        // helpComponent.style.backdropFilter = "blur(2px)";
       }, 0);
     },
     closeHelp() {
       this.help = false;
       setTimeout(() => {
         this.transitionName = "slide-fade";
+        // let classToBlur = document.querySelector(".wizard-components");
+        // classToBlur.style.filter = "blur(0)";
       }, 0);
-    },
-    helpNeeded() {
-      if (this.stage === 2) {
-        return false;
-      } else return true;
     },
   },
 };
@@ -357,6 +358,6 @@ export default {
 
 .help-transition-enter-to,
 .help-transition-leave {
-  opacity: 1;
+  opacity: 0.93;
 }
 </style>

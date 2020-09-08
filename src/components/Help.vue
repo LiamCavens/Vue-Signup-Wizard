@@ -1,5 +1,5 @@
 <template>
-  <div class="help">
+  <div id="help-component" class="help">
     <h3 class="help-title">{{helpTitle}}</h3>
     <p class="help-message">{{helpMessage}}</p>
     <button class="help-close" @click="closeHelp">Close</button>
@@ -61,6 +61,15 @@ export default {
   },
   mounted() {
     this.getHelp(this.stage);
+    let helpOnMount = document.querySelector("#help-component");
+    setTimeout(() => {
+      helpOnMount.style.opacity = 0.93;
+      helpOnMount.style.transition = "opacity 0.5s";
+    }, 0);
+  },
+  beforeDestroy() {
+    let helpOnMount = document.querySelector("#help-component");
+    helpOnMount.style.opacity = 0;
   },
 };
 </script>
@@ -75,13 +84,13 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #f3c88b;
+  background-color: #fff;
   z-index: 100;
   border-radius: 10px;
 }
 
 .help-message {
-  background-color: #c29e6b;
+  background-color: #d6be9c;
   margin: 10px;
   padding: 20px 15px;
   text-align: left;
