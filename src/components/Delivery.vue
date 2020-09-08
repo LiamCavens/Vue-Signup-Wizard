@@ -4,7 +4,7 @@
     <p class="delivery-date">{{delivery1 | moment("dddd Do MMM[.] YYYY")}}</p>
     <p class="delivery-date-title">Your second delivery date:</p>
     <p class="delivery-date">{{delivery2 | moment("dddd Do MMM[.] YYYY")}}</p>
-    <button
+    <!-- <button
       v-if="!datePicking"
       class="btn-green delivery-date-button"
       @click="pickDates"
@@ -13,16 +13,21 @@
       v-if="datePicking"
       class="btn-green delivery-date-button"
       @click="saveDates"
-    >Save delivery date</button>
+    >Save delivery date</button>-->
+
+    <p>Change first delivery below</p>
 
     <div class="delivery-calendar">
-      <v-calendar v-if="!loading && !datePicking" :attributes="attributes" />
-      <v-date-picker v-if="!loading && datePicking" v-model="delivery1" is-inline />
+      <!-- <v-calendar v-if="!loading && !datePicking" :attributes="attributes" /> -->
+      <!-- <v-date-picker v-if="!loading && datePicking" v-model="delivery1" is-inline /> -->
+      <v-date-picker v-model="delivery1" :select-attribute="selectAttribute" is-inline />
     </div>
   </div>
 </template>
 
 <script>
+const moment = require("moment");
+
 export default {
   name: "Delivery",
   props: {},
@@ -32,19 +37,29 @@ export default {
       datePicking: false,
       delivery1: "",
       delivery2: "",
-      attributes: [
-        {
-          highlight: {
-            color: "green",
-            class: "bella-duke-green",
-          },
-          dates: "",
-          popover: {
-            label: "First Delivery",
-            visibility: "click",
-          },
+      selectAttribute: {
+        highlight: {
+          color: "green",
+          class: "bella-duke-green",
         },
-      ],
+        popover: {
+          label: "First Delivery",
+        },
+      },
+      // BELOW: IF WE USE THE V-CALENDAR THEN THESE ARE THE SETTINGS
+      //   attributes: [
+      //     {
+      //       highlight: {
+      //         color: "green",
+      //         class: "bella-duke-green",
+      //       },
+      //       dates: "",
+      //       popover: {
+      //         label: "First Delivery",
+      //         visibility: "click",
+      //       },
+      //     },
+      //   ],
     };
   },
   methods: {
@@ -64,9 +79,17 @@ export default {
   mounted() {
     let today = new Date();
     this.delivery1 = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
-    this.attributes[0].dates = this.delivery1;
+    this.delivery2 = new Date(today.getTime() + 14 * 24 * 60 * 60 * 1000);
+    // this.attributes[0].dates = this.delivery1;
+    // If we want to show the second date on calander
+    // this.attributes[1].dates = this.delivery2;
 
     this.loading = false;
+  },
+  watch: {
+    delivery1: function (val) {
+      this.delivery2 = moment(val).add(1, "week");
+    },
   },
 };
 </script>

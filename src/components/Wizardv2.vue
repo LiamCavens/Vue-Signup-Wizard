@@ -131,7 +131,7 @@ export default {
     return {
       help: false,
       transitionName: "slide-fade",
-      stage: 1,
+      stage: 10,
       pet: {
         name: "",
         gender: "",
