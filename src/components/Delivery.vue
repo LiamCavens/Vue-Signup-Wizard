@@ -20,7 +20,12 @@
     <div class="delivery-calendar">
       <!-- <v-calendar v-if="!loading && !datePicking" :attributes="attributes" /> -->
       <!-- <v-date-picker v-if="!loading && datePicking" v-model="delivery1" is-inline /> -->
-      <v-date-picker v-model="delivery1" :select-attribute="selectAttribute" is-inline />
+      <v-date-picker
+        v-model="delivery1"
+        :select-attribute="selectAttribute"
+        :disabled-dates="[{ weekdays: [1, 7] }, { start: null, end:  new Date()}]"
+        is-inline
+      />
     </div>
   </div>
 </template>
@@ -80,8 +85,8 @@ export default {
     let today = new Date();
     this.delivery1 = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
     this.delivery2 = new Date(today.getTime() + 14 * 24 * 60 * 60 * 1000);
+    // If we want to show the dates on v-calander
     // this.attributes[0].dates = this.delivery1;
-    // If we want to show the second date on calander
     // this.attributes[1].dates = this.delivery2;
 
     this.loading = false;
