@@ -131,7 +131,7 @@ export default {
     return {
       help: false,
       transitionName: "slide-fade",
-      stage: 10,
+      stage: 1,
       pet: {
         name: "",
         gender: "",
@@ -326,6 +326,20 @@ export default {
 
 .footer-buttons button:focus {
   outline: none;
+}
+
+.input-error {
+  border: 1px solid #e1251b !important;
+  box-shadow: inset 0px 0px 4px 0px #e1251b !important;
+}
+
+.error-message {
+  color: #e1251b;
+  font-weight: 700;
+  text-align: left;
+  padding-left: 20px;
+  margin-bottom: 2px;
+  font-size: 12px;
 }
 
 .slide-fade-enter-active {

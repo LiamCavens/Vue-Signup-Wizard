@@ -1,15 +1,20 @@
 <template>
   <div class="dog-weight">
     <p class="dog-weight-label">What's {{ name }}'s weight?</p>
+    <p v-if="inputError" class="error-message">* {{errorMessage}}</p>
     <div class="weight-inputs">
       <input
         placeholder="Enter Weight"
         class="dog-weight-input"
+        v-bind:class="{ 'input-error': inputError }"
         type="number"
         min="0"
         max="999"
+        pattern="^[0-9]+$"
         v-model="weight.amount"
         @blur="blurred = true"
+        @keypress="restrictInput($event)"
+        @keyup="checkInput"
         autofocus
       />
       <select name="dog-weight-units" id="weight-units" v-model="weight.unit">
@@ -33,18 +38,35 @@ export default {
   data: () => {
     return {
       blurred: false,
+      inputError: false,
+      errorMessage: "",
     };
   },
   methods: {
     handleNext() {
-      if (!this.weight.amount) return alert("You must input a weight");
-      this.$emit("weightSubmit");
+      if (!this.weight.amount) {
+        this.inputError = true;
+        this.errorMessage = "You must input a weight";
+        return;
+      } else {
+        this.$emit("weightSubmit");
+      }
+    },
+    restrictInput(evt) {
+      if (evt.keyCode === 45 || evt.keyCode === 43) {
+        evt.preventDefault();
+      }
+    },
+    checkInput() {
+      if (this.weight.amount > 0) {
+        this.inputError = false;
+      }
     },
   },
   mounted() {
     window.addEventListener("keyup", (event) => {
       if (event.keyCode === 13) {
-        this.$emit("weightSubmit");
+        this.handleNext();
       }
     });
     if (this.weight.amount) {

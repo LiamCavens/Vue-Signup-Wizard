@@ -1,9 +1,11 @@
 <template>
   <div class="dog-name">
     <p class="dog-name-label">What's your dog's name?</p>
+    <p v-if="inputError" class="error-message">* {{errorMessage}}</p>
     <input
       placeholder="Name"
       class="dog-name-input"
+      v-bind:class="{ 'input-error': inputError }"
       type="text"
       :value="name"
       @input="$emit('update:name', $event.target.value)"
@@ -26,18 +28,31 @@ export default {
   data: () => {
     return {
       blurred: false,
+      inputError: false,
+      errorMessage: "",
     };
   },
   methods: {
     handleNext() {
-      if (!this.name) return alert("You must input a name");
-      this.$emit("nameSubmit");
+      this.name = this.name.trim();
+      if (!this.name || this.name.length < 3) {
+        this.inputError = true;
+        if (!this.name) {
+          this.errorMessage = "You must input a name.";
+        } else if (this.name.length < 3) {
+          this.errorMessage = "Name must be more than 2 characters.";
+        }
+        return;
+      } else {
+        this.inputError = true;
+        this.$emit("nameSubmit");
+      }
     },
   },
   mounted() {
     window.addEventListener("keyup", (event) => {
       if (event.keyCode === 13) {
-        this.$emit("nameSubmit");
+        this.handleNext();
       }
     });
     if (this.name) {
