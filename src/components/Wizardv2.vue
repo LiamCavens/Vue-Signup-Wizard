@@ -55,12 +55,13 @@
         <DogWeight
           v-if="stage === 6"
           :name="pet.name"
+          :animal="pet.animal"
           :weight.sync="pet.weight"
           @weightSubmit="handleWeight"
           key="weight"
         />
         <DogBodyType
-          v-if="stage === 7"
+          v-if="stage === 7 && pet.animal === 'dog'"
           :name="pet.name"
           :body.sync="pet.body"
           @bodySubmit="handleBody"

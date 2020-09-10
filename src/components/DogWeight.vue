@@ -17,8 +17,22 @@
         @keyup="checkInput"
         autofocus
       />
-      <select name="dog-weight-units" id="weight-units" v-model="weight.unit">
+      <select
+        v-if="animal === 'dog'"
+        name="dog-weight-units"
+        id="weight-units"
+        v-model="weight.unit"
+      >
         <option class="unit-option" value="kg" default>Kilograms</option>
+        <option class="unit-option" value="lb">Pounds</option>
+      </select>
+      <select
+        v-if="animal === 'cat'"
+        name="dog-weight-units"
+        id="weight-units"
+        v-model="weight.unit"
+      >
+        <option class="unit-option" value="g" default>Grams</option>
         <option class="unit-option" value="lb">Pounds</option>
       </select>
     </div>
@@ -34,6 +48,7 @@ export default {
   props: {
     name: String,
     weight: Object,
+    animal: String,
   },
   data: () => {
     return {
