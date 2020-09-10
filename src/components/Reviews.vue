@@ -23,10 +23,10 @@
       <!-- <button @click="prevReview">
         <font-awesome-icon :icon="['fas', 'backward']" />
       </button>-->
-      <button @click="playReview">
+      <button v-if="!isPlaying" @click="playReview">
         <font-awesome-icon :icon="['fas', 'play']" />
       </button>
-      <button @click="pauseReview">
+      <button v-if="isPlaying" @click="pauseReview">
         <font-awesome-icon :icon="['fas', 'pause']" />
       </button>
       <!-- <button @click="nextReview">
@@ -42,6 +42,7 @@ export default {
   props: {},
   data: () => {
     return {
+      isPlaying: true,
       currentReview: 0,
       reviews: [
         {
@@ -83,12 +84,14 @@ export default {
       }
     },
     playReview() {
+      this.isPlaying = true;
       this.playReviews = setInterval(() => {
         this.nextReview();
       }, 7500);
     },
     pauseReview() {
       clearInterval(this.playReviews);
+      this.isPlaying = false;
     },
     handleNext() {
       this.$emit("handleNext");

@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "DogName",
+  name: "DogGender",
   props: {
     name: String,
     gender: String,

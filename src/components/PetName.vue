@@ -1,10 +1,10 @@
 <template>
-  <div class="dog-name">
-    <p class="dog-name-label">What's your dog's name?</p>
+  <div class="pet-name">
+    <p class="pet-name-label">Lets start with a name...</p>
     <p v-if="inputError" class="error-message">* {{errorMessage}}</p>
     <input
       placeholder="Name"
-      class="dog-name-input"
+      class="pet-name-input"
       v-bind:class="{ 'input-error': inputError }"
       type="text"
       :value="name"
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: "DogName",
+  name: "PetName",
   props: {
     name: String,
   },
@@ -63,19 +63,19 @@ export default {
 </script>
 
 <style scoped>
-.dog-name {
+.pet-name {
   color: #00263a;
   display: flex;
   flex-direction: column;
 }
 
-.dog-name-label {
+.pet-name-label {
   font-family: Montserrat-Bold;
   font-size: 22px;
   margin-bottom: 5px;
 }
 
-.dog-name-input {
+.pet-name-input {
   box-sizing: border-box;
   border: 1px solid #c2c2c2;
   box-shadow: 1px 1px 4px #ebebeb;
@@ -86,7 +86,7 @@ export default {
   transition: 0.2s linear;
 }
 
-.dog-name-input:focus {
+.pet-name-input:focus {
   border: 1px solid #00263a;
   transition: 0.2s linear;
 }

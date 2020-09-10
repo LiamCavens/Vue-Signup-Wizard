@@ -21,59 +21,67 @@
 
       <transition-group v-bind:name="transitionName">
         <Help v-if="help" class="help-component" :stage="stage" @closeHelp="closeHelp" key="help" />
-        <DogStory :pet.sync="pet" :stage.sync="stage" key="story" v-if="stage < 7" />
-        <DogName v-if="stage === 1" :name.sync="pet.name" @nameSubmit="handleName" key="name" />
-        <DogGender
+        <PetStory :pet.sync="pet" :stage.sync="stage" key="story" v-if="stage < 7" />
+        <PetName v-if="stage === 1" :name.sync="pet.name" @nameSubmit="handleName" key="name" />
+        <PetAnimal
           v-if="stage === 2"
+          :name="pet.name"
+          :animal.sync="pet.animal"
+          @animalSubmit="handleAnimal"
+          key="animal"
+        />
+        <DogGender
+          v-if="stage === 3"
           :name="pet.name"
           :gender.sync="pet.gender"
           @genderSubmit="handleGender"
           key="gender"
         />
         <DogAge
-          v-if="stage === 3"
+          v-if="stage === 4"
           :name="pet.name"
           :age.sync="pet.age"
           @ageSubmit="handleAge"
           key="age"
         />
         <DogBreed
-          v-if="stage === 4"
+          v-if="stage === 5"
           :name="pet.name"
+          :animal="pet.animal"
           :breed.sync="pet.breed"
           @breedSubmit="handleBreed"
           key="breed"
         />
         <DogWeight
-          v-if="stage === 5"
+          v-if="stage === 6"
           :name="pet.name"
           :weight.sync="pet.weight"
           @weightSubmit="handleWeight"
           key="weight"
         />
         <DogBodyType
-          v-if="stage === 6"
+          v-if="stage === 7"
           :name="pet.name"
           :body.sync="pet.body"
           @bodySubmit="handleBody"
           key="bodytype"
         />
         <Recommendation
-          v-if="stage === 7"
+          v-if="stage === 8"
           :name="pet.name"
           key="recommendation"
           @handleNext="nextStage"
         />
         <Nutrition
-          v-if="stage === 8"
+          v-if="stage === 9"
           :name="pet.name"
           key="nutrition"
           @handleNext="nextStage"
           @handlePrev="prevStage"
         />
-        <Reviews v-if="stage === 9" key="reviews" @handleNext="nextStage" @handlePrev="prevStage" />
+        <Reviews v-if="stage === 10" key="reviews" @handleNext="nextStage" @handlePrev="prevStage" />
         <Delivery
-          v-if="stage === 10"
+          v-if="stage === 11"
           key="delivery"
           @handleNext="nextStage"
           @handlePrev="prevStage"
@@ -97,9 +105,10 @@
 
 <script>
 import DogAge from "./DogAge";
-import DogName from "./DogName";
-import DogStory from "./DogStory";
+import PetName from "./PetName";
+import PetStory from "./PetStory";
 import DogBreed from "./DogBreed";
+import PetAnimal from "./PetAnimal";
 import DogGender from "./DogGender";
 import DogWeight from "./DogWeight";
 import DogBodyType from "./DogBodyType";
@@ -114,9 +123,10 @@ export default {
   name: "Wizardv2",
   components: {
     DogAge,
-    DogName,
+    PetName,
     DogBreed,
-    DogStory,
+    PetStory,
+    PetAnimal,
     DogGender,
     DogWeight,
     DogBodyType,
@@ -134,6 +144,7 @@ export default {
       stage: 1,
       pet: {
         name: "",
+        animal: "",
         gender: "",
         age: {
           years: "",
@@ -167,26 +178,30 @@ export default {
       }
     },
     handleName() {
-      this.stage = 2;
+      this.nextStage();
+    },
+    handleAnimal(animal) {
+      this.pet.animal = animal;
+      this.nextStage();
     },
     handleGender(gender) {
       this.pet.gender = gender;
-      this.stage = 3;
+      this.nextStage();
     },
     handleAge() {
       if (this.pet.age.years && this.pet.age.months) {
-        this.stage = 4;
+        this.nextStage();
       }
     },
     handleBreed() {
-      this.stage = 5;
+      this.nextStage();
     },
     handleWeight() {
-      this.stage = 6;
+      this.nextStage();
     },
     handleBody(bodyType) {
       this.pet.body = bodyType;
-      this.stage = 7;
+      this.nextStage();
     },
     openHelp() {
       this.transitionName = "help-transition";
@@ -213,7 +228,6 @@ export default {
 <style>
 .wizard {
   background-color: #00263a;
-  color: #e1b77e;
   width: 100%;
   display: flex;
   justify-content: center;

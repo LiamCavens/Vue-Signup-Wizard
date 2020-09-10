@@ -1,13 +1,14 @@
 <template>
-  <div class="dog-story">
+  <div class="pet-story">
     <transition-group name="slide-down">
-      <p v-if="pet.name && stage >= 2" key="name">
+      <p v-if="pet.name && stage >= 2 && pet.animal" key="name">
         I'm a
         <transition name="slide-in">
           <span v-if="pet.gender && stage >= 3">
             <b>{{ pet.gender }}</b>
           </span>
-        </transition>&nbsp; dog named
+        </transition>&nbsp;
+        <b>{{pet.animal}}</b> named
         <b>{{ pet.name }}</b>.
       </p>
 
@@ -48,7 +49,7 @@
 
 <script>
 export default {
-  name: "DogStory",
+  name: "PetStory",
   props: {
     pet: Object,
     stage: Number,
@@ -63,7 +64,7 @@ export default {
 </script>
 
 <style scoped>
-.dog-story p {
+.pet-story p {
   margin: 5px 0;
 }
 

@@ -1,8 +1,8 @@
 <template>
-  <div class="dog-breed">
-    <p class="dog-breed-label">What breed is {{ name }}?</p>
-    <div class="dog-breed-radios">
-      <div class="dog-breed-radio">
+  <div class="pet-breed">
+    <p class="pet-breed-label">What breed is {{ name }}?</p>
+    <div class="pet-breed-radios">
+      <div class="pet-breed-radio">
         <input
           type="radio"
           id="purebreed"
@@ -15,7 +15,7 @@
         <div class="check"></div>
       </div>
 
-      <div class="dog-breed-radio">
+      <div v-if="animal === 'dog'" class="pet-breed-radio">
         <input
           type="radio"
           id="crossbreed"
@@ -28,7 +28,7 @@
         <div class="check"></div>
       </div>
 
-      <div class="dog-breed-radio">
+      <div class="pet-breed-radio">
         <input
           type="radio"
           id="dontknow"
@@ -53,7 +53,7 @@
       </div>
 
       <div class="breed-parents" v-if="breed.type === 'crossbreed'" key="crossbreed-select">
-        <p class="dog-breed-label">Mother's Breed</p>
+        <p class="pet-breed-label">Mother's Breed</p>
         <v-select
           class="parent-chooser"
           placeholder="Choose Breed"
@@ -61,7 +61,7 @@
           v-model="breed.parent1"
           @input="breedSubmit('cross')"
         />
-        <p class="dog-breed-label">Fathers's Breed</p>
+        <p class="pet-breed-label">Fathers's Breed</p>
         <v-select
           class="parent-chooser"
           placeholder="Choose Breed"
@@ -83,10 +83,12 @@ export default {
   props: {
     name: String,
     breed: Object,
+    animal: String,
   },
   data: () => {
     return {
-      breeds: [
+      breeds: [],
+      dogBreeds: [
         "Affenpinscher",
         "Afghan Hound",
         "Aidi",
@@ -119,6 +121,33 @@ export default {
         "Schillerstövare",
         "Schipperke",
       ],
+      catBreeds: [
+        "Abyssinian",
+        "American Bobtail",
+        "Balinese",
+        "Bengal",
+        "Birman",
+        "British Shorthair",
+        "Burmese",
+        "Chartreux",
+        "Colorpoint Shorthair",
+        "Cornish Rex",
+        "Devon Rex",
+        "Egyptian Mau",
+        "Exotic",
+        "Havana Brown",
+        "Japanese Bobtail",
+        "Korat",
+        "Lykoi",
+        "Maine Coon",
+        "Ocicat",
+        "Persian",
+        "RagaMuffin",
+        "Russian Blue",
+        "Scottish Fold",
+        "Siamese",
+        "Tabby",
+      ],
       genderSubmitted: false,
     };
   },
@@ -149,35 +178,37 @@ export default {
     if (this.breed.parent1) {
       this.genderSubmitted = true;
     }
+
+    this.breeds = this.animal === "dog" ? this.dogBreeds : this.catBreeds;
   },
 };
 </script>
 
 <style scoped>
-.dog-breed {
+.pet-breed {
   color: #00263a;
   display: flex;
   flex-direction: column;
 }
 
-.dog-breed-label {
+.pet-breed-label {
   font-family: Montserrat-Bold;
   font-size: 22px;
   margin-bottom: 10px;
 }
 
-.dog-breed-radios {
+.pet-breed-radios {
   border: none;
   display: flex;
   justify-content: space-evenly;
 }
 
-.dog-breed-radio input[type="radio"] {
+.pet-breed-radio input[type="radio"] {
   position: absolute;
   visibility: hidden;
 }
 
-.dog-breed-radio label {
+.pet-breed-radio label {
   cursor: pointer;
   display: block;
   position: relative;
@@ -187,11 +218,11 @@ export default {
   transition: all 0.25s linear;
 }
 
-.dog-breed-radio label:hover {
+.pet-breed-radio label:hover {
   color: #789904;
 }
 
-.dog-breed-radio {
+.pet-breed-radio {
   position: relative;
 }
 
@@ -235,7 +266,7 @@ input[type="radio"]:checked ~ label {
   color: #789904;
 }
 
-.dog-breed-radio:hover .check {
+.pet-breed-radio:hover .check {
   border: 3px solid #789904;
 }
 
@@ -292,7 +323,7 @@ input[type="radio"]:checked ~ label {
 }
 
 @media screen and (max-width: 340px) {
-  .dog-breed-radio label {
+  .pet-breed-radio label {
     font-size: 14px;
   }
   .next-button {

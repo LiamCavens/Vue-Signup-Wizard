@@ -9,9 +9,6 @@
       :class="{active : activatedDiv === index}"
     >
       <img class="dog-body-image" src="../assets/icon_dog_white.png" alt="Dob Body Image" />
-      <!-- <button class="dog-body-next" v-if="activatedDiv === index">
-        <font-awesome-icon :icon="['fas', 'arrow-right']" />
-      </button>-->
       <div class="dog-body-item-text">
         <p class="dog-body-item-label">{{bodyType.label}}</p>
         <p class="dog-body-item-desc">{{bodyType.description}}</p>
