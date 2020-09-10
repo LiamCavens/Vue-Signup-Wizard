@@ -52,7 +52,7 @@
           @breedSubmit="handleBreed"
           key="breed"
         />
-        <DogWeight
+        <PetWeight
           v-if="stage === 6"
           :name="pet.name"
           :animal="pet.animal"
@@ -111,7 +111,7 @@ import PetStory from "./PetStory";
 import DogBreed from "./DogBreed";
 import PetAnimal from "./PetAnimal";
 import DogGender from "./DogGender";
-import DogWeight from "./DogWeight";
+import PetWeight from "./PetWeight";
 import DogBodyType from "./DogBodyType";
 
 import Help from "./Help";
@@ -129,7 +129,7 @@ export default {
     PetStory,
     PetAnimal,
     DogGender,
-    DogWeight,
+    PetWeight,
     DogBodyType,
     Help,
     Reviews,

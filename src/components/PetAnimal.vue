@@ -48,6 +48,12 @@ export default {
   flex-direction: column;
 }
 
+.pet-animal-label {
+  font-family: Montserrat-Bold;
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
 .pet-animal-buttons {
   display: flex;
   flex-direction: column;

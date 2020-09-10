@@ -1,11 +1,11 @@
 <template>
-  <div class="dog-weight">
-    <p class="dog-weight-label">What's {{ name }}'s weight?</p>
+  <div class="pet-weight">
+    <p class="pet-weight-label">What's {{ name }}'s weight?</p>
     <p v-if="inputError" class="error-message">* {{errorMessage}}</p>
     <div class="weight-inputs">
       <input
         placeholder="Enter Weight"
-        class="dog-weight-input"
+        class="pet-weight-input"
         v-bind:class="{ 'input-error': inputError }"
         type="number"
         min="0"
@@ -18,8 +18,8 @@
         autofocus
       />
       <select
-        v-if="animal === 'dog'"
-        name="dog-weight-units"
+        v-if="animal === 'pet'"
+        name="pet-weight-units"
         id="weight-units"
         v-model="weight.unit"
       >
@@ -28,7 +28,7 @@
       </select>
       <select
         v-if="animal === 'cat'"
-        name="dog-weight-units"
+        name="pet-weight-units"
         id="weight-units"
         v-model="weight.unit"
       >
@@ -44,7 +44,7 @@
 
 <script>
 export default {
-  name: "DogWeight",
+  name: "PetWeight",
   props: {
     name: String,
     weight: Object,
@@ -92,19 +92,19 @@ export default {
 </script>
 
 <style scoped>
-.dog-weight {
+.pet-weight {
   color: #00263a;
   display: flex;
   flex-direction: column;
 }
 
-.dog-weight-label {
+.pet-weight-label {
   font-family: Montserrat-Bold;
   font-size: 22px;
   margin-bottom: 5px;
 }
 
-.dog-weight-input {
+.pet-weight-input {
   box-sizing: border-box;
   border: 1px solid #c2c2c2;
   box-shadow: 1px 1px 4px #ebebeb;
@@ -138,7 +138,7 @@ export default {
   transition: 0.3s ease;
 }
 
-.dog-weight-input:focus {
+.pet-weight-input:focus {
   border: 1px solid #00263a;
   transition: 0.2s linear;
 }
@@ -168,7 +168,7 @@ export default {
 }
 
 @media screen and (max-width: 340px) {
-  .dog-weight-input {
+  .pet-weight-input {
     width: 180px;
     margin: 0 5% 0 0;
   }
