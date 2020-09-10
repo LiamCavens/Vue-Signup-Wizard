@@ -39,7 +39,7 @@ export default {
 }
 
 .headerLogo {
-  height: 70px;
+  height: 50px;
   max-width: 100%;
 }
 

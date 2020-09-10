@@ -12,7 +12,7 @@
         <b>{{ pet.name }}</b>.
       </p>
 
-      <p v-if="pet.age && stage >= 4" key="age">
+      <p v-if="pet.age && stage >= 5" key="age">
         I am
         <b>{{ pet.age.years }} years</b>
         <span v-if="pet.age.months > 0">
@@ -22,7 +22,7 @@
         old.
       </p>
 
-      <p v-if="pet.breed && stage >= 5" key="breed">
+      <p v-if="pet.breed && stage >= 6" key="breed">
         <span v-if="pet.breed.type === 'purebreed'">
           I'm a
           <b>
@@ -39,7 +39,7 @@
         <span v-if="pet.breed.type === 'none'">I'm not quite sure what breed I am.</span>
       </p>
 
-      <p v-if="pet.weight && stage >= 6" key="weight">
+      <p v-if="pet.weight && stage >= 7" key="weight">
         I weigh
         <b>{{pet.weight.amount}}{{pet.weight.unit}}.</b>
       </p>
