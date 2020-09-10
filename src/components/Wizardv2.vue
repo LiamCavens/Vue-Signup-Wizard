@@ -172,6 +172,7 @@ export default {
   methods: {
     nextStage() {
       this.stage++;
+      if (this.stage === 7 && this.pet.animal === "cat") this.nextStage();
     },
     prevStage() {
       if (this.stage > 1) {
@@ -183,6 +184,7 @@ export default {
     },
     handleAnimal(animal) {
       this.pet.animal = animal;
+      if (animal === "cat") this.pet.weight.unit = "g";
       this.nextStage();
     },
     handleGender(gender) {
