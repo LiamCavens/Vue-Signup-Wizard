@@ -5,12 +5,12 @@
         <button @click="openHelp">
           <p class="help-text">HELP</p>
           <span class="help-icon">
-            <font-awesome-icon :icon="['far', 'question-circle']" />
+            <font-awesome-icon :icon="['fas', 'question']" />
           </span>
         </button>
       </div>
 
-      <div v-if="stage >= 7" class="chevrons">
+      <div v-if="stage >= 8" class="chevrons">
         <button class="previous-chevron" @click="prevStage">
           <font-awesome-icon :icon="['fas', 'chevron-left']" />
         </button>
@@ -44,7 +44,7 @@
           @ageSubmit="handleAge"
           key="age"
         />
-        <DogBreed
+        <PetBreed
           v-if="stage === 5"
           :name="pet.name"
           :animal="pet.animal"
@@ -93,9 +93,9 @@
         <button @click="prevStage">
           <font-awesome-icon :icon="['fas', 'arrow-left']" />
         </button>
-        <button @click="help = !help">
+        <!-- <button @click="help = !help">
           <font-awesome-icon :icon="['far', 'comment-dots']" />
-        </button>
+        </button>-->
         <button>
           <font-awesome-icon :icon="['far', 'save']" />
         </button>
@@ -108,7 +108,7 @@
 import DogAge from "./DogAge";
 import PetName from "./PetName";
 import PetStory from "./PetStory";
-import DogBreed from "./DogBreed";
+import PetBreed from "./PetBreed";
 import PetAnimal from "./PetAnimal";
 import DogGender from "./DogGender";
 import PetWeight from "./PetWeight";
@@ -125,7 +125,7 @@ export default {
   components: {
     DogAge,
     PetName,
-    DogBreed,
+    PetBreed,
     PetStory,
     PetAnimal,
     DogGender,
@@ -145,7 +145,7 @@ export default {
       stage: 1,
       pet: {
         name: "",
-        animal: "",
+        animal: "cat",
         gender: "",
         age: {
           years: "",
@@ -167,6 +167,7 @@ export default {
         experience: "",
         foodPreference: "",
       },
+      pets: [],
     };
   },
   methods: {
@@ -178,13 +179,14 @@ export default {
       if (this.stage > 1) {
         this.stage--;
       }
+      if (this.stage === 7 && this.pet.animal === "cat") this.prevStage();
     },
     handleName() {
       this.nextStage();
     },
     handleAnimal(animal) {
       this.pet.animal = animal;
-      if (animal === "cat") this.pet.weight.unit = "g";
+      this.pet.weight.unit = animal === "cat" ? "g" : "kg";
       this.nextStage();
     },
     handleGender(gender) {
@@ -224,6 +226,36 @@ export default {
         // classToBlur.style.filter = "blur(0)";
       }, 0);
     },
+    addNewPet() {
+      let newPet = {
+        name: "",
+        animal: "",
+        gender: "",
+        age: {
+          years: "",
+          months: "",
+        },
+        breed: {
+          type: "",
+          parent1: "",
+          parent2: "",
+        },
+        weight: {
+          unit: "kg",
+          amount: "",
+        },
+        activity: "",
+        body: "",
+        working: "",
+        health: [],
+        experience: "",
+        foodPreference: "",
+      };
+      this.pets.push(newPet);
+    },
+  },
+  mounted() {
+    this.addNewPet();
   },
 };
 </script>
@@ -248,7 +280,7 @@ export default {
   font-size: 13px;
   height: 60px;
   color: white;
-  background-color: #00263a;
+  background-color: #789904;
   border-radius: 5px 0 0 5px;
   border-bottom: #789904 2px solid;
   border-left: #789904 2px solid;
@@ -267,10 +299,11 @@ export default {
 }
 
 .help-text {
-  writing-mode: vertical-rl;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
   text-transform: lowercase;
   font-variant: small-caps;
-  margin: 0;
+  margin: 0 0 3px;
 }
 
 .wizard-components {
@@ -294,7 +327,7 @@ export default {
 
 .next-chevron {
   font-size: 30px;
-  color: orange;
+  color: #ee7623;
   align-self: center;
   margin-left: auto;
   background-color: white;
@@ -306,7 +339,7 @@ export default {
 
 .previous-chevron {
   font-size: 30px;
-  color: orange;
+  color: #ee7623;
   align-self: center;
   margin-right: auto;
   background-color: white;

@@ -130,23 +130,6 @@ export default {
   border-radius: 50%;
 }
 
-/* .dog-body-next {
-  height: 79px !important;
-  width: 79px !important;
-  padding: 0;
-  font-size: 30px;
-  color: #789904;
-  background-color: white;
-  border: 2px #789904 solid;
-  border-radius: 50%;
-  cursor: pointer;
-} */
-
-/* .dog-body-item:hover .dog-body-next {
-  color: #00263a;
-  transition: all 0.3s ease;
-} */
-
 @media screen and (max-height: 700px) {
   .dog-body-item-text {
     padding-left: 5px;

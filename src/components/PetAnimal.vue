@@ -70,6 +70,7 @@ export default {
 }
 
 .pet-animal-buttons button:hover {
+  margin: 2px;
   color: #789904;
   border: #789904 2px solid;
 }

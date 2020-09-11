@@ -17,22 +17,9 @@
         @keyup="checkInput"
         autofocus
       />
-      <select
-        v-if="animal === 'pet'"
-        name="pet-weight-units"
-        id="weight-units"
-        v-model="weight.unit"
-      >
-        <option class="unit-option" value="kg" default>Kilograms</option>
-        <option class="unit-option" value="lb">Pounds</option>
-      </select>
-      <select
-        v-if="animal === 'cat'"
-        name="pet-weight-units"
-        id="weight-units"
-        v-model="weight.unit"
-      >
-        <option class="unit-option" value="g" default>Grams</option>
+      <select name="pet-weight-units" id="weight-units" v-model="weight.unit">
+        <option v-if="animal === 'dog'" class="unit-option" value="kg" default>Kilograms</option>
+        <option v-else-if="animal === 'cat'" class="unit-option" value="g" default>Grams</option>
         <option class="unit-option" value="lb">Pounds</option>
       </select>
     </div>

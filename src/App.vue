@@ -41,6 +41,7 @@ export default {
 .headerLogo {
   height: 50px;
   max-width: 100%;
+  margin: 14px 0;
 }
 
 .link {

@@ -79,6 +79,7 @@ export default {
       this.loading = false;
     },
   },
+  beforeMount() {},
   mounted() {
     let calendarFix = document.querySelector("#date-picker");
     calendarFix.style.height = "230px";
@@ -91,7 +92,7 @@ export default {
 
     this.loading = false;
     setTimeout(() => {
-      calendarFix.style.height = "250px";
+      calendarFix.style.height = "270px";
     }, 500);
   },
   watch: {
@@ -111,6 +112,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 28px;
 }
 
 .delivery-date-title {

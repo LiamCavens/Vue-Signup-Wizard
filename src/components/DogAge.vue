@@ -57,7 +57,9 @@ export default {
       this.$emit("ageSubmit");
     },
   },
-  computed: {},
+  mounted() {
+    if (this.age.years && this.age.months) this.ageSubmitted = true;
+  },
 };
 </script>
 

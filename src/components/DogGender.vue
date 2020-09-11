@@ -55,7 +55,7 @@ export default {
 
 .dog-gender-buttons button:hover {
   color: #789904;
-  border: #789904 1px solid;
+  border: #789904 2px solid;
 }
 
 .dog-gender-label {

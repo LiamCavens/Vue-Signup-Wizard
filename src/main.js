@@ -1,7 +1,10 @@
 import Vue from "vue";
 import App from "./App.vue";
+import lodash from "lodash";
 import vSelect from "vue-select";
 import VCalendar from "v-calendar";
+import VueLodash from "vue-lodash";
+
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
@@ -19,6 +22,7 @@ Vue.config.productionTip = false;
 
 Vue.use(VCalendar);
 Vue.use(require("vue-moment"));
+Vue.use(VueLodash, { lodash: lodash });
 
 new Vue({
     render: (h) => h(App),

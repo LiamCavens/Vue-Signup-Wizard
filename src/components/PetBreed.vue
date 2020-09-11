@@ -175,11 +175,13 @@ export default {
     },
   },
   mounted() {
+    this.breeds = this.animal === "dog" ? this.dogBreeds : this.catBreeds;
+    if (!this._.includes(this.breeds, this.breed.parent1)) {
+      this.breed.parent1 = "";
+    }
     if (this.breed.parent1) {
       this.genderSubmitted = true;
     }
-
-    this.breeds = this.animal === "dog" ? this.dogBreeds : this.catBreeds;
   },
 };
 </script>
@@ -354,8 +356,8 @@ input[type="radio"]:checked ~ label {
 .breed-chooser .vs__dropdown-toggle,
 .breed-chooser .vs__dropdown-menu {
   width: 300px;
-  background: #e1b77e;
-  border: none;
+  background: #ffffff;
+  border: #00263a 1px solid;
   color: #00263a;
   text-transform: lowercase;
   font-variant: small-caps;
