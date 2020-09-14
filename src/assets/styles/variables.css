@@ -1,0 +1,22 @@
+:root {
+    --bnd-navy: #00263a;
+    --bnd-green: #789904;
+    --bnd-orange: #ee7623;
+    --bnd-red: #e1251b;
+    --bnd-buff: #e1b77e;
+}
+
+/* EXAMPLE 
+
+App.vue
+
+<style>
+  @import './assets/styles/variables.css';
+</style>
+LandingView.vue
+
+<style scoped>
+  #landing-view {
+    color: var(--bnd-navy);
+  }
+</style> */

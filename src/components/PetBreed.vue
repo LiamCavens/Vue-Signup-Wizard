@@ -79,7 +79,7 @@
 
 <script>
 export default {
-  name: "DogBreed",
+  name: "PetBreed",
   props: {
     name: String,
     breed: Object,

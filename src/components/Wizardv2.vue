@@ -22,6 +22,12 @@
       <transition-group v-bind:name="transitionName">
         <Help v-if="help" class="help-component" :stage="stage" @closeHelp="closeHelp" key="help" />
         <PetStory :pet.sync="pet" :stage.sync="stage" key="story" v-if="stage < 7" />
+        <UserEmail
+          v-if="stage === 0"
+          :email.sync="user.email"
+          @emailSubmit="handleEmail"
+          key="email"
+        />
         <PetName v-if="stage === 1" :name.sync="pet.name" @nameSubmit="handleName" key="name" />
         <PetAnimal
           v-if="stage === 2"
@@ -105,6 +111,7 @@
 </template>
 
 <script>
+import UserEmail from "./UserEmail";
 import DogAge from "./DogAge";
 import PetName from "./PetName";
 import PetStory from "./PetStory";
@@ -123,6 +130,7 @@ import Recommendation from "./Recommendation";
 export default {
   name: "Wizardv2",
   components: {
+    UserEmail,
     DogAge,
     PetName,
     PetBreed,
@@ -142,7 +150,10 @@ export default {
     return {
       help: false,
       transitionName: "slide-fade",
-      stage: 1,
+      stage: 0,
+      user: {
+        email: "",
+      },
       pet: {
         name: "",
         animal: "cat",
@@ -171,15 +182,19 @@ export default {
     };
   },
   methods: {
+    // ALL HANDLES WHICH JUST DO NEXT STAGE WILL CALL THE NEXTSTAGE FUNTION IN THE FUTURE
     nextStage() {
       this.stage++;
       if (this.stage === 7 && this.pet.animal === "cat") this.nextStage();
     },
     prevStage() {
-      if (this.stage > 1) {
+      if (this.stage > 0) {
         this.stage--;
       }
       if (this.stage === 7 && this.pet.animal === "cat") this.prevStage();
+    },
+    handleEmail() {
+      this.nextStage();
     },
     handleName() {
       this.nextStage();
@@ -381,6 +396,7 @@ export default {
 .input-error {
   border: 1px solid #e1251b !important;
   box-shadow: inset 0px 0px 4px 0px #e1251b !important;
+  transition: 0.5s ease !important;
 }
 
 .error-message {
