@@ -28,19 +28,29 @@ export default {
       //     this.helpMessage = `We need to know the name of your dog.`;
       //   }
       switch (stage) {
+        case 0:
+          this.helpTitle = `Email`;
+          this.helpMessage = `We use your email so we can send you a copy of this wizard in case you don’t have time to finish. 
+                            What we don’t do is share your email with anybody else. 
+                            After collecting information about dogs and cats we provide a specific recommendation for each animal based on the answers you give.`;
+          break;
         case 1:
           this.helpTitle = `Name`;
           this.helpMessage = `We need to know the name of your dog.`;
           break;
         case 2:
+          this.helpTitle = `Animal`;
+          this.helpMessage = `We need to know if you have a cat or dog.`;
+          break;
+        case 3:
           this.helpTitle = `Gender`;
           this.helpMessage = `Different genders need slightly different amounts of food.`;
           break;
-        case 3:
+        case 4:
           this.helpTitle = `Age`;
           this.helpMessage = `Different ages need slightly different amounts of food.`;
           break;
-        case 4:
+        case 5:
           this.helpTitle = `Breed`;
           this.helpMessage = `Different breeds need slightly different food mixes. 
           Some breeds have propensities for certain conditions so it is helpful to 
@@ -48,7 +58,7 @@ export default {
             We publish guides about individual breeds. 
             If your animal is one of those breeds, we will be sending you a copy.`;
           break;
-        case 5:
+        case 6:
           this.helpTitle = `Weight`;
           this.helpMessage = `Weight is a critical input for our recommendation engine. If you don’t know your pet’s weight, there are a couple of ways to estimate.`;
           break;

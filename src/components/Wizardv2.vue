@@ -21,67 +21,72 @@
 
       <transition-group v-bind:name="transitionName">
         <Help v-if="help" class="help-component" :stage="stage" @closeHelp="closeHelp" key="help" />
-        <PetStory :pet.sync="pet" :stage.sync="stage" key="story" v-if="stage < 7" />
+        <PetStory :pet.sync="currentPet" :stage.sync="stage" key="story" v-if="stage < 7" />
         <UserEmail
           v-if="stage === 0"
           :email.sync="user.email"
           @emailSubmit="handleEmail"
           key="email"
         />
-        <PetName v-if="stage === 1" :name.sync="pet.name" @nameSubmit="handleName" key="name" />
+        <PetName
+          v-if="stage === 1"
+          :name.sync="currentPet.name"
+          @nameSubmit="handleName"
+          key="name"
+        />
         <PetAnimal
           v-if="stage === 2"
-          :name="pet.name"
-          :animal.sync="pet.animal"
+          :name="currentPet.name"
+          :animal.sync="currentPet.animal"
           @animalSubmit="handleAnimal"
           key="animal"
         />
         <DogGender
           v-if="stage === 3"
-          :name="pet.name"
-          :gender.sync="pet.gender"
+          :name="currentPet.name"
+          :gender.sync="currentPet.gender"
           @genderSubmit="handleGender"
           key="gender"
         />
         <DogAge
           v-if="stage === 4"
-          :name="pet.name"
-          :age.sync="pet.age"
+          :name="currentPet.name"
+          :age.sync="currentPet.age"
           @ageSubmit="handleAge"
           key="age"
         />
         <PetBreed
           v-if="stage === 5"
-          :name="pet.name"
-          :animal="pet.animal"
-          :breed.sync="pet.breed"
+          :name="currentPet.name"
+          :animal="currentPet.animal"
+          :breed.sync="currentPet.breed"
           @breedSubmit="handleBreed"
           key="breed"
         />
         <PetWeight
           v-if="stage === 6"
-          :name="pet.name"
-          :animal="pet.animal"
-          :weight.sync="pet.weight"
+          :name="currentPet.name"
+          :animal="currentPet.animal"
+          :weight.sync="currentPet.weight"
           @weightSubmit="handleWeight"
           key="weight"
         />
         <DogBodyType
-          v-if="stage === 7 && pet.animal === 'dog'"
-          :name="pet.name"
-          :body.sync="pet.body"
+          v-if="stage === 7 && currentPet.animal === 'dog'"
+          :name="currentPet.name"
+          :body.sync="currentPet.body"
           @bodySubmit="handleBody"
           key="bodytype"
         />
         <Recommendation
           v-if="stage === 8"
-          :name="pet.name"
+          :name="currentPet.name"
           key="recommendation"
           @handleNext="nextStage"
         />
         <Nutrition
           v-if="stage === 9"
-          :name="pet.name"
+          :name="currentPet.name"
           key="nutrition"
           @handleNext="nextStage"
           @handlePrev="prevStage"
@@ -154,30 +159,7 @@ export default {
       user: {
         email: "",
       },
-      pet: {
-        name: "",
-        animal: "cat",
-        gender: "",
-        age: {
-          years: "",
-          months: "",
-        },
-        breed: {
-          type: "",
-          parent1: "",
-          parent2: "",
-        },
-        weight: {
-          unit: "kg",
-          amount: "",
-        },
-        activity: "",
-        body: "",
-        working: "",
-        health: [],
-        experience: "",
-        foodPreference: "",
-      },
+      currentPet: {},
       pets: [],
     };
   },
@@ -185,13 +167,15 @@ export default {
     // ALL HANDLES WHICH JUST DO NEXT STAGE WILL CALL THE NEXTSTAGE FUNTION IN THE FUTURE
     nextStage() {
       this.stage++;
-      if (this.stage === 7 && this.pet.animal === "cat") this.nextStage();
+      if (this.stage === 7 && this.currentPet.animal === "cat")
+        this.nextStage();
     },
     prevStage() {
       if (this.stage > 0) {
         this.stage--;
       }
-      if (this.stage === 7 && this.pet.animal === "cat") this.prevStage();
+      if (this.stage === 7 && this.currentPet.animal === "cat")
+        this.prevStage();
     },
     handleEmail() {
       this.nextStage();
@@ -200,16 +184,16 @@ export default {
       this.nextStage();
     },
     handleAnimal(animal) {
-      this.pet.animal = animal;
-      this.pet.weight.unit = animal === "cat" ? "g" : "kg";
+      this.currentPet.animal = animal;
+      this.currentPet.weight.unit = animal === "cat" ? "g" : "kg";
       this.nextStage();
     },
     handleGender(gender) {
-      this.pet.gender = gender;
+      this.currentPet.gender = gender;
       this.nextStage();
     },
     handleAge() {
-      if (this.pet.age.years && this.pet.age.months) {
+      if (this.currentPet.age.years && this.currentPet.age.months) {
         this.nextStage();
       }
     },
@@ -220,7 +204,7 @@ export default {
       this.nextStage();
     },
     handleBody(bodyType) {
-      this.pet.body = bodyType;
+      this.currentPet.body = bodyType;
       this.nextStage();
     },
     openHelp() {
@@ -267,10 +251,12 @@ export default {
         foodPreference: "",
       };
       this.pets.push(newPet);
+      this.currentPet = this.pets[this.pets.length - 1];
     },
   },
   mounted() {
     this.addNewPet();
+    console.log(this.currentPet);
   },
 };
 </script>

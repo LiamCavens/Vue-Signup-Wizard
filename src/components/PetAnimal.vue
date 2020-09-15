@@ -4,18 +4,10 @@
     <div class="pet-animal-buttons">
       <button @click="handleAnimal('cat')">
         <p class="pet-animal-text">Cat</p>
-        <img
-          class="pet-animal-image cat-image"
-          src="../assets/icon_cat_white.png"
-          alt="Dob Body Image"
-        />
+        <img class="pet-animal-image cat-image" src="../assets/icon_cat_white.png" alt="Cat Image" />
       </button>
       <button @click="handleAnimal('dog')">
-        <img
-          class="pet-animal-image dog-image"
-          src="../assets/icon_dog_white.png"
-          alt="Dob Body Image"
-        />
+        <img class="pet-animal-image dog-image" src="../assets/icon_dog_white.png" alt="Dog Image" />
         <p class="pet-animal-text">Dog</p>
       </button>
     </div>
