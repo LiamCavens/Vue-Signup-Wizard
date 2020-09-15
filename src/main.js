@@ -21,7 +21,6 @@ Vue.component("v-select", vSelect);
 Vue.config.productionTip = false;
 
 Vue.use(VCalendar);
-Vue.use(require("vue-moment"));
 Vue.use(VueLodash, { lodash: lodash });
 
 new Vue({

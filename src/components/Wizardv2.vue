@@ -155,7 +155,7 @@ export default {
     return {
       help: false,
       transitionName: "slide-fade",
-      stage: 0,
+      stage: 11,
       user: {
         email: "",
       },

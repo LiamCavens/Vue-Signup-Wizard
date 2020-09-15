@@ -1,9 +1,10 @@
 <template>
   <div class="delivery">
     <p class="delivery-date-title">Your first delivery date:</p>
-    <p class="delivery-date">{{delivery1 | moment("dddd Do MMM[.] YYYY")}}</p>
+    <p class="delivery-date" v-if="delivery1">{{ format(delivery1, "eeee do MMM'.' yyyy") }}</p>
     <p class="delivery-date-title">Your second delivery date:</p>
-    <p class="delivery-date">{{delivery2 | moment("dddd Do MMM[.] YYYY")}}</p>
+    <p class="delivery-date" v-if="delivery2">{{ format(delivery2, "eeee do MMM'.' yyyy") }}</p>
+
     <!-- <button
       v-if="!datePicking"
       class="btn-green delivery-date-button"
@@ -32,13 +33,14 @@
 </template>
 
 <script>
-const moment = require("moment");
+import { format, add } from "date-fns";
 
 export default {
   name: "Delivery",
   props: {},
   data: () => {
     return {
+      format,
       loading: true,
       datePicking: false,
       delivery1: "",
@@ -83,9 +85,8 @@ export default {
   mounted() {
     let calendarFix = document.querySelector("#date-picker");
     calendarFix.style.height = "230px";
-    let today = new Date();
-    this.delivery1 = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
-    this.delivery2 = new Date(today.getTime() + 14 * 24 * 60 * 60 * 1000);
+    this.delivery1 = add(new Date(), { weeks: 1 });
+    this.delivery2 = add(new Date(), { weeks: 2 });
     // If we want to show the dates on v-calander
     // this.attributes[0].dates = this.delivery1;
     // this.attributes[1].dates = this.delivery2;
@@ -97,7 +98,7 @@ export default {
   },
   watch: {
     delivery1: function (val) {
-      this.delivery2 = moment(val).add(1, "week");
+      this.delivery2 = add(val, { days: 7 });
     },
   },
   beforeDestroy() {
