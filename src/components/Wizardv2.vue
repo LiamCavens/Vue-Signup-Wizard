@@ -10,11 +10,11 @@
         </button>
       </div>
 
-      <div v-if="stage >= 8" class="chevrons">
+      <div v-if="stage >= 8 && stage <= 11" class="chevrons">
         <button class="previous-chevron" @click="prevStage">
           <font-awesome-icon :icon="['fas', 'chevron-left']" />
         </button>
-        <button class="next-chevron" @click="nextStage">
+        <button v-if="stage < 11" class="next-chevron" @click="nextStage">
           <font-awesome-icon :icon="['fas', 'chevron-right']" />
         </button>
       </div>
@@ -104,11 +104,11 @@
         <button @click="prevStage">
           <font-awesome-icon :icon="['fas', 'arrow-left']" />
         </button>
-        <!-- <button @click="help = !help">
-          <font-awesome-icon :icon="['far', 'comment-dots']" />
-        </button>-->
         <button>
           <font-awesome-icon :icon="['far', 'save']" />
+        </button>
+        <button id="hidden" @click="help = !help">
+          <font-awesome-icon :icon="['far', 'comment-dots']" />
         </button>
       </div>
     </div>
@@ -155,7 +155,7 @@ export default {
     return {
       help: false,
       transitionName: "slide-fade",
-      stage: 11,
+      stage: 0,
       user: {
         email: "",
       },
@@ -392,6 +392,10 @@ export default {
   padding-left: 20px;
   margin-bottom: 2px;
   font-size: 12px;
+}
+
+#hidden {
+  visibility: hidden;
 }
 
 .slide-fade-enter-active {
