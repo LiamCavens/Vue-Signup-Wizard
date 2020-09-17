@@ -155,7 +155,7 @@ export default {
     return {
       help: false,
       transitionName: "slide-fade",
-      stage: 1,
+      stage: 5,
       user: {
         email: "",
       },
@@ -229,7 +229,7 @@ export default {
     addNewPet() {
       let newPet = {
         name: "",
-        animal: "",
+        animal: "dog",
         gender: "",
         age: {
           years: "",
@@ -263,8 +263,10 @@ export default {
     },
   },
   mounted() {
-    this.addNewPet();
     console.log(this.currentPet);
+  },
+  beforeMount() {
+    this.addNewPet();
   },
 };
 </script>

@@ -357,10 +357,16 @@ input[type="radio"]:checked ~ label {
 .breed-chooser .vs__dropdown-menu {
   width: 300px;
   background: #ffffff;
-  border: #00263a 1px solid;
   color: #00263a;
   text-transform: lowercase;
   font-variant: small-caps;
+}
+
+.breed-chooser .vs__dropdown-toggle,
+.breed-chooser .vs__dropdown-menu,
+.parent-chooser .vs__dropdown-toggle,
+.parent-chooser .vs__dropdown-menu {
+  border: #00263a 1px solid;
 }
 
 .parent-chooser .vs__clear,
