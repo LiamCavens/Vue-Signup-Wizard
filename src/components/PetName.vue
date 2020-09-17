@@ -14,7 +14,7 @@
       autofocus
     />
     <transition name="fade">
-      <button class="next-button" v-if="blurred" @click="handleNext">Next</button>
+      <button class="next-button" v-if="name && name.length > 1" @click="handleNext">Next</button>
     </transition>
   </div>
 </template>
@@ -35,12 +35,12 @@ export default {
   methods: {
     handleNext() {
       this.name = this.name.trim();
-      if (!this.name || this.name.length < 3) {
+      if (!this.name || this.name.length < 2) {
         this.inputError = true;
         if (!this.name) {
           this.errorMessage = "You must input a name.";
-        } else if (this.name.length < 3) {
-          this.errorMessage = "Name must be more than 2 characters.";
+        } else if (this.name.length < 2) {
+          this.errorMessage = "Name must be more than 1 character.";
         }
         return;
       } else {
@@ -111,12 +111,14 @@ export default {
   transition: 0.3s ease;
 }
 
-.fade-enter-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 0.3s linear;
-  transition-delay: 0.5s;
+  transition-delay: 0.2s;
 }
 
-.fade-enter {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 </style>

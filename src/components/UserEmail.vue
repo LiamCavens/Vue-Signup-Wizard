@@ -26,7 +26,7 @@
     </label>
 
     <transition name="fade">
-      <button class="next-button" @click="handleNext">Next</button>
+      <button class="btn-green next-button" @click="handleNext">Next</button>
     </transition>
   </div>
 </template>
@@ -125,24 +125,7 @@ export default {
 }
 
 .next-button {
-  font-family: Montserrat;
-  background-color: #789904;
-  margin: 15px 5%;
-  padding: 5px 0;
-  box-sizing: border-box;
-  border: 1px solid #c2c2c2;
-  box-shadow: 1px 1px 4px #ebebeb;
-  border-radius: 3px;
-  outline: none;
-  height: 32px;
-  transition: 0.3s ease;
   width: 100%;
-}
-
-.next-button:hover {
-  cursor: pointer;
-  background-color: #617a04;
-  transition: 0.3s ease;
 }
 
 .fade-enter-active {
