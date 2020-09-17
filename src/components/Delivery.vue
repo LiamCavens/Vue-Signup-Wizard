@@ -86,7 +86,9 @@ export default {
     let calendarFix = document.querySelector("#date-picker");
     calendarFix.style.height = "230px";
     this.delivery1 = add(new Date(), { weeks: 1 });
-    this.delivery2 = add(new Date(), { weeks: 2 });
+    this.delivery2 = add(new Date(), {
+      days: Math.floor(Math.random() * (31 - 14) + 14),
+    });
     // If we want to show the dates on v-calander
     // this.attributes[0].dates = this.delivery1;
     // this.attributes[1].dates = this.delivery2;

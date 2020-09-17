@@ -41,14 +41,14 @@
           @animalSubmit="handleAnimal"
           key="animal"
         />
-        <DogGender
+        <PetGender
           v-if="stage === 3"
           :name="currentPet.name"
           :gender.sync="currentPet.gender"
           @genderSubmit="handleGender"
           key="gender"
         />
-        <DogAge
+        <PetAge
           v-if="stage === 4"
           :name="currentPet.name"
           :age.sync="currentPet.age"
@@ -117,12 +117,12 @@
 
 <script>
 import UserEmail from "./UserEmail";
-import DogAge from "./DogAge";
+import PetAge from "./PetAge";
 import PetName from "./PetName";
 import PetStory from "./PetStory";
 import PetBreed from "./PetBreed";
 import PetAnimal from "./PetAnimal";
-import DogGender from "./DogGender";
+import PetGender from "./PetGender";
 import PetWeight from "./PetWeight";
 import DogBodyType from "./DogBodyType";
 
@@ -136,12 +136,12 @@ export default {
   name: "Wizardv2",
   components: {
     UserEmail,
-    DogAge,
+    PetAge,
     PetName,
     PetBreed,
     PetStory,
     PetAnimal,
-    DogGender,
+    PetGender,
     PetWeight,
     DogBodyType,
     Help,
@@ -155,7 +155,7 @@ export default {
     return {
       help: false,
       transitionName: "slide-fade",
-      stage: 0,
+      stage: 1,
       user: {
         email: "",
       },
@@ -181,6 +181,7 @@ export default {
       this.nextStage();
     },
     handleName() {
+      this.currentPet.name = this.capitalizeName(this.currentPet.name);
       this.nextStage();
     },
     handleAnimal(animal) {
@@ -232,7 +233,7 @@ export default {
         gender: "",
         age: {
           years: "",
-          months: "",
+          months: "0",
         },
         breed: {
           type: "",
@@ -252,6 +253,13 @@ export default {
       };
       this.pets.push(newPet);
       this.currentPet = this.pets[this.pets.length - 1];
+    },
+    capitalizeName(name) {
+      return name
+        .toLowerCase()
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.substring(1))
+        .join(" ");
     },
   },
   mounted() {
@@ -398,6 +406,7 @@ export default {
   visibility: hidden;
 }
 
+/* THIS IS THE PREVIOUS TRANSITION LEFT TO RIGHT 
 .slide-fade-enter-active {
   transition: all 0.8s ease;
   transition-delay: 0.4s;
@@ -412,6 +421,25 @@ export default {
 
 .slide-fade-leave-to {
   transform: translateX(-10px);
+  opacity: 0;
+} */
+
+.slide-fade-enter-active {
+  transition: all 0.8s ease;
+  transition-delay: 0.4s;
+}
+.slide-fade-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter {
+  transform: translateY(100px);
+  opacity: 0;
+}
+
+.slide-fade-leave-to {
+  transform: translateY(-50px);
+  width: 350px;
+  position: absolute;
   opacity: 0;
 }
 

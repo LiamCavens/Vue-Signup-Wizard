@@ -1,9 +1,9 @@
 <template>
-  <div class="dog-age">
-    <p class="dog-age-label">What age is {{ name }}?</p>
-    <div class="dog-age-selects">
+  <div class="pet-age">
+    <p class="pet-age-label">What age is {{ name }}?</p>
+    <div class="pet-age-selects">
       <select
-        class="dog-age-select"
+        class="pet-age-select"
         v-model="age.years"
         name="years"
         id="age-years"
@@ -15,14 +15,13 @@
       </select>
 
       <select
-        class="dog-age-select"
+        class="pet-age-select"
         v-model="age.months"
         name="months"
         id="age-months"
         @change="ageSubmit"
       >
-        <option value disabled selected>Months</option>
-        <option value="0">0 Months</option>
+        <option value="0" selected>0 Months</option>
         <option v-for="n in 11" :key="n.id" :value="n">{{ n }} Months</option>
       </select>
     </div>
@@ -34,7 +33,7 @@
 
 <script>
 export default {
-  name: "DogAge",
+  name: "PetAge",
   props: {
     name: String,
     age: {
@@ -64,19 +63,19 @@ export default {
 </script>
 
 <style scoped>
-.dog-age {
+.pet-age {
   color: #00263a;
   display: flex;
   flex-direction: column;
 }
 
-.dog-age-label {
+.pet-age-label {
   font-family: Montserrat-Bold;
   font-size: 22px;
   margin-bottom: 5px;
 }
 
-.dog-age-select {
+.pet-age-select {
   font-family: Montserrat;
   flex: 1;
   box-sizing: border-box;
@@ -89,7 +88,7 @@ export default {
   transition: 0.2s linear;
 }
 
-.dog-age-select:focus {
+.pet-age-select:focus {
   border: 1px solid #00263a;
   transition: 0.2s linear;
 }

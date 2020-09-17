@@ -1,15 +1,19 @@
 <template>
   <div class="pet-animal">
-    <p class="pet-animal-label">Is {{name}} a Cat or Dog?</p>
+    <p class="pet-animal-label">Is {{name}} a...</p>
     <div class="pet-animal-buttons">
-      <button @click="handleAnimal('cat')">
+      <div class="pet-animal-buttons-card">
+        <button @click="handleAnimal('cat')">
+          <img class="pet-animal-image" src="../assets/icon_cat_white.png" alt="Cat Image" />
+        </button>
         <p class="pet-animal-text">Cat</p>
-        <img class="pet-animal-image cat-image" src="../assets/icon_cat_white.png" alt="Cat Image" />
-      </button>
-      <button @click="handleAnimal('dog')">
-        <img class="pet-animal-image dog-image" src="../assets/icon_dog_white.png" alt="Dog Image" />
+      </div>
+      <div class="pet-animal-buttons-card">
+        <button @click="handleAnimal('dog')">
+          <img class="pet-animal-image" src="../assets/icon_dog_white.png" alt="Dog Image" />
+        </button>
         <p class="pet-animal-text">Dog</p>
-      </button>
+      </div>
     </div>
   </div>
 </template>
@@ -48,39 +52,37 @@ export default {
 
 .pet-animal-buttons {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .pet-animal-buttons button {
   font-family: Montserrat;
   display: flex;
+  flex-direction: column;
   margin: 3px;
-  padding: 3px 3px 3px 12px;
-  border: 1px solid #00263a;
+  padding: 3px;
+  border: 2px solid #00263a;
   background-color: white;
-  border-radius: 5px;
+  border-radius: 50%;
 }
 
 .pet-animal-buttons button:hover {
-  margin: 2px;
   color: #789904;
   border: #789904 2px solid;
 }
 
+.pet-animal-buttons button:focus {
+  outline: none;
+}
+
 .pet-animal-text {
   font-family: Montserrat;
-  font-size: 34px;
+  font-size: 22px;
   margin: auto;
 }
 
 .pet-animal-image {
-  height: 75px;
-}
-
-.cat-image {
-  margin: auto;
-}
-.dog-image {
-  margin: auto;
+  height: 120px;
 }
 </style>

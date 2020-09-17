@@ -33,6 +33,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   height: 100vh;
+  max-height: 100vh;
   display: flex;
   flex-flow: column;
   align-items: center;
