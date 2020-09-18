@@ -1,6 +1,6 @@
 <template>
   <div class="dog-body">
-    <p class="dog-body-label">What's {{ name }}'s body type?</p>
+    <h2>What's {{ name }}'s body type?</h2>
     <button
       class="dog-body-item"
       v-for="(bodyType, index) in bodyTypes"
@@ -70,12 +70,6 @@ export default {
   color: #00263a;
   display: flex;
   flex-direction: column;
-}
-
-.dog-body-label {
-  font-family: Montserrat-Bold;
-  font-size: 22px;
-  margin-bottom: 5px;
 }
 
 .dog-body-item {

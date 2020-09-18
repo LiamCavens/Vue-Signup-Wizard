@@ -10,7 +10,7 @@
         </button>
       </div>
 
-      <div v-if="stage >= 8 && stage <= 11" class="chevrons">
+      <div v-if="stage >= 9 && stage <= 12" class="chevrons">
         <button class="previous-chevron" @click="prevStage">
           <font-awesome-icon :icon="['fas', 'chevron-left']" />
         </button>
@@ -21,7 +21,7 @@
 
       <transition-group v-bind:name="transitionName">
         <Help v-if="help" class="help-component" :stage="stage" @closeHelp="closeHelp" key="help" />
-        <PetStory :pet.sync="currentPet" :stage.sync="stage" key="story" v-if="stage < 7" />
+        <PetStory :pet.sync="currentPet" :stage.sync="stage" key="story" v-if="stage < 9" />
         <UserEmail
           v-if="stage === 0"
           :email.sync="user.email"
@@ -79,22 +79,29 @@
           @bodySubmit="handleBody"
           key="bodytype"
         />
+        <DogActivity
+          v-if="stage === 8 && currentPet.animal === 'dog'"
+          :name="currentPet.name"
+          :activity.sync="currentPet.activity"
+          @activitySubmit="handleActivity"
+          key="activity"
+        />
         <Recommendation
-          v-if="stage === 8"
+          v-if="stage === 9"
           :name="currentPet.name"
           key="recommendation"
           @handleNext="nextStage"
         />
         <Nutrition
-          v-if="stage === 9"
+          v-if="stage === 10"
           :name="currentPet.name"
           key="nutrition"
           @handleNext="nextStage"
           @handlePrev="prevStage"
         />
-        <Reviews v-if="stage === 10" key="reviews" @handleNext="nextStage" @handlePrev="prevStage" />
+        <Reviews v-if="stage === 11" key="reviews" @handleNext="nextStage" @handlePrev="prevStage" />
         <Delivery
-          v-if="stage === 11"
+          v-if="stage === 12"
           key="delivery"
           @handleNext="nextStage"
           @handlePrev="prevStage"
@@ -126,6 +133,7 @@ import PetAnimal from "./PetAnimal";
 import PetGender from "./PetGender";
 import PetWeight from "./PetWeight";
 import DogBodyType from "./DogBodyType";
+import DogActivity from "./DogActivity";
 
 import Help from "./Help";
 import Reviews from "./Reviews";
@@ -145,6 +153,7 @@ export default {
     PetGender,
     PetWeight,
     DogBodyType,
+    DogActivity,
     Help,
     Reviews,
     Delivery,
@@ -156,7 +165,7 @@ export default {
     return {
       help: false,
       transitionName: "slide-fade",
-      stage: 1,
+      stage: 0,
       user: {
         email: "",
       },
@@ -168,14 +177,20 @@ export default {
     // ALL HANDLES WHICH JUST DO NEXT STAGE WILL CALL THE NEXTSTAGE FUNTION IN THE FUTURE
     nextStage() {
       this.stage++;
-      if (this.stage === 7 && this.currentPet.animal === "cat")
+      if (
+        this.stage === 7 ||
+        (this.stage === 8 && this.currentPet.animal === "cat")
+      )
         this.nextStage();
     },
     prevStage() {
       if (this.stage > 0) {
         this.stage--;
       }
-      if (this.stage === 7 && this.currentPet.animal === "cat")
+      if (
+        this.stage === 7 ||
+        (this.stage === 8 && this.currentPet.animal === "cat")
+      )
         this.prevStage();
     },
     handleEmail() {
@@ -187,7 +202,7 @@ export default {
     },
     handleAnimal(animal) {
       this.currentPet.animal = animal;
-      this.currentPet.weight.unit = animal === "cat" ? "g" : "kg";
+      //   this.currentPet.weight.unit = animal === "cat" ? "g" : "kg";
       this.nextStage();
     },
     handleGender(gender) {
@@ -207,6 +222,10 @@ export default {
     },
     handleBody(bodyType) {
       this.currentPet.body = bodyType;
+      this.nextStage();
+    },
+    handleActivity(activityLevel) {
+      this.currentPet.activityLevel = activityLevel;
       this.nextStage();
     },
     openHelp() {

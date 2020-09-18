@@ -1,6 +1,6 @@
 <template>
   <div class="pet-breed">
-    <p class="pet-breed-label">{{ name }}'s breed</p>
+    <h2>{{ name }}'s breed</h2>
     <div class="pet-breed-buttons">
       <button
         class="pet-breed-button"
@@ -227,12 +227,6 @@ export default {
   color: #00263a;
   display: flex;
   flex-direction: column;
-}
-
-.pet-breed-label {
-  font-family: Montserrat-Bold;
-  font-size: 22px;
-  margin-bottom: 10px;
 }
 
 .pet-breed-buttons {

@@ -1,6 +1,6 @@
 <template>
   <div class="pet-gender">
-    <p class="pet-gender-label">{{ name }} is...?</p>
+    <h2>{{ name }} is...?</h2>
     <div class="pet-gender-buttons">
       <div class="pet-gender-buttons-card">
         <button @click="handleGender('female')">
@@ -102,11 +102,5 @@ export default {
 
 .pet-gender-image {
   height: 120px;
-}
-
-.pet-gender-label {
-  font-family: Montserrat-Bold;
-  font-size: 22px;
-  margin-bottom: 8px;
 }
 </style>

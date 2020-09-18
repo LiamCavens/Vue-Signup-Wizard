@@ -111,4 +111,10 @@ export default {
 .btn-green:active {
   box-shadow: inset 0px 4px 15px rgba(0, 0, 0, 0.2);
 }
+
+h2 {
+  font-family: Montserrat-Bold;
+  font-size: 22px;
+  margin-bottom: 5px;
+}
 </style>

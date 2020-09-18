@@ -1,6 +1,6 @@
 <template>
   <div class="pet-name">
-    <p class="pet-name-label">Lets start with a name...</p>
+    <h2>Lets start with a name...</h2>
     <p v-if="inputError" class="error-message">* {{errorMessage}}</p>
     <input
       placeholder="Name"
@@ -67,12 +67,6 @@ export default {
   color: #00263a;
   display: flex;
   flex-direction: column;
-}
-
-.pet-name-label {
-  font-family: Montserrat-Bold;
-  font-size: 22px;
-  margin-bottom: 5px;
 }
 
 .pet-name-input {

@@ -1,6 +1,6 @@
 <template>
   <div class="pet-age">
-    <p class="pet-age-label">{{ name }}'s age</p>
+    <h2>{{ name }}'s age</h2>
     <div class="pet-age-selects">
       <select
         class="pet-age-select"
@@ -72,12 +72,6 @@ export default {
   color: #00263a;
   display: flex;
   flex-direction: column;
-}
-
-.pet-age-label {
-  font-family: Montserrat-Bold;
-  font-size: 22px;
-  margin-bottom: 5px;
 }
 
 .pet-age-selects {

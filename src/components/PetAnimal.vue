@@ -1,6 +1,6 @@
 <template>
   <div class="pet-animal">
-    <p class="pet-animal-label">Is {{name}} a...</p>
+    <h2>Is {{name}} a...</h2>
     <div class="pet-animal-buttons">
       <div class="pet-animal-buttons-card">
         <button @click="handleAnimal('cat')">
@@ -42,12 +42,6 @@ export default {
   color: #00263a;
   display: flex;
   flex-direction: column;
-}
-
-.pet-animal-label {
-  font-family: Montserrat-Bold;
-  font-size: 22px;
-  margin-bottom: 8px;
 }
 
 .pet-animal-buttons {

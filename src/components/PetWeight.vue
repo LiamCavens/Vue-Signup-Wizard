@@ -1,6 +1,6 @@
 <template>
   <div class="pet-weight">
-    <p class="pet-weight-label">What's {{ name }}'s weight?</p>
+    <h2>What's {{ name }}'s weight?</h2>
     <p v-if="inputError" class="error-message">* {{errorMessage}}</p>
     <div class="weight-inputs">
       <input
@@ -17,8 +17,8 @@
         autofocus
       />
       <select name="pet-weight-units" id="weight-units" v-model="weight.unit">
-        <option v-if="animal === 'dog'" class="unit-option" value="kg" default>Kilograms</option>
-        <option v-else-if="animal === 'cat'" class="unit-option" value="g" default>Grams</option>
+        <option class="unit-option" value="kg" default>Kilograms</option>
+        <!-- <option v-else-if="animal === 'cat'" class="unit-option" value="g" default>Grams</option> -->
         <option class="unit-option" value="lb">Pounds</option>
       </select>
     </div>
@@ -78,12 +78,6 @@ export default {
   color: #00263a;
   display: flex;
   flex-direction: column;
-}
-
-.pet-weight-label {
-  font-family: Montserrat-Bold;
-  font-size: 22px;
-  margin-bottom: 5px;
 }
 
 .pet-weight-input {
