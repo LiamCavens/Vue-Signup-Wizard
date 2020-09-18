@@ -1,58 +1,38 @@
 <template>
   <div class="pet-breed">
-    <p class="pet-breed-label">What breed is {{ name }}?</p>
-    <div class="pet-breed-radios">
-      <div class="pet-breed-radio">
-        <input
-          type="radio"
-          id="purebreed"
-          name="breedradio"
-          value="purebreed"
-          v-model="breed.type"
-          @input="checkForNext('pure')"
-        />
-        <label for="purebreed">Pure</label>
-        <div class="check"></div>
-      </div>
-
-      <div v-if="animal === 'dog'" class="pet-breed-radio">
-        <input
-          type="radio"
-          id="crossbreed"
-          name="breedradio"
-          value="crossbreed"
-          v-model="breed.type"
-          @input="checkForNext('cross')"
-        />
-        <label for="crossbreed">Cross Breed</label>
-        <div class="check"></div>
-      </div>
-
-      <div class="pet-breed-radio">
-        <input
-          type="radio"
-          id="dontknow"
-          name="breedradio"
-          value="none"
-          v-model="breed.type"
-          @input="checkForNext('none')"
-        />
-        <label for="dontknow">Dont Know</label>
-        <div class="check"></div>
-      </div>
+    <p class="pet-breed-label">{{ name }}'s breed</p>
+    <div class="pet-breed-buttons">
+      <button
+        class="pet-breed-button"
+        v-bind:class="{active: breed.type === 'pure'}"
+        @click="checkForNext('pure')"
+      >Pure breed</button>
+      <button
+        v-if="animal === 'dog'"
+        class="pet-breed-button"
+        v-bind:class="{active: breed.type === 'cross'}"
+        @click="checkForNext('cross')"
+      >Cross breed</button>
+      <button
+        class="pet-breed-button"
+        v-bind:class="{active: breed.type === 'dontknow'}"
+        @click="checkForNext('dontknow')"
+      >Don't know</button>
     </div>
     <transition-group name="slide-fade">
-      <div class="breed-select" v-if="breed.type === 'purebreed'" key="purebreed-select">
+      <div class="breed-select" v-if="breed.type === 'pure'" key="purebreed-select">
         <v-select
           class="breed-chooser"
           placeholder="Choose Breed"
           :options="breeds"
           v-model="breed.parent1"
           @input="breedSubmit('pure')"
+          append-to-body
+          :calculate-position="withPopper"
         />
       </div>
 
-      <div class="breed-parents" v-if="breed.type === 'crossbreed'" key="crossbreed-select">
+      <div class="breed-parents" v-if="breed.type === 'cross'" key="crossbreed-select">
         <p class="pet-breed-label">Mother's Breed</p>
         <v-select
           class="parent-chooser"
@@ -60,6 +40,8 @@
           :options="breeds"
           v-model="breed.parent1"
           @input="breedSubmit('cross')"
+          append-to-body
+          :calculate-position="withPopper"
         />
         <p class="pet-breed-label">Fathers's Breed</p>
         <v-select
@@ -68,16 +50,24 @@
           :options="breeds"
           v-model="breed.parent2"
           @input="breedSubmit('cross')"
+          append-to-body
+          :calculate-position="withPopper"
         />
       </div>
     </transition-group>
     <transition name="fade">
-      <button class="next-button" v-if="genderSubmitted" @click="handleNext" key="next-button">Next</button>
+      <button
+        class="btn-green next-button"
+        v-if="genderSubmitted"
+        @click="handleNext"
+        key="next-button"
+      >Next</button>
     </transition>
   </div>
 </template>
 
 <script>
+import { createPopper } from "@popperjs/core";
 export default {
   name: "PetBreed",
   props: {
@@ -88,6 +78,7 @@ export default {
   data: () => {
     return {
       breeds: [],
+      placement: "bottom",
       dogBreeds: [
         "Affenpinscher",
         "Afghan Hound",
@@ -156,22 +147,67 @@ export default {
       this.checkForNext(type);
     },
     handleNext() {
-      if (this.breed.type === "none") {
+      if (this.breed.type === "dontknow") {
         this.breed.parent1 = this.breed.parent2 = "";
       }
       this.$emit("breedSubmit");
     },
     checkForNext(type) {
+      this.breed.type = type;
       if (type === "pure" && this.breed.parent1) {
         this.genderSubmitted = true;
         this.breed.parent2 = this.breed.parent1;
       } else if (type === "cross" && this.breed.parent1 && this.breed.parent2) {
         this.genderSubmitted = true;
-      } else if (type === "none") {
+      } else if (type === "dontknow") {
         this.genderSubmitted = true;
       } else {
         this.genderSubmitted = false;
       }
+    },
+    withPopper(dropdownList, component, { width }) {
+      /**
+       * We need to explicitly define the dropdown width since
+       * it is usually inherited from the parent with CSS.
+       */
+      dropdownList.style.width = width;
+      /**
+       * Here we position the dropdownList relative to the $refs.toggle Element.
+       *
+       * The 'offset' modifier aligns the dropdown so that the $refs.toggle and
+       * the dropdownList overlap by 1 pixel.
+       *
+       * The 'toggleClass' modifier adds a 'drop-up' class to the Vue Select
+       * wrapper so that we can set some styles for when the dropdown is placed
+       * above.
+       */
+      const popper = createPopper(component.$refs.toggle, dropdownList, {
+        placement: this.placement,
+        modifiers: [
+          {
+            name: "offset",
+            options: {
+              offset: [0, -1],
+            },
+          },
+          {
+            name: "toggleClass",
+            enabled: true,
+            phase: "write",
+            fn({ state }) {
+              component.$el.classList.toggle(
+                "drop-up",
+                state.placement === "top"
+              );
+            },
+          },
+        ],
+      });
+      /**
+       * To prevent memory leaks Popper needs to be destroyed.
+       * If you return function, it will be called just before dropdown is removed from DOM.
+       */
+      return () => popper.destroy();
     },
   },
   mounted() {
@@ -199,77 +235,35 @@ export default {
   margin-bottom: 10px;
 }
 
-.pet-breed-radios {
-  border: none;
+.pet-breed-buttons {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 30px;
 }
 
-.pet-breed-radio input[type="radio"] {
-  position: absolute;
-  visibility: hidden;
-}
-
-.pet-breed-radio label {
+.pet-breed-button {
+  margin: 10px 20px;
+  padding: 10px;
+  width: 100%;
+  height: 42px;
+  border: 1px solid #00263a;
+  color: #00263a;
+  background-color: #fff;
+  border-radius: 500px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s ease;
   cursor: pointer;
-  display: block;
-  position: relative;
-  padding: 2px 0px 5px 25px;
-  z-index: 9;
-  cursor: pointer;
-  transition: all 0.25s linear;
 }
 
-.pet-breed-radio label:hover {
-  color: #789904;
+.pet-breed-button:focus {
+  outline: none;
 }
 
-.pet-breed-radio {
-  position: relative;
-}
-
-.check {
-  display: block;
-  position: absolute;
-  border: 3px solid #aaaaaa;
-  border-radius: 100%;
-  height: 15px;
-  width: 15px;
-  top: 1px;
-  left: 1px;
-  z-index: 5;
-  transition: border 0.25s linear;
-  -webkit-transition: border 0.25s linear;
-}
-
-.check::before {
-  display: block;
-  position: absolute;
-  content: "";
-  border-radius: 100%;
-  height: 11px;
-  width: 11px;
-  top: 2px;
-  left: 2px;
-  margin: auto;
-  transition: background 0.25s linear;
-  -webkit-transition: background 0.25s linear;
-}
-
-input[type="radio"]:checked ~ .check {
-  border: 3px solid #789904;
-}
-
-input[type="radio"]:checked ~ .check::before {
-  background: #789904;
-}
-
-input[type="radio"]:checked ~ label {
-  color: #789904;
-}
-
-.pet-breed-radio:hover .check {
-  border: 3px solid #789904;
+.active {
+  transition: all 0.4s ease;
+  background-color: #789904;
+  color: #fff;
 }
 
 .breed-select {
@@ -292,24 +286,8 @@ input[type="radio"]:checked ~ label {
 }
 
 .next-button {
-  font-family: Montserrat;
-  background-color: #789904;
   margin: 10px auto;
-  padding: 5px 0;
-  box-sizing: border-box;
-  border: 1px solid #c2c2c2;
-  box-shadow: 1px 1px 4px #ebebeb;
-  border-radius: 3px;
-  outline: none;
-  height: 32px;
-  transition: 0.3s ease;
   width: 300px;
-}
-
-.next-button:hover {
-  cursor: pointer;
-  background-color: #617a04;
-  transition: 0.3s ease;
 }
 
 .fade-enter-active {
@@ -349,24 +327,23 @@ input[type="radio"]:checked ~ label {
 </style>
 
 <style>
-.parent-chooser .vs__search::placeholder,
-.parent-chooser .vs__dropdown-toggle,
-.parent-chooser .vs__dropdown-menu,
-.breed-chooser .vs__search::placeholder,
-.breed-chooser .vs__dropdown-toggle,
-.breed-chooser .vs__dropdown-menu {
-  width: 300px;
+.vs__dropdown-toggle,
+.vs__search::placeholder,
+.vs__dropdown-menu {
+  width: 289px;
   background: #ffffff;
   color: #00263a;
   text-transform: lowercase;
   font-variant: small-caps;
+  font-family: Montserrat;
 }
 
 .breed-chooser .vs__dropdown-toggle,
 .breed-chooser .vs__dropdown-menu,
 .parent-chooser .vs__dropdown-toggle,
-.parent-chooser .vs__dropdown-menu {
-  border: #00263a 1px solid;
+.parent-chooser .vs__dropdown-menu .vs__dropdown-toggle,
+.vs__dropdown-menu {
+  border: #00263a 1px solid !important;
 }
 
 .parent-chooser .vs__clear,
@@ -375,6 +352,13 @@ input[type="radio"]:checked ~ label {
 .breed-chooser .vs__open-indicator {
   cursor: pointer;
   fill: #00263a;
+}
+
+[data-popper-placement="top"] {
+  border-radius: 4px 4px 0 0;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.15);
 }
 
 @media screen and (max-width: 340px) {

@@ -44,6 +44,7 @@
         <PetGender
           v-if="stage === 3"
           :name="currentPet.name"
+          :animal="currentPet.animal"
           :gender.sync="currentPet.gender"
           @genderSubmit="handleGender"
           key="gender"
@@ -155,7 +156,7 @@ export default {
     return {
       help: false,
       transitionName: "slide-fade",
-      stage: 5,
+      stage: 1,
       user: {
         email: "",
       },
@@ -229,8 +230,15 @@ export default {
     addNewPet() {
       let newPet = {
         name: "",
+        body: "",
         animal: "dog",
         gender: "",
+        health: [],
+        neutered: "",
+        activity: "",
+        working: "",
+        experience: "",
+        foodPreference: "",
         age: {
           years: "",
           months: "0",
@@ -244,12 +252,6 @@ export default {
           unit: "kg",
           amount: "",
         },
-        activity: "",
-        body: "",
-        working: "",
-        health: [],
-        experience: "",
-        foodPreference: "",
       };
       this.pets.push(newPet);
       this.currentPet = this.pets[this.pets.length - 1];
@@ -318,9 +320,9 @@ export default {
 }
 
 .wizard-components {
-  margin: 10px;
-  padding: 10px 10px 0 10px;
-  width: 350px;
+  margin: 8px;
+  padding: 30px 30px 0;
+  width: 300px;
   background-color: white;
   color: #00263a;
   border-radius: 10px;
@@ -358,6 +360,16 @@ export default {
   position: absolute;
   left: 0;
   cursor: pointer;
+}
+
+.next-chevron:hover,
+.previous-chevron:hover {
+  color: #d36415;
+}
+
+.next-chevron:focus,
+.previous-chevron:focus {
+  outline: none;
 }
 
 .footer-buttons {
@@ -440,8 +452,6 @@ export default {
 
 .slide-fade-leave-to {
   transform: translateY(-50px);
-  width: 350px;
-  position: absolute;
   opacity: 0;
 }
 
@@ -458,5 +468,11 @@ export default {
 .help-transition-enter-to,
 .help-transition-leave {
   opacity: 0.93;
+}
+
+@media screen and (max-width: 330px) {
+  .wizard-components {
+    width: 250px;
+  }
 }
 </style>

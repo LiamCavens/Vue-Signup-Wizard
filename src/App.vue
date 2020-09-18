@@ -83,7 +83,7 @@ export default {
   background-image: linear-gradient(to bottom, #789904, #91b516);
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
-  border-radius: 5px;
+  border-radius: 500px;
   color: #ffffff;
   height: 30px;
   padding: 2px;

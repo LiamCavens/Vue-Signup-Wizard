@@ -23,6 +23,9 @@
         <p class="pet-gender-text">Male</p>
       </div>
     </div>
+    <!-- <div v-if="showNeutered" class="pet-neutered">
+        <span>Is he neutered? <input type="checkbox" name="" id=""> </span>
+    </div>-->
   </div>
 </template>
 
@@ -31,17 +34,28 @@ export default {
   name: "PetGender",
   props: {
     name: String,
+    animal: String,
     gender: String,
   },
   data: () => {
     return {
       blurred: false,
+      showSpayed: false,
+      showNeutered: false,
     };
   },
   methods: {
     handleGender(gender) {
       this.$emit("genderSubmit", gender);
+      //   if (gender === "male") {
+      //     this.showNeutered = true;
+      //     this.showSpayed = false;
+      //   } else {
+      //     this.showNeutered = false;
+      //     this.showSpayed = true;
+      //   }
     },
+    // handleNeuteredSpayed(gender) {},
   },
   computed: {},
 };

@@ -1,6 +1,6 @@
 <template>
   <div class="pet-age">
-    <p class="pet-age-label">What age is {{ name }}?</p>
+    <p class="pet-age-label">{{ name }}'s age</p>
     <div class="pet-age-selects">
       <select
         class="pet-age-select"
@@ -26,7 +26,12 @@
       </select>
     </div>
     <transition name="fade">
-      <button class="next-button" v-if="ageSubmitted" @click="handleNext" key="next-button">Next</button>
+      <button
+        class="btn-green next-button"
+        v-if="ageSubmitted"
+        @click="handleNext"
+        key="next-button"
+      >Next</button>
     </transition>
   </div>
 </template>
@@ -75,6 +80,10 @@ export default {
   margin-bottom: 5px;
 }
 
+.pet-age-selects {
+  margin: 10px 0;
+}
+
 .pet-age-select {
   font-family: Montserrat;
   flex: 1;
@@ -94,24 +103,8 @@ export default {
 }
 
 .next-button {
-  font-family: Montserrat;
-  background-color: #789904;
   margin: 10px auto;
-  padding: 5px 0;
-  box-sizing: border-box;
-  border: 1px solid #c2c2c2;
-  box-shadow: 1px 1px 4px #ebebeb;
-  border-radius: 3px;
-  outline: none;
-  height: 32px;
-  transition: 0.3s ease;
   width: 238px;
-}
-
-.next-button:hover {
-  cursor: pointer;
-  background-color: #617a04;
-  transition: 0.3s ease;
 }
 
 .fade-enter-active {

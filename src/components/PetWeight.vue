@@ -12,7 +12,6 @@
         max="999"
         pattern="^[0-9]+$"
         v-model="weight.amount"
-        @blur="blurred = true"
         @keypress="restrictInput($event)"
         @keyup="checkInput"
         autofocus
@@ -24,7 +23,7 @@
       </select>
     </div>
     <transition name="fade">
-      <button class="next-button" v-if="blurred" @click="handleNext">Next</button>
+      <button class="btn-green next-button" v-if="weight.amount > 0" @click="handleNext">Next</button>
     </transition>
   </div>
 </template>
@@ -39,7 +38,6 @@ export default {
   },
   data: () => {
     return {
-      blurred: false,
       inputError: false,
       errorMessage: "",
     };
@@ -71,9 +69,6 @@ export default {
         this.handleNext();
       }
     });
-    if (this.weight.amount) {
-      this.blurred = true;
-    }
   },
 };
 </script>
@@ -93,29 +88,20 @@ export default {
 
 .pet-weight-input {
   box-sizing: border-box;
-  border: 1px solid #c2c2c2;
+  border: 1px solid #00263a;
   box-shadow: 1px 1px 4px #ebebeb;
   border-radius: 3px;
   height: 50px;
   width: 200px;
   padding: 7px;
-  margin: 0 5%;
+  margin: 0 10px;
   outline: none;
   transition: 0.2s linear;
 }
 
 .next-button {
-  font-family: Montserrat;
-  background-color: #789904;
   margin: 10px auto;
   padding: 5px 0;
-  box-sizing: border-box;
-  border: 1px solid #c2c2c2;
-  box-shadow: 1px 1px 4px #ebebeb;
-  border-radius: 3px;
-  outline: none;
-  height: 32px;
-  transition: 0.3s ease;
   width: 315px;
 }
 
@@ -145,12 +131,14 @@ export default {
   outline: none;
 }
 
-.fade-enter-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 0.3s linear;
-  transition-delay: 0.5s;
+  transition-delay: 0.2s;
 }
 
-.fade-enter {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 
@@ -162,6 +150,12 @@ export default {
 
   .next-button {
     width: 280px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .next-button {
+    width: 310px;
   }
 }
 </style>
