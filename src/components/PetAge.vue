@@ -82,13 +82,17 @@ export default {
   font-family: Montserrat;
   flex: 1;
   box-sizing: border-box;
-  border: 1px solid #c2c2c2;
+  border: 1px solid #00263a;
   box-shadow: 1px 1px 4px #ebebeb;
   border-radius: 3px;
   padding: 7px;
   margin: 0 5%;
   outline: none;
   transition: 0.2s linear;
+}
+
+.pet-age-select option {
+  color: #00263a;
 }
 
 .pet-age-select:focus {

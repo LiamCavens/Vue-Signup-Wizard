@@ -144,7 +144,7 @@ export default {
   display: flex;
   align-items: center;
   user-select: none;
-  font-size: 14px;
+  font-size: 10px;
   cursor: pointer;
 }
 

@@ -14,7 +14,7 @@
         <button class="previous-chevron" @click="prevStage">
           <font-awesome-icon :icon="['fas', 'chevron-left']" />
         </button>
-        <button v-if="stage < 11" class="next-chevron" @click="nextStage">
+        <button v-if="stage < 12" class="next-chevron" @click="nextStage">
           <font-awesome-icon :icon="['fas', 'chevron-right']" />
         </button>
       </div>
@@ -365,7 +365,7 @@ export default {
   background-color: white;
   border: none;
   position: absolute;
-  right: 0;
+  right: -25px;
   cursor: pointer;
 }
 
@@ -377,7 +377,7 @@ export default {
   background-color: white;
   border: none;
   position: absolute;
-  left: 0;
+  left: -25px;
   cursor: pointer;
 }
 
