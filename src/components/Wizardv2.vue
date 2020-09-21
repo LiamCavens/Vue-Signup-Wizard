@@ -10,11 +10,11 @@
         </button>
       </div>
 
-      <div v-if="stage >= 9 && stage <= 12" class="chevrons">
+      <div v-if="stage >= 12 && stage <= 15" class="chevrons">
         <button class="previous-chevron" @click="prevStage">
           <font-awesome-icon :icon="['fas', 'chevron-left']" />
         </button>
-        <button v-if="stage < 12" class="next-chevron" @click="nextStage">
+        <button v-if="stage < 15" class="next-chevron" @click="nextStage">
           <font-awesome-icon :icon="['fas', 'chevron-right']" />
         </button>
       </div>
@@ -86,22 +86,43 @@
           @activitySubmit="handleActivity"
           key="activity"
         />
+        <DogHealth
+          v-if="stage === 9 && currentPet.animal === 'dog'"
+          :name="currentPet.name"
+          :health.sync="currentPet.health"
+          @healthSubmit="handleHealth"
+          key="health"
+        />
+        <DogBehaviour
+          v-if="stage === 10 && currentPet.animal === 'dog'"
+          :name="currentPet.name"
+          :behaviour.sync="currentPet.behaviour"
+          @behaviourSubmit="handleBehaviour"
+          key="behaviour"
+        />
+        <RawExperience
+          v-if="stage === 11"
+          :experience.sync="user.experience"
+          :foodPreference.sync="user.foodPreference"
+          @experienceSubmit="handleExperience"
+          key="experience"
+        />
         <Recommendation
-          v-if="stage === 9"
+          v-if="stage === 12"
           :name="currentPet.name"
           key="recommendation"
           @handleNext="nextStage"
         />
         <Nutrition
-          v-if="stage === 10"
+          v-if="stage === 13"
           :name="currentPet.name"
           key="nutrition"
           @handleNext="nextStage"
           @handlePrev="prevStage"
         />
-        <Reviews v-if="stage === 11" key="reviews" @handleNext="nextStage" @handlePrev="prevStage" />
+        <Reviews v-if="stage === 14" key="reviews" @handleNext="nextStage" @handlePrev="prevStage" />
         <Delivery
-          v-if="stage === 12"
+          v-if="stage === 15"
           key="delivery"
           @handleNext="nextStage"
           @handlePrev="prevStage"
@@ -132,13 +153,16 @@ import PetBreed from "./PetBreed";
 import PetAnimal from "./PetAnimal";
 import PetGender from "./PetGender";
 import PetWeight from "./PetWeight";
+import DogHealth from "./DogHealth";
 import DogBodyType from "./DogBodyType";
 import DogActivity from "./DogActivity";
+import DogBehaviour from "./DogBehaviour";
 
 import Help from "./Help";
 import Reviews from "./Reviews";
 import Delivery from "./Delivery";
 import Nutrition from "./Nutrition";
+import RawExperience from "./RawExperience";
 import Recommendation from "./Recommendation";
 
 export default {
@@ -152,12 +176,15 @@ export default {
     PetAnimal,
     PetGender,
     PetWeight,
+    DogHealth,
     DogBodyType,
     DogActivity,
+    DogBehaviour,
     Help,
     Reviews,
     Delivery,
     Nutrition,
+    RawExperience,
     Recommendation,
   },
   props: {},
@@ -168,6 +195,8 @@ export default {
       stage: 0,
       user: {
         email: "",
+        experience: "",
+        foodPreference: "noPref",
       },
       currentPet: {},
       pets: [],
@@ -228,6 +257,15 @@ export default {
       this.currentPet.activityLevel = activityLevel;
       this.nextStage();
     },
+    handleHealth() {
+      this.nextStage();
+    },
+    handleBehaviour() {
+      this.nextStage();
+    },
+    handleExperience() {
+      this.nextStage();
+    },
     openHelp() {
       this.transitionName = "help-transition";
       setTimeout(() => {
@@ -253,11 +291,10 @@ export default {
         animal: "dog",
         gender: "",
         health: [],
+        behaviour: [],
         neutered: "",
         activity: "",
         working: "",
-        experience: "",
-        foodPreference: "",
         age: {
           years: "",
           months: "0",
