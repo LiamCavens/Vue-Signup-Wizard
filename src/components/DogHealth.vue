@@ -112,6 +112,11 @@ export default {
   border-radius: 3px;
 }
 
+.dog-health-issues-item:hover {
+  border: 1px solid #789904;
+  color: #789904;
+}
+
 .list-span {
   padding-right: 5px;
 }
@@ -121,6 +126,10 @@ export default {
   color: #fff;
   border: 1px solid #789904;
   transition: all 0.2s ease;
+}
+
+.active:hover {
+  color: #00263a;
 }
 
 .next-button {

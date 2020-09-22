@@ -2,8 +2,8 @@
   <div class="delivery">
     <p class="delivery-date-title">Your first delivery date:</p>
     <p class="delivery-date" v-if="delivery1">{{ format(delivery1, "eeee do MMM'.' yyyy") }}</p>
-    <p class="delivery-date-title">Your second delivery date:</p>
-    <p class="delivery-date" v-if="delivery2">{{ format(delivery2, "eeee do MMM'.' yyyy") }}</p>
+    <p class="delivery-date-title-2">Your second delivery date:</p>
+    <p class="delivery-date-2" v-if="delivery2">{{ format(delivery2, "eeee do MMM'.' yyyy") }}</p>
 
     <!-- <button
       v-if="!datePicking"
@@ -100,7 +100,9 @@ export default {
   },
   watch: {
     delivery1: function (val) {
-      this.delivery2 = add(val, { days: 7 });
+      this.delivery2 = add(val, {
+        days: Math.floor(Math.random() * (31 - 14) + 14),
+      });
     },
   },
   beforeDestroy() {
@@ -124,7 +126,17 @@ export default {
 }
 .delivery-date {
   font-family: Montserrat-Bold;
-  font-size: 22px;
+  font-size: 18px;
+  margin: 5px 5px 15px;
+}
+
+.delivery-date-title-2 {
+  font-size: 16px;
+  margin: 2px;
+}
+.delivery-date-2 {
+  font-family: Montserrat-Bold;
+  font-size: 14px;
   margin: 5px 5px 15px;
 }
 

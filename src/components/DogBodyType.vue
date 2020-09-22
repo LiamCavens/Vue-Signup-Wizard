@@ -1,6 +1,6 @@
 <template>
   <div class="dog-body">
-    <h2>What's {{ name }}'s body type?</h2>
+    <h2>His body composition</h2>
     <button
       class="dog-body-item"
       v-for="(bodyType, index) in bodyTypes"
@@ -22,34 +22,34 @@ export default {
   name: "DogBodyType",
   props: {
     name: String,
-    body: String,
+    body: Number,
   },
   data: () => {
     return {
       activatedDiv: "",
       bodyTypes: [
         {
-          value: "veryunder",
+          value: 1,
           label: "Very Underweight",
           description: "Very underweight description",
         },
         {
-          value: "mildunder",
+          value: 2,
           label: "Mildy Underweight",
           description: "Mildly underweight description with longer description",
         },
         {
-          value: "normal",
+          value: 3,
           label: "Normal",
           description: "Normal description",
         },
         {
-          value: "mildover",
+          value: 4,
           label: "Very Overweight",
           description: "Mildly overweight description",
         },
         {
-          value: "veryover",
+          value: 5,
           label: "Very Overweight",
           description: "Very overweight description",
         },

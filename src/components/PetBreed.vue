@@ -67,6 +67,7 @@
 </template>
 
 <script>
+import _ from "lodash";
 import { createPopper } from "@popperjs/core";
 export default {
   name: "PetBreed",
@@ -212,7 +213,7 @@ export default {
   },
   mounted() {
     this.breeds = this.animal === "dog" ? this.dogBreeds : this.catBreeds;
-    if (!this._.includes(this.breeds, this.breed.parent1)) {
+    if (!_.includes(this.breeds, this.breed.parent1)) {
       this.breed.parent1 = "";
     }
     if (this.breed.parent1) {

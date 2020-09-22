@@ -192,7 +192,7 @@ export default {
     return {
       help: false,
       transitionName: "slide-fade",
-      stage: 0,
+      stage: 1,
       user: {
         email: "",
         experience: "",
@@ -206,21 +206,16 @@ export default {
     // ALL HANDLES WHICH JUST DO NEXT STAGE WILL CALL THE NEXTSTAGE FUNTION IN THE FUTURE
     nextStage() {
       this.stage++;
-      if (
-        this.stage === 7 ||
-        (this.stage === 8 && this.currentPet.animal === "cat")
-      )
-        this.nextStage();
+      if (this.stage === 7 && this.currentPet.animal === "cat") {
+        this.stage = 12;
+        return;
+      }
+      console.log(this.currentPet);
     },
     prevStage() {
       if (this.stage > 0) {
         this.stage--;
       }
-      if (
-        this.stage === 7 ||
-        (this.stage === 8 && this.currentPet.animal === "cat")
-      )
-        this.prevStage();
     },
     handleEmail() {
       this.nextStage();
@@ -254,7 +249,7 @@ export default {
       this.nextStage();
     },
     handleActivity(activityLevel) {
-      this.currentPet.activityLevel = activityLevel;
+      this.currentPet.activity = activityLevel;
       this.nextStage();
     },
     handleHealth() {
@@ -287,13 +282,13 @@ export default {
     addNewPet() {
       let newPet = {
         name: "",
-        body: "",
-        animal: "dog",
+        body: 0,
+        animal: "",
         gender: "",
         health: [],
         behaviour: [],
         neutered: "",
-        activity: "",
+        activity: 0,
         working: "",
         age: {
           years: "",
