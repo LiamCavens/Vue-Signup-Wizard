@@ -82,47 +82,54 @@
         <DogActivity
           v-if="stage === 8 && currentPet.animal === 'dog'"
           :name="currentPet.name"
+          :gender="currentPet.gender"
           :activity.sync="currentPet.activity"
           @activitySubmit="handleActivity"
           key="activity"
         />
-        <DogHealth
+        <DogWorking
           v-if="stage === 9 && currentPet.animal === 'dog'"
+          :working.sync="currentPet.working"
+          @workingSubmit="handleWorking"
+          key="activity"
+        />
+        <DogHealth
+          v-if="stage === 10 && currentPet.animal === 'dog'"
           :name="currentPet.name"
           :health.sync="currentPet.health"
           @healthSubmit="handleHealth"
           key="health"
         />
         <DogBehaviour
-          v-if="stage === 10 && currentPet.animal === 'dog'"
+          v-if="stage === 11 && currentPet.animal === 'dog'"
           :name="currentPet.name"
           :behaviour.sync="currentPet.behaviour"
           @behaviourSubmit="handleBehaviour"
           key="behaviour"
         />
         <RawExperience
-          v-if="stage === 11"
+          v-if="stage === 12"
           :experience.sync="user.experience"
           :foodPreference.sync="user.foodPreference"
           @experienceSubmit="handleExperience"
           key="experience"
         />
         <Recommendation
-          v-if="stage === 12"
+          v-if="stage === 13"
           :name="currentPet.name"
           key="recommendation"
           @handleNext="nextStage"
         />
         <Nutrition
-          v-if="stage === 13"
+          v-if="stage === 14"
           :name="currentPet.name"
           key="nutrition"
           @handleNext="nextStage"
           @handlePrev="prevStage"
         />
-        <Reviews v-if="stage === 14" key="reviews" @handleNext="nextStage" @handlePrev="prevStage" />
+        <Reviews v-if="stage === 15" key="reviews" @handleNext="nextStage" @handlePrev="prevStage" />
         <Delivery
-          v-if="stage === 15"
+          v-if="stage === 16"
           key="delivery"
           @handleNext="nextStage"
           @handlePrev="prevStage"
@@ -154,6 +161,7 @@ import PetAnimal from "./PetAnimal";
 import PetGender from "./PetGender";
 import PetWeight from "./PetWeight";
 import DogHealth from "./DogHealth";
+import DogWorking from "./DogWorking";
 import DogBodyType from "./DogBodyType";
 import DogActivity from "./DogActivity";
 import DogBehaviour from "./DogBehaviour";
@@ -177,6 +185,7 @@ export default {
     PetGender,
     PetWeight,
     DogHealth,
+    DogWorking,
     DogBodyType,
     DogActivity,
     DogBehaviour,
@@ -252,6 +261,9 @@ export default {
       this.currentPet.activity = activityLevel;
       this.nextStage();
     },
+    handleWorking() {
+      this.nextStage();
+    },
     handleHealth() {
       this.nextStage();
     },
@@ -283,7 +295,7 @@ export default {
       let newPet = {
         name: "",
         body: 0,
-        animal: "",
+        animal: "dog",
         gender: "",
         health: [],
         behaviour: [],
