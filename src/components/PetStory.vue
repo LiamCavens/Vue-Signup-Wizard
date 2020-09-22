@@ -3,25 +3,25 @@
     <transition-group name="slide-down">
       <p v-if="pet.name && stage === 2" key="onlyname">
         My name is
-        <b>{{pet.name}}</b>
+        <span class="edit-link" @click="editStage(1)">{{pet.name}}</span>
       </p>
       <p v-if="pet.name && stage >= 3 && pet.animal" key="name">
         I'm a
         <transition name="slide-in">
           <span v-if="pet.gender && stage >= 3">
-            <b>{{ pet.gender }}</b>
+            <span class="edit-link" @click="editStage(3)">{{ pet.gender }}</span>
           </span>
         </transition>&nbsp;
-        <b>{{pet.animal}}</b> named
-        <b>{{ pet.name }}</b>.
+        <span class="edit-link" @click="editStage(2)">{{pet.animal}}</span> named
+        <span class="edit-link" @click="editStage(1)">{{ pet.name }}</span>.
       </p>
 
       <p v-if="pet.age && stage >= 5" key="age">
         I am
-        <b>{{ pet.age.years }} years</b>
+        <span class="edit-link" @click="editStage(4)">{{ pet.age.years }} years</span>
         <span v-if="pet.age.months > 0">
           and
-          <b>{{pet.age.months}} months</b>
+          <span class="edit-link" @click="editStage(4)">{{pet.age.months}} months</span>
         </span>
         old.
       </p>
@@ -29,37 +29,46 @@
       <p v-if="pet.breed && stage >= 6" key="breed">
         <span v-if="pet.breed.type === 'pure'">
           I'm a
-          <b>
+          <span class="edit-link" @click="editStage(5)">
             pure
             {{pet.breed.parent1}}.
-          </b>
+          </span>
         </span>
         <span v-if="pet.breed.type === 'cross'">
           My mother is {{pet.breed.parent1.match(vowelRegex) ? 'an' : 'a'}}
-          <b>{{pet.breed.parent1}}</b>
+          <span
+            class="edit-link"
+            @click="editStage(5)"
+          >{{pet.breed.parent1}}</span>
           and my father is {{pet.breed.parent2.match(vowelRegex) ? 'an' : 'a'}}
-          <b>{{pet.breed.parent2}}</b>.
+          <span
+            class="edit-link"
+            @click="editStage(5)"
+          >{{pet.breed.parent2}}</span>.
         </span>
         <span v-if="pet.breed.type === 'dontknow'">
           I'm not quite sure what
-          <b>breed</b> I am.
+          <span class="edit-link" @click="editStage(5)">breed</span> I am.
         </span>
       </p>
       <p v-if="pet.weight && stage >= 7" key="weight">
         I weigh
-        <b>{{pet.weight.amount}}{{pet.weight.unit}}</b>
+        <span
+          class="edit-link"
+          @click="editStage(6)"
+        >{{pet.weight.amount}}{{pet.weight.unit}}</span>
         <span v-if="pet.body && stage >= 8" key="bodyComp">
           <span v-if="pet.body <= 2">
             and I could
-            <b>gain a few pounds</b>
+            <span class="edit-link" @click="editStage(7)">gain a few pounds</span>
           </span>
           <span v-if="pet.body === 3">
             and I would like to
-            <b>maintain my weight</b>
+            <span class="edit-link" @click="editStage(7)">maintain my weight</span>
           </span>
           <span v-if="pet.body >= 4">
             and I could
-            <b>lose a few pounds</b>
+            <span class="edit-link" @click="editStage(7)">lose a few pounds</span>
           </span>
         </span>
       </p>
@@ -79,13 +88,28 @@ export default {
       vowelRegex: "^[aieouAIEOU].*",
     };
   },
-  methods: {},
+  methods: {
+    editStage(stageToGo) {
+      this.$emit("changeStage", stageToGo);
+    },
+  },
 };
 </script>
 
 <style scoped>
 .pet-story p {
   margin: 5px 0;
+}
+
+.edit-link {
+  font-weight: 700;
+  /* border-bottom: 1px dashed #00263a; */
+  cursor: pointer;
+
+  background-image: linear-gradient(to right, #00263a 75%, transparent 75%);
+  background-position: 0 1.04em;
+  background-repeat: repeat-x;
+  background-size: 6px 2px;
 }
 
 .slide-down-enter-active {

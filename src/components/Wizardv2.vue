@@ -21,7 +21,13 @@
 
       <transition-group v-bind:name="transitionName">
         <Help v-if="help" class="help-component" :stage="stage" @closeHelp="closeHelp" key="help" />
-        <PetStory :pet.sync="currentPet" :stage.sync="stage" key="story" v-if="stage < 9" />
+        <PetStory
+          :pet.sync="currentPet"
+          :stage.sync="stage"
+          @changeStage="handleStage"
+          key="story"
+          v-if="stage < 12"
+        />
         <UserEmail
           v-if="stage === 0"
           :email.sync="user.email"
@@ -213,17 +219,23 @@ export default {
   },
   methods: {
     // ALL HANDLES WHICH JUST DO NEXT STAGE WILL CALL THE NEXTSTAGE FUNTION IN THE FUTURE
+    handleStage(stageToGo) {
+      this.stage = stageToGo;
+    },
     nextStage() {
       this.stage++;
       if (this.stage === 7 && this.currentPet.animal === "cat") {
         this.stage = 12;
         return;
       }
-      console.log(this.currentPet);
     },
     prevStage() {
       if (this.stage > 0) {
         this.stage--;
+      }
+      if (this.stage === 11 && this.currentPet.animal === "cat") {
+        this.stage = 6;
+        return;
       }
     },
     handleEmail() {
@@ -295,7 +307,7 @@ export default {
       let newPet = {
         name: "",
         body: 0,
-        animal: "dog",
+        animal: "",
         gender: "",
         health: [],
         behaviour: [],
