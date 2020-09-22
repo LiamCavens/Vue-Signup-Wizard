@@ -75,4 +75,8 @@ export default {
   color: #fff;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
 }
+
+.pet-activity-button:focus {
+  outline: none;
+}
 </style>

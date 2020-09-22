@@ -76,32 +76,22 @@ export default {
 .btn-green {
   font-family: Montserrat;
   background: #789904;
-  background-image: -webkit-linear-gradient(top, #789904, #91b516);
-  background-image: -moz-linear-gradient(top, #789904, #91b516);
-  background-image: -ms-linear-gradient(top, #789904, #91b516);
-  background-image: -o-linear-gradient(top, #789904, #91b516);
-  background-image: linear-gradient(to bottom, #789904, #91b516);
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   border-radius: 500px;
   color: #ffffff;
-  height: 30px;
+  height: 50px;
   padding: 2px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-  border: solid #637e05 1px;
+  border: solid #789904 1px;
   cursor: pointer;
   text-align: center;
   margin: 10px 10px 20px;
 }
 
 .btn-green:hover {
-  border: solid #637e05 1px;
-  background: #91b516;
-  background-image: -webkit-linear-gradient(top, #91b516, #789904);
-  background-image: -moz-linear-gradient(top, #91b516, #789904);
-  background-image: -ms-linear-gradient(top, #91b516, #789904);
-  background-image: -o-linear-gradient(top, #91b516, #789904);
-  background-image: linear-gradient(to bottom, #91b516, #789904);
+  border: solid #789904 1px;
+  /* background: #91b516; */
 }
 
 .btn-green:focus {

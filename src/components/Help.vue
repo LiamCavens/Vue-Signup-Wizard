@@ -2,13 +2,20 @@
   <div id="help-component" class="help">
     <h3 class="help-title">{{helpTitle}}</h3>
     <p class="help-message">{{helpMessage}}</p>
-    <button class="help-close" @click="closeHelp">Close</button>
+    <div @click="closeHelp">
+      <Times class="close-times" />
+      <p class="close-text">Close</p>
+    </div>
   </div>
 </template>
 
 <script>
+import Times from "../assets/fontawesome/times.vue";
 export default {
   name: "Help",
+  components: {
+    Times,
+  },
   props: {
     stage: Number,
   },
@@ -73,7 +80,7 @@ export default {
     this.getHelp(this.stage);
     let helpOnMount = document.querySelector("#help-component");
     setTimeout(() => {
-      helpOnMount.style.opacity = 0.93;
+      helpOnMount.style.opacity = 0.9;
       helpOnMount.style.transition = "opacity 0.5s";
     }, 0);
   },
@@ -86,6 +93,7 @@ export default {
 
 <style scoped>
 .help {
+  /* opacity: 0.9; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -94,21 +102,42 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #fff;
+  background-color: #00263a;
+  color: #fff;
   z-index: 100;
   border-radius: 10px;
 }
 
+.help-title {
+  opacity: 1 !important;
+}
+
 .help-message {
-  background-color: #d6be9c;
   margin: 10px;
   padding: 20px 15px;
   text-align: left;
-  box-shadow: inset 0 0 4px #584931;
-  border-radius: 5px;
+  opacity: 1 !important;
+}
+
+.close-text {
+  color: #fff;
+  font-size: 24px;
+  text-transform: lowercase;
+  font-variant: small-caps;
+  font-family: Montserrat;
+  margin: 0;
+  opacity: 1 !important;
+  cursor: pointer;
+}
+
+.close-times {
+  height: 100px;
+  opacity: 1 !important;
+  cursor: pointer;
 }
 
 .help-close {
+  opacity: 1;
   margin: 20px;
   font-family: Montserrat;
   text-transform: lowercase;

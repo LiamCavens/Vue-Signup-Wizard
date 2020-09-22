@@ -91,7 +91,6 @@ export default {
 
 .next-button:hover {
   cursor: pointer;
-  background-color: #617a04;
 }
 
 .fade-enter-active,

@@ -251,6 +251,11 @@ export default {
   cursor: pointer;
 }
 
+.pet-breed-button:hover {
+  border: 1px solid #789904;
+  color: #789904;
+}
+
 .pet-breed-button:focus {
   outline: none;
 }
@@ -258,7 +263,12 @@ export default {
 .active {
   transition: all 0.4s ease;
   background-color: #789904;
+  border: 1px solid #789904;
   color: #fff;
+}
+
+.active:hover {
+  color: #00263a;
 }
 
 .breed-select {

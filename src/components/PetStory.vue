@@ -72,6 +72,24 @@
           </span>
         </span>
       </p>
+      <p v-if="stage >= 11" key="health">
+        I have
+        <span
+          v-if="pet.health.length === 0"
+          class="edit-link"
+          @click="editStage(10)"
+        >no health issues</span>
+        <span
+          v-if="pet.health.length > 0 && pet.health.length < 4"
+          class="edit-link"
+          @click="editStage(10)"
+        >some health issues</span>
+        <span
+          v-if="pet.health.length > 3"
+          class="edit-link"
+          @click="editStage(10)"
+        >a lot of health issues</span>
+      </p>
     </transition-group>
   </div>
 </template>

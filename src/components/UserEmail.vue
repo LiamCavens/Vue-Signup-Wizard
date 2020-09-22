@@ -79,14 +79,15 @@ export default {
 
 <style scoped>
 .email {
-  padding: 15px 30px;
+  padding: 15px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .email-text {
-  font-size: 14px;
+  font-size: 18px;
+  margin-top: 0;
 }
 
 .error-message {
@@ -144,7 +145,7 @@ export default {
   display: flex;
   align-items: center;
   user-select: none;
-  font-size: 10px;
+  font-size: 14px;
   cursor: pointer;
 }
 

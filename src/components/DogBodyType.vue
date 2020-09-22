@@ -87,7 +87,7 @@ export default {
   cursor: pointer;
   border: 2px solid #789904;
   color: #789904;
-  margin: 2px 3px;
+  margin: 2px;
   transition: all 0.3s ease;
 }
 

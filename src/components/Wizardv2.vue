@@ -10,11 +10,11 @@
         </button>
       </div>
 
-      <div v-if="stage >= 12 && stage <= 15" class="chevrons">
+      <div v-if="stage >= 13 && stage <= 16" class="chevrons">
         <button class="previous-chevron" @click="prevStage">
           <font-awesome-icon :icon="['fas', 'chevron-left']" />
         </button>
-        <button v-if="stage < 15" class="next-chevron" @click="nextStage">
+        <button v-if="stage < 16" class="next-chevron" @click="nextStage">
           <font-awesome-icon :icon="['fas', 'chevron-right']" />
         </button>
       </div>
@@ -542,7 +542,7 @@ export default {
 
 .help-transition-enter-to,
 .help-transition-leave {
-  opacity: 0.93;
+  opacity: 0.9;
 }
 
 @media screen and (max-width: 330px) {
