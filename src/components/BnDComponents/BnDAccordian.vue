@@ -91,6 +91,8 @@ export default {
   display: flex;
   flex-direction: column;
   margin: auto 0;
+  font-weight: 700;
+  font-size: 14px;
 }
 
 .header-image {
@@ -101,6 +103,7 @@ export default {
 .header-desc {
   text-align: start;
   font-size: 12px;
+  font-weight: normal;
 }
 
 .accordion .header-icon {
