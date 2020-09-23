@@ -10,17 +10,23 @@
         </button>
       </div>
 
-      <div v-if="stage >= 13 && stage <= 16" class="chevrons">
+      <!-- <div v-if="stage >= 13 && stage <= 16" class="chevrons">
         <button class="previous-chevron" @click="prevStage">
           <font-awesome-icon :icon="['fas', 'chevron-left']" />
         </button>
         <button v-if="stage < 16" class="next-chevron" @click="nextStage">
           <font-awesome-icon :icon="['fas', 'chevron-right']" />
         </button>
-      </div>
+      </div> -->
 
       <transition-group v-bind:name="transitionName">
-        <Help v-if="help" class="help-component" :stage="stage" @closeHelp="closeHelp" key="help" />
+        <Help
+          v-if="help"
+          class="help-component"
+          :stage="stage"
+          @closeHelp="closeHelp"
+          key="help"
+        />
         <PetStory
           :pet.sync="currentPet"
           :stage.sync="stage"
@@ -120,12 +126,18 @@
           @experienceSubmit="handleExperience"
           key="experience"
         />
-        <Recommendation
+        <RecommendationAccordian
           v-if="stage === 13"
           :name="currentPet.name"
           key="recommendation"
           @handleNext="nextStage"
         />
+        <!-- <Recommendation
+          v-if="stage === 13"
+          :name="currentPet.name"
+          key="recommendation"
+          @handleNext="nextStage"
+        /> -->
         <Nutrition
           v-if="stage === 14"
           :name="currentPet.name"
@@ -133,7 +145,12 @@
           @handleNext="nextStage"
           @handlePrev="prevStage"
         />
-        <Reviews v-if="stage === 15" key="reviews" @handleNext="nextStage" @handlePrev="prevStage" />
+        <Reviews
+          v-if="stage === 15"
+          key="reviews"
+          @handleNext="nextStage"
+          @handlePrev="prevStage"
+        />
         <Delivery
           v-if="stage === 16"
           key="delivery"
@@ -177,7 +194,8 @@ import Reviews from "./Reviews";
 import Delivery from "./Delivery";
 import Nutrition from "./Nutrition";
 import RawExperience from "./RawExperience";
-import Recommendation from "./Recommendation";
+// import Recommendation from "./Recommendation";
+import RecommendationAccordian from "./RecommendationAccordian";
 
 export default {
   name: "Wizardv2",
@@ -200,14 +218,15 @@ export default {
     Delivery,
     Nutrition,
     RawExperience,
-    Recommendation,
+    // Recommendation,
+    RecommendationAccordian,
   },
   props: {},
   data: () => {
     return {
       help: false,
       transitionName: "slide-fade",
-      stage: 1,
+      stage: 13,
       user: {
         email: "",
         experience: "",
@@ -225,7 +244,7 @@ export default {
     nextStage() {
       this.stage++;
       if (this.stage === 7 && this.currentPet.animal === "cat") {
-        this.stage = 12;
+        this.stage = 13;
         return;
       }
     },
@@ -233,7 +252,7 @@ export default {
       if (this.stage > 0) {
         this.stage--;
       }
-      if (this.stage === 11 && this.currentPet.animal === "cat") {
+      if (this.stage === 12 && this.currentPet.animal === "cat") {
         this.stage = 6;
         return;
       }

@@ -3,25 +3,32 @@
     <transition-group name="slide-down">
       <p v-if="pet.name && stage === 2" key="onlyname">
         My name is
-        <span class="edit-link" @click="editStage(1)">{{pet.name}}</span>
+        <span class="edit-link" @click="editStage(1)">{{ pet.name }}</span>
       </p>
       <p v-if="pet.name && stage >= 3 && pet.animal" key="name">
         I'm a
         <transition name="slide-in">
           <span v-if="pet.gender && stage >= 3">
-            <span class="edit-link" @click="editStage(3)">{{ pet.gender }}</span>
-          </span>
-        </transition>&nbsp;
-        <span class="edit-link" @click="editStage(2)">{{pet.animal}}</span> named
-        <span class="edit-link" @click="editStage(1)">{{ pet.name }}</span>.
+            <span class="edit-link" @click="editStage(3)">{{
+              pet.gender
+            }}</span>
+          </span> </transition
+        >&nbsp;
+        <span class="edit-link" @click="editStage(2)">{{ pet.animal }}</span>
+        named <span class="edit-link" @click="editStage(1)">{{ pet.name }}</span
+        >.
       </p>
 
       <p v-if="pet.age && stage >= 5" key="age">
         I am
-        <span class="edit-link" @click="editStage(4)">{{ pet.age.years }} years</span>
+        <span class="edit-link" @click="editStage(4)"
+          >{{ pet.age.years }} years</span
+        >
         <span v-if="pet.age.months > 0">
           and
-          <span class="edit-link" @click="editStage(4)">{{pet.age.months}} months</span>
+          <span class="edit-link" @click="editStage(4)"
+            >{{ pet.age.months }} months</span
+          >
         </span>
         old.
       </p>
@@ -31,20 +38,20 @@
           I'm a
           <span class="edit-link" @click="editStage(5)">
             pure
-            {{pet.breed.parent1}}.
+            {{ pet.breed.parent1 }}.
           </span>
         </span>
         <span v-if="pet.breed.type === 'cross'">
-          My mother is {{pet.breed.parent1.match(vowelRegex) ? 'an' : 'a'}}
-          <span
-            class="edit-link"
-            @click="editStage(5)"
-          >{{pet.breed.parent1}}</span>
-          and my father is {{pet.breed.parent2.match(vowelRegex) ? 'an' : 'a'}}
-          <span
-            class="edit-link"
-            @click="editStage(5)"
-          >{{pet.breed.parent2}}</span>.
+          My mother is {{ pet.breed.parent1.match(vowelRegex) ? "an" : "a" }}
+          <span class="edit-link" @click="editStage(5)">{{
+            pet.breed.parent1
+          }}</span>
+          and my father is
+          {{ pet.breed.parent2.match(vowelRegex) ? "an" : "a" }}
+          <span class="edit-link" @click="editStage(5)">{{
+            pet.breed.parent2
+          }}</span
+          >.
         </span>
         <span v-if="pet.breed.type === 'dontknow'">
           I'm not quite sure what
@@ -53,42 +60,58 @@
       </p>
       <p v-if="pet.weight && stage >= 7" key="weight">
         I weigh
-        <span
-          class="edit-link"
-          @click="editStage(6)"
-        >{{pet.weight.amount}}{{pet.weight.unit}}</span>
+        <span class="edit-link" @click="editStage(6)"
+          >{{ pet.weight.amount }}{{ pet.weight.unit }}</span
+        >
         <span v-if="pet.body && stage >= 8" key="bodyComp">
           <span v-if="pet.body <= 2">
             and I could
-            <span class="edit-link" @click="editStage(7)">gain a few pounds</span>
+            <span class="edit-link" @click="editStage(7)"
+              >gain a few pounds</span
+            >
           </span>
           <span v-if="pet.body === 3">
             and I would like to
-            <span class="edit-link" @click="editStage(7)">maintain my weight</span>
+            <span class="edit-link" @click="editStage(7)"
+              >maintain my weight</span
+            >
           </span>
           <span v-if="pet.body >= 4">
             and I could
-            <span class="edit-link" @click="editStage(7)">lose a few pounds</span>
+            <span class="edit-link" @click="editStage(7)"
+              >lose a few pounds</span
+            >
           </span>
         </span>
       </p>
-      <p v-if="stage >= 11" key="health">
+
+      <p v-if="stage >= 10 && pet.animal === 'dog'">
+        I am
+        <span class="edit-link" @click="editStage(9)"
+          >{{ pet.working ? "" : "not" }} a working dog</span
+        >
+      </p>
+
+      <p v-if="stage >= 11 && pet.animal === 'dog'" key="health">
         I have
         <span
           v-if="pet.health.length === 0"
           class="edit-link"
           @click="editStage(10)"
-        >no health issues</span>
+          >no health issues</span
+        >
         <span
           v-if="pet.health.length > 0 && pet.health.length < 4"
           class="edit-link"
           @click="editStage(10)"
-        >some health issues</span>
+          >some health issues</span
+        >
         <span
           v-if="pet.health.length > 3"
           class="edit-link"
           @click="editStage(10)"
-        >a lot of health issues</span>
+          >a lot of health issues</span
+        >
       </p>
     </transition-group>
   </div>

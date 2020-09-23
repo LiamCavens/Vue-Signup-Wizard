@@ -1,7 +1,7 @@
 <template>
   <div class="pet-weight">
     <h2>What's {{ name }}'s weight?</h2>
-    <p v-if="inputError" class="error-message">* {{errorMessage}}</p>
+    <p v-if="inputError" class="error-message">* {{ errorMessage }}</p>
     <div class="weight-inputs">
       <input
         placeholder="Enter Weight"
@@ -23,7 +23,13 @@
       </select>
     </div>
     <transition name="fade">
-      <button class="btn-green next-button" v-if="weight.amount > 0" @click="handleNext">Next</button>
+      <button
+        class="btn-green next-button"
+        v-if="weight.amount > 0"
+        @click="handleNext"
+      >
+        Next
+      </button>
     </transition>
   </div>
 </template>
@@ -97,12 +103,6 @@ export default {
   margin: 10px auto;
   padding: 5px 0;
   width: 315px;
-}
-
-.next-button:hover {
-  cursor: pointer;
-  background-color: #617a04;
-  transition: 0.3s ease;
 }
 
 .pet-weight-input:focus {
