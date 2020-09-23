@@ -1,7 +1,13 @@
 <template>
   <div class="accordion" v-bind:class="theme">
     <div class="header" v-on:click="toggle">
-      <slot name="header"></slot>
+      <img class="header-image" :src="getIconUrl(icon)" alt="" />
+      <div class="header-text">
+        <slot name="header"></slot>
+        <div class="header-desc">
+          <slot name="header-desc"></slot>
+        </div>
+      </div>
       <font-awesome-icon
         class="header-icon"
         :class="{ rotate: show }"
@@ -29,6 +35,7 @@ export default {
   name: "BnDAccordian",
   props: {
     theme: String,
+    icon: String,
   },
   data: () => {
     return {
@@ -36,6 +43,10 @@ export default {
     };
   },
   methods: {
+    getIconUrl(iconUrl) {
+      if (!iconUrl) return;
+      return require(`../../assets/${iconUrl}.png`);
+    },
     toggle: function () {
       this.show = !this.show;
     },
@@ -67,17 +78,33 @@ export default {
 }
 
 .accordion .header {
-  height: 40px;
-  line-height: 40px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
   position: relative;
   color: #00263a;
   cursor: pointer;
 }
 
+.header-text {
+  display: flex;
+  flex-direction: column;
+  margin: auto 0;
+}
+
+.header-image {
+  height: 60px;
+  margin-right: 10px;
+}
+
+.header-desc {
+  text-align: start;
+  font-size: 12px;
+}
+
 .accordion .header-icon {
-  position: absolute;
-  top: 12px;
-  right: 15px;
+  margin: 0 20px 0 auto;
   transform: rotate(0deg);
   transition-duration: 0.3s;
 }

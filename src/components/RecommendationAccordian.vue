@@ -1,16 +1,19 @@
 <template>
   <div>
     <h2>Recommendation</h2>
-    <BnDAccordian>
+    <BnDAccordian icon="icon_bowl_white">
       <div slot="header">Jimmy's meal plan</div>
+      <div slot="header-desc">Cheese & Beans</div>
       <Recommendation name="Jimmy" key="recommendation" />
     </BnDAccordian>
-    <BnDAccordian>
+    <BnDAccordian icon="icon_healthy_heart_white">
       <div slot="header">Jimmy's nutrition</div>
+      <div slot="header-desc">All the good bits</div>
       <Nutrition name="Jimmy" />
     </BnDAccordian>
-    <BnDAccordian>
+    <BnDAccordian icon="icon_dog_white">
       <div slot="header">Customer Testimonials</div>
+      <div slot="header-desc">What people say</div>
       <Reviews />
     </BnDAccordian>
   </div>
