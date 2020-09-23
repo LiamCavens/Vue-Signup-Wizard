@@ -8,8 +8,8 @@
       <div v-for="(review, index) in reviews" :key="index">
         <transition name="fade-down">
           <div class="reviews-review" v-if="index === currentReview">
-            <p class="review-description">"{{review.description}}"</p>
-            <p class="reviews-name">{{review.name}}</p>
+            <p class="review-description">"{{ review.description }}"</p>
+            <p class="reviews-name">{{ review.name }}</p>
             <img
               class="reviews-image"
               :src="require(`../assets/${review.imageUrl}`)"
@@ -19,20 +19,20 @@
         </transition>
       </div>
     </div>
-    <div class="reviews-controls">
-      <!-- <button @click="prevReview">
+    <!-- <div class="reviews-controls">
+      <button @click="prevReview">
         <font-awesome-icon :icon="['fas', 'backward']" />
-      </button>-->
+      </button>
       <button v-if="!isPlaying" @click="playReview">
         <font-awesome-icon :icon="['fas', 'play']" />
       </button>
       <button v-if="isPlaying" @click="pauseReview">
         <font-awesome-icon :icon="['fas', 'pause']" />
       </button>
-      <!-- <button @click="nextReview">
+      <button @click="nextReview">
         <font-awesome-icon :icon="['fas', 'forward']" />
-      </button>-->
-    </div>
+      </button>
+    </div> -->
   </div>
 </template>
 
@@ -120,12 +120,13 @@ export default {
 .reviews-carousel {
   display: flex;
   flex-direction: row;
-  height: 265px;
+  margin-bottom: 20px;
+  /* height: 265px; */
 }
 
-.reviews-review {
+/* .reviews-review {
   position: absolute;
-}
+} */
 
 .reviews-ourword {
   font-weight: 700;

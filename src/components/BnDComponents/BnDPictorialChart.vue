@@ -63,7 +63,7 @@ export default {
 </script>
 <style scoped>
 .pic-chart {
-  width: 350px;
+  width: 300px;
   height: 185px;
 }
 

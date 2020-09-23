@@ -1,7 +1,11 @@
 <template>
   <div class="recommendation">
     <div class="recommendation-logo-next">
-      <img class="recommendation-logo" alt="recommendation image" src="../assets/BeefShot.png" />
+      <img
+        class="recommendation-logo"
+        alt="recommendation image"
+        src="../assets/BeefShot.png"
+      />
     </div>
     <p class="recommendation-meal">{{ name }}'s meal plan</p>
     <p class="recommendation-meal">Premium Complete</p>
@@ -9,22 +13,21 @@
     <transition name="slide-down-read">
       <div class="recommendation-read" v-if="readMore">
         <p>
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna
-          aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          Duis aute irure dolor in reprehenderit in voluptate velit
-          esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-          occaecat cupidatat non proident, sunt in culpa qui officia
-          deserunt mollit anim id est laborum.
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
         </p>
       </div>
     </transition>
-    <a class="link recommendation-read-more" href="#" @click="readMore = !readMore">
+    <!-- <a class="link recommendation-read-more" href="#" @click="readMore = !readMore">
       Tell me {{ readMore ? "less" : "more" }}
       <font-awesome-icon v-if="!readMore" :icon="['fas', 'chevron-down']" />
       <font-awesome-icon v-if="readMore" :icon="['fas', 'chevron-up']" />
-    </a>
+    </a> -->
   </div>
 </template>
 
