@@ -36,11 +36,10 @@ export default {
   props: {
     theme: String,
     icon: String,
+    show: Boolean,
   },
   data: () => {
-    return {
-      show: false,
-    };
+    return {};
   },
   methods: {
     getIconUrl(iconUrl) {
@@ -49,6 +48,7 @@ export default {
     },
     toggle: function () {
       this.show = !this.show;
+      this.$emit("opened");
     },
     beforeEnter: function (el) {
       el.style.height = "0";
@@ -118,7 +118,7 @@ export default {
   border-top: 0;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
-  transition: 150ms ease-out;
+  transition: 0.3s ease-out;
 }
 
 .accordion .body-inner {

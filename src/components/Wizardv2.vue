@@ -85,14 +85,14 @@
           key="weight"
         />
         <DogBodyType
-          v-if="stage === 7 && currentPet.animal === 'dog'"
+          v-if="stage === 7 && currentPet.animal != 'cat'"
           :name="currentPet.name"
           :body.sync="currentPet.body"
           @bodySubmit="handleBody"
           key="bodytype"
         />
         <DogActivity
-          v-if="stage === 8 && currentPet.animal === 'dog'"
+          v-if="stage === 8 && currentPet.animal != 'cat'"
           :name="currentPet.name"
           :gender="currentPet.gender"
           :activity.sync="currentPet.activity"
@@ -100,20 +100,20 @@
           key="activity"
         />
         <DogWorking
-          v-if="stage === 9 && currentPet.animal === 'dog'"
+          v-if="stage === 9 && currentPet.animal != 'cat'"
           :working.sync="currentPet.working"
           @workingSubmit="handleWorking"
           key="activity"
         />
         <DogHealth
-          v-if="stage === 10 && currentPet.animal === 'dog'"
+          v-if="stage === 10 && currentPet.animal != 'cat'"
           :name="currentPet.name"
           :health.sync="currentPet.health"
           @healthSubmit="handleHealth"
           key="health"
         />
         <DogBehaviour
-          v-if="stage === 11 && currentPet.animal === 'dog'"
+          v-if="stage === 11 && currentPet.animal != 'cat'"
           :name="currentPet.name"
           :behaviour.sync="currentPet.behaviour"
           @behaviourSubmit="handleBehaviour"
@@ -126,33 +126,14 @@
           @experienceSubmit="handleExperience"
           key="experience"
         />
-        <RecommendationAccordian
+        <MealPlanNutrtionReviews
           v-if="stage === 13"
           :name="currentPet.name"
           key="recommendation"
           @handleNext="nextStage"
-        />
-        <!-- <Recommendation
-          v-if="stage === 13"
-          :name="currentPet.name"
-          key="recommendation"
-          @handleNext="nextStage"
-        /> -->
-        <Nutrition
-          v-if="stage === 14"
-          :name="currentPet.name"
-          key="nutrition"
-          @handleNext="nextStage"
-          @handlePrev="prevStage"
-        />
-        <Reviews
-          v-if="stage === 15"
-          key="reviews"
-          @handleNext="nextStage"
-          @handlePrev="prevStage"
         />
         <Delivery
-          v-if="stage === 16"
+          v-if="stage === 14"
           key="delivery"
           @handleNext="nextStage"
           @handlePrev="prevStage"
@@ -190,12 +171,9 @@ import DogActivity from "./DogActivity";
 import DogBehaviour from "./DogBehaviour";
 
 import Help from "./Help";
-import Reviews from "./Reviews";
 import Delivery from "./Delivery";
-import Nutrition from "./Nutrition";
 import RawExperience from "./RawExperience";
-// import Recommendation from "./Recommendation";
-import RecommendationAccordian from "./RecommendationAccordian";
+import MealPlanNutrtionReviews from "./MealPlanNutrtionReviews";
 
 export default {
   name: "Wizardv2",
@@ -214,19 +192,16 @@ export default {
     DogActivity,
     DogBehaviour,
     Help,
-    Reviews,
     Delivery,
-    Nutrition,
     RawExperience,
-    // Recommendation,
-    RecommendationAccordian,
+    MealPlanNutrtionReviews,
   },
   props: {},
   data: () => {
     return {
       help: false,
       transitionName: "slide-fade",
-      stage: 13,
+      stage: 1,
       user: {
         email: "",
         experience: "",
@@ -247,6 +222,8 @@ export default {
         this.stage = 13;
         return;
       }
+      console.log("Liam: this.$route");
+      console.log(this.$route);
     },
     prevStage() {
       if (this.stage > 0) {

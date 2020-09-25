@@ -124,9 +124,10 @@ export default {
   /* height: 265px; */
 }
 
-/* .reviews-review {
+.reviews-review {
   position: absolute;
-} */
+  margin-bottom: 20px;
+}
 
 .reviews-ourword {
   font-weight: 700;

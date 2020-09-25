@@ -1,9 +1,13 @@
 <template>
   <div class="delivery">
     <p class="delivery-date-title">Your first delivery date:</p>
-    <p class="delivery-date" v-if="delivery1">{{ format(delivery1, "eeee do MMM'.' yyyy") }}</p>
+    <p class="delivery-date" v-if="delivery1">
+      {{ format(delivery1, "eeee do MMM'.' yyyy") }}
+    </p>
     <p class="delivery-date-title-2">Your second delivery date:</p>
-    <p class="delivery-date-2" v-if="delivery2">{{ format(delivery2, "eeee do MMM'.' yyyy") }}</p>
+    <p class="delivery-date-2" v-if="delivery2">
+      {{ format(delivery2, "eeee do MMM'.' yyyy") }}
+    </p>
 
     <!-- <button
       v-if="!datePicking"
@@ -25,7 +29,10 @@
         id="date-picker"
         v-model="delivery1"
         :select-attribute="selectAttribute"
-        :disabled-dates="[{ weekdays: [1, 7] }, { start: null, end:  new Date()}]"
+        :disabled-dates="[
+          { weekdays: [1, 7] },
+          { start: null, end: new Date() },
+        ]"
         is-inline
       />
     </div>
@@ -33,7 +40,7 @@
 </template>
 
 <script>
-import { format, add } from "date-fns";
+import { format, add, addBusinessDays } from "date-fns";
 
 export default {
   name: "Delivery",
@@ -43,8 +50,8 @@ export default {
       format,
       loading: true,
       datePicking: false,
-      delivery1: "",
-      delivery2: "",
+      delivery1: add(new Date(), { weeks: 1 }),
+      delivery2: add(new Date(), { weeks: 3 }),
       selectAttribute: {
         highlight: {
           color: "green",
@@ -53,6 +60,7 @@ export default {
         popover: {
           label: "First Delivery",
         },
+        dates: add(new Date(), { weeks: 1 }),
       },
       // BELOW: IF WE USE THE V-CALENDAR THEN THESE ARE THE SETTINGS
       //   attributes: [
@@ -85,10 +93,6 @@ export default {
   mounted() {
     let calendarFix = document.querySelector("#date-picker");
     calendarFix.style.height = "230px";
-    this.delivery1 = add(new Date(), { weeks: 1 });
-    this.delivery2 = add(new Date(), {
-      days: Math.floor(Math.random() * (31 - 14) + 14),
-    });
     // If we want to show the dates on v-calander
     // this.attributes[0].dates = this.delivery1;
     // this.attributes[1].dates = this.delivery2;
@@ -100,9 +104,7 @@ export default {
   },
   watch: {
     delivery1: function (val) {
-      this.delivery2 = add(val, {
-        days: Math.floor(Math.random() * (31 - 14) + 14),
-      });
+      this.delivery2 = addBusinessDays(val, 14);
     },
   },
   beforeDestroy() {
