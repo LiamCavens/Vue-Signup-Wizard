@@ -1,6 +1,6 @@
 <template>
   <div class="pet-gender">
-    <h2>{{ name }} is...?</h2>
+    <h2>Are you...</h2>
     <div class="pet-gender-buttons">
       <div class="pet-gender-buttons-card">
         <button @click="handleGender('female')">
@@ -83,10 +83,11 @@ export default {
   border: 2px solid #00263a;
   background-color: white;
   border-radius: 50%;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .pet-gender-buttons button:hover {
-  color: #789904;
+  /* color: #789904; */
   border: #789904 2px solid;
 }
 
@@ -96,7 +97,7 @@ export default {
 
 .pet-gender-text {
   font-family: Montserrat;
-  font-size: 22px;
+  font-size: 16px;
   margin: auto;
 }
 

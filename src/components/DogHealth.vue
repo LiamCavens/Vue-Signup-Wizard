@@ -5,20 +5,22 @@
       <ul class="dog-health-issues-list">
         <li
           class="dog-health-issues-item"
-          v-bind:class="{ active: issue.active}"
+          v-bind:class="{ active: issue.active }"
           v-for="(issue, index) in healthIssues"
           :key="index"
           @click="handleIssue(issue)"
         >
           <span>
-            <span class="list-span">{{issue.label}}</span>
+            <span class="list-span">{{ issue.label }}</span>
             <font-awesome-icon v-if="!issue.active" :icon="['fas', 'plus']" />
             <font-awesome-icon v-if="issue.active" :icon="['fas', 'minus']" />
           </span>
         </li>
       </ul>
     </div>
-    <button class="btn-green next-button" @click="handleHealthSubmit">Next</button>
+    <button class="btn-green next-button" @click="handleHealthSubmit">
+      Next
+    </button>
   </div>
 </template>
 
@@ -110,11 +112,12 @@ export default {
   cursor: pointer;
   transition: all 0.2s ease;
   border-radius: 3px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .dog-health-issues-item:hover {
   border: 1px solid #789904;
-  color: #789904;
+  /* color: #789904; */
 }
 
 .list-span {
@@ -127,10 +130,10 @@ export default {
   border: 1px solid #789904;
   transition: all 0.2s ease;
 }
-
+/* 
 .active:hover {
   color: #00263a;
-}
+} */
 
 .next-button {
   margin: auto;

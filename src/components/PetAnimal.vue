@@ -1,16 +1,24 @@
 <template>
   <div class="pet-animal">
-    <h2>Is {{name}} a...</h2>
+    <h2>{{ name }}, are you a...</h2>
     <div class="pet-animal-buttons">
       <div class="pet-animal-buttons-card">
         <button @click="handleAnimal('cat')">
-          <img class="pet-animal-image" src="../assets/icon_cat_white.png" alt="Cat Image" />
+          <img
+            class="pet-animal-image"
+            src="../assets/icon_cat_white.png"
+            alt="Cat Image"
+          />
         </button>
         <p class="pet-animal-text">Cat</p>
       </div>
       <div class="pet-animal-buttons-card">
         <button @click="handleAnimal('dog')">
-          <img class="pet-animal-image" src="../assets/icon_dog_white.png" alt="Dog Image" />
+          <img
+            class="pet-animal-image"
+            src="../assets/icon_dog_white.png"
+            alt="Dog Image"
+          />
         </button>
         <p class="pet-animal-text">Dog</p>
       </div>
@@ -59,10 +67,11 @@ export default {
   border: 2px solid #00263a;
   background-color: white;
   border-radius: 50%;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .pet-animal-buttons button:hover {
-  color: #789904;
+  /* color: #789904; */
   border: #789904 2px solid;
 }
 

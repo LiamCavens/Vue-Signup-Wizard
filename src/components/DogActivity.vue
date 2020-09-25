@@ -1,14 +1,17 @@
 <template>
   <div class="pet-activity">
-    <h2>How active is he?</h2>
+    <h2>How active are you?</h2>
+    <p class="honest-text">(and be honest!)</p>
     <div class="pet-activity-buttons">
       <button
         class="pet-activity-button"
         v-for="(level, index) in activeLevels"
         @click="handleActivityLevel(level.value, index)"
-        :class="{active : activatedDiv === index}"
+        :class="{ active: activatedDiv === index }"
         :key="index"
-      >{{level.label}}</button>
+      >
+        {{ level.label }}
+      </button>
     </div>
   </div>
 </template>
@@ -78,5 +81,15 @@ export default {
 
 .pet-activity-button:focus {
   outline: none;
+}
+
+h2 {
+  margin-bottom: 0;
+}
+
+.honest-text {
+  font-size: 14px;
+  margin-top: 0;
+  margin-bottom: 20px;
 }
 </style>

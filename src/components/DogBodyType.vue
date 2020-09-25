@@ -1,17 +1,21 @@
 <template>
   <div class="dog-body">
-    <h2>His body composition</h2>
+    <h2>Would you say you are...</h2>
     <button
       class="dog-body-item"
       v-for="(bodyType, index) in bodyTypes"
       :key="index"
       @click="handleBodySub(bodyType, index)"
-      :class="{active : activatedDiv === index}"
+      :class="{ active: activatedDiv === index }"
     >
-      <img class="dog-body-image" src="../assets/icon_dog_white.png" alt="Dob Body Image" />
+      <img
+        class="dog-body-image"
+        src="../assets/icon_dog_white.png"
+        alt="Dob Body Image"
+      />
       <div class="dog-body-item-text">
-        <p class="dog-body-item-label">{{bodyType.label}}</p>
-        <p class="dog-body-item-desc">{{bodyType.description}}</p>
+        <p class="dog-body-item-label">{{ bodyType.label }}</p>
+        <p class="dog-body-item-desc">{{ bodyType.description }}</p>
       </div>
     </button>
   </div>
@@ -30,28 +34,28 @@ export default {
       bodyTypes: [
         {
           value: 1,
-          label: "Very Underweight",
-          description: "Very underweight description",
+          label: "Very underweight",
+          description: "and thats why I need Bella & Duke food?",
         },
         {
           value: 2,
-          label: "Mildy Underweight",
-          description: "Mildly underweight description with longer description",
+          label: "Slightly underweight",
+          description: "and svelte and elegant and hungry",
         },
         {
           value: 3,
           label: "Normal",
-          description: "Normal description",
+          description: "and absolutely happy",
         },
         {
           value: 4,
-          label: "Very Overweight",
-          description: "Mildly overweight description",
+          label: "Slightly overweight",
+          description: "but will soon be back in shape with raw",
         },
         {
           value: 5,
-          label: "Very Overweight",
-          description: "Very overweight description",
+          label: "Very overweight",
+          description: "and want to get to happiness with your food",
         },
       ],
     };
@@ -80,21 +84,20 @@ export default {
   border: 1px solid #00263a;
   background-color: white;
   border-radius: 5px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .dog-body-item:hover,
 .active {
   cursor: pointer;
   border: 2px solid #789904;
-  color: #789904;
+  /* color: #789904; */
   margin: 2px;
-  transition: all 0.3s ease;
 }
 
 .dog-body-item:hover .dog-body-image,
 .active .dog-body-image {
   border: 2px solid #789904;
-  transition: all 0.3s ease;
 }
 
 .dog-body-item-text {

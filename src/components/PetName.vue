@@ -1,7 +1,7 @@
 <template>
   <div class="pet-name">
     <h2>Lets start with a name...</h2>
-    <p v-if="inputError" class="error-message">* {{errorMessage}}</p>
+    <p v-if="inputError" class="error-message">* {{ errorMessage }}</p>
     <input
       placeholder="Name"
       class="pet-name-input"
@@ -14,7 +14,13 @@
       autofocus
     />
     <transition name="fade">
-      <button class="btn-green next-button" v-if="name && name.length > 1" @click="handleNext">Next</button>
+      <button
+        class="btn-green next-button"
+        v-if="name && name.length > 1"
+        @click="handleNext"
+      >
+        Next
+      </button>
     </transition>
   </div>
 </template>
@@ -75,7 +81,6 @@ export default {
   box-shadow: 1px 1px 4px #ebebeb;
   border-radius: 3px;
   padding: 7px;
-  margin: 0 5%;
   outline: none;
   transition: 0.2s linear;
 }

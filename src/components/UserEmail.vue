@@ -1,10 +1,11 @@
 <template>
   <div class="email">
-    <p
-      class="email-text"
-    >Welcome to our diet recommendation engine. Together, we will build a profile of your pets so we can recommend the best diet plan.</p>
+    <p class="email-text">
+      Welcome to our diet recommendation engine. Together, we will build a
+      profile of your pets so we can recommend the best diet plan.
+    </p>
     <div class="email-section">
-      <p v-if="inputError" class="error-message">* {{errorMessage}}</p>
+      <p v-if="inputError" class="error-message">* {{ errorMessage }}</p>
       <input
         placeholder="Enter your email..."
         class="email-input"
@@ -155,8 +156,8 @@ export default {
   position: absolute;
 }
 .email-checkbox input:checked ~ .check {
-  border-color: #789904;
-  box-shadow: 0px 0px 0px 15px #789904 inset;
+  border-color: #00263a;
+  box-shadow: 0px 0px 0px 15px #00263a inset;
 }
 .email-checkbox input:checked ~ .check::after {
   opacity: 1;
@@ -172,8 +173,8 @@ export default {
   position: relative;
   border-radius: 100px;
   background-color: #fff;
-  border: 2px solid #789904;
-  box-shadow: 0px 0px 0px 0px #789904 inset;
+  border: 2px solid #00263a;
+  box-shadow: 0px 0px 0px 0px #00263a inset;
   transition: all 0.15s cubic-bezier(0, 1.05, 0.72, 1.07);
 }
 .email-checkbox .check::after {
@@ -190,5 +191,11 @@ export default {
   background-position: center;
   transition-delay: 0.2s !important;
   transition: all 0.25s cubic-bezier(0, 1.05, 0.72, 1.07);
+}
+
+@media screen and (max-width: 380px) {
+  .email-checkbox {
+    font-size: 12px;
+  }
 }
 </style>

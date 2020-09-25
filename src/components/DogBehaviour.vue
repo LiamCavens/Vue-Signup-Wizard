@@ -5,20 +5,22 @@
       <ul class="dog-behaviour-issues-list">
         <li
           class="dog-behaviour-issues-item"
-          v-bind:class="{ active: issue.active}"
+          v-bind:class="{ active: issue.active }"
           v-for="(issue, index) in behaviourIssues"
           :key="index"
           @click="handleIssue(issue)"
         >
           <span>
-            <span class="list-span">{{issue.label}}</span>
+            <span class="list-span">{{ issue.label }}</span>
             <font-awesome-icon v-if="!issue.active" :icon="['fas', 'plus']" />
             <font-awesome-icon v-if="issue.active" :icon="['fas', 'minus']" />
           </span>
         </li>
       </ul>
     </div>
-    <button class="btn-green next-button" @click="handleBehaviourSubmit">Next</button>
+    <button class="btn-green next-button" @click="handleBehaviourSubmit">
+      Next
+    </button>
   </div>
 </template>
 
@@ -88,6 +90,7 @@ export default {
   cursor: pointer;
   transition: all 0.2s ease;
   border-radius: 3px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .list-span {

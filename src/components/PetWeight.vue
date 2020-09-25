@@ -1,6 +1,6 @@
 <template>
   <div class="pet-weight">
-    <h2>What's {{ name }}'s weight?</h2>
+    <h2>How much do you weigh?</h2>
     <p v-if="inputError" class="error-message">* {{ errorMessage }}</p>
     <div class="weight-inputs">
       <input

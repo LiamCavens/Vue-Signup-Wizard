@@ -4,22 +4,31 @@
     <div class="raw-exp-buttons">
       <button
         class="raw-exp-button"
-        v-bind:class="{active: experienceLevel === 'first'}"
+        v-bind:class="{ active: experienceLevel === 'first' }"
         @click="handleExperience('first')"
-      >First time</button>
+      >
+        First time
+      </button>
       <button
         class="raw-exp-button"
-        v-bind:class="{active: experienceLevel === 'occasion'}"
+        v-bind:class="{ active: experienceLevel === 'occasion' }"
         @click="handleExperience('occasion')"
-      >Occasional</button>
+      >
+        Occasional
+      </button>
       <button
         class="raw-exp-button"
-        v-bind:class="{active: experienceLevel === 'experienced'}"
+        v-bind:class="{ active: experienceLevel === 'experienced' }"
         @click="handleExperience('experienced')"
-      >Experienced</button>
+      >
+        Experienced
+      </button>
     </div>
     <div v-if="showPreference" class="experience-radios">
-      <p>If you are experienced and have a prefered range, then please select one.</p>
+      <p>
+        If you are experienced and have a prefered range, then please select
+        one.
+      </p>
       <div class="experience-radio">
         <input
           type="radio"
@@ -81,7 +90,9 @@
         <div class="check"></div>
       </div>
     </div>
-    <button v-if="showNext" class="btn-green next-button" @click="handleNext">Next</button>
+    <button v-if="showNext" class="btn-green next-button" @click="handleNext">
+      Next
+    </button>
   </div>
 </template>
 
@@ -191,7 +202,7 @@ export default {
 }
 
 .experience-radio label:hover {
-  color: #789904;
+  /* color: #789904; */
 }
 
 .experience-radio {
@@ -234,9 +245,9 @@ input[type="radio"]:checked ~ .check::before {
   background: #789904;
 }
 
-input[type="radio"]:checked ~ label {
+/* input[type="radio"]:checked ~ label {
   color: #789904;
-}
+} */
 
 .experience-radio:hover .check {
   border: 3px solid #789904;

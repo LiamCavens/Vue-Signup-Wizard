@@ -1,7 +1,7 @@
 <template>
   <div id="help-component" class="help">
-    <h3 class="help-title">{{helpTitle}}</h3>
-    <p class="help-message">{{helpMessage}}</p>
+    <h3 class="help-title">{{ helpTitle }}</h3>
+    <p class="help-message">{{ helpMessage }}</p>
     <div @click="closeHelp">
       <Times class="close-times" />
       <p class="close-text">Close</p>
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Times from "../assets/fontawesome/times.vue";
+import Times from "../assets/svgicons/times.vue";
 export default {
   name: "Help",
   components: {

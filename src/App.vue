@@ -24,7 +24,7 @@ export default {
 
 @font-face {
   font-family: Montserrat-Bold;
-  src: local("Montserrat-Bold"), url(./fonts/Montserrat/Montserrat-Bold.ttf);
+  src: local("Montserrat-Bold"), url(./fonts/Montserrat/Montserrat-SemiBold.ttf);
 }
 #app {
   font-family: Montserrat;
@@ -39,6 +39,11 @@ export default {
   align-items: center;
 }
 
+button,
+input {
+  font-family: Montserrat;
+}
+
 .headerLogo {
   height: 50px;
   max-width: 100%;
@@ -49,10 +54,6 @@ export default {
   position: relative;
   color: #789904;
   text-decoration: none;
-}
-
-.link:hover {
-  color: #789904;
 }
 
 .link::before {
@@ -105,6 +106,6 @@ export default {
 h2 {
   font-family: Montserrat-Bold;
   font-size: 22px;
-  margin-bottom: 5px;
+  margin: 0 0 20px;
 }
 </style>

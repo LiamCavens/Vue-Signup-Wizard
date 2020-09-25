@@ -140,17 +140,32 @@
         />
       </transition-group>
 
-      <div class="footer-buttons">
+      <!-- <div class="footer-buttons">
         <button @click="prevStage">
           <font-awesome-icon :icon="['fas', 'arrow-left']" />
+          <p class="footer-button-text">back</p>
         </button>
         <button>
           <font-awesome-icon :icon="['far', 'save']" />
+          <p class="footer-button-text">save</p>
         </button>
         <button id="hidden" @click="help = !help">
           <font-awesome-icon :icon="['far', 'comment-dots']" />
         </button>
-      </div>
+      </div> -->
+    </div>
+    <div class="footer-buttons2">
+      <button @click="prevStage">
+        <BackArrow class="footer-icon" iconColor="#00263a" />
+        <p class="footer-button-text">back</p>
+      </button>
+      <button>
+        <Save class="footer-icon" iconColor="#00263a" />
+        <p class="footer-button-text">save</p>
+      </button>
+      <button id="hidden" @click="help = !help">
+        <font-awesome-icon :icon="['far', 'comment-dots']" />
+      </button>
     </div>
   </div>
 </template>
@@ -175,6 +190,10 @@ import Delivery from "./Delivery";
 import RawExperience from "./RawExperience";
 import MealPlanNutrtionReviews from "./MealPlanNutrtionReviews";
 
+// ICONS
+import BackArrow from "../assets/svgicons/backArrow";
+import Save from "../assets/svgicons/save";
+
 export default {
   name: "Wizardv2",
   components: {
@@ -195,6 +214,8 @@ export default {
     Delivery,
     RawExperience,
     MealPlanNutrtionReviews,
+    BackArrow,
+    Save,
   },
   props: {},
   data: () => {
@@ -349,7 +370,9 @@ export default {
   background-color: #00263a;
   width: 100%;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: column;
   flex: 1;
 }
 
@@ -392,12 +415,14 @@ export default {
 
 .wizard-components {
   margin: 8px;
-  padding: 30px 30px 0;
+  padding: 30px 30px;
   width: 300px;
   background-color: white;
   color: #00263a;
   border-radius: 10px;
   display: flex;
+  /* MOCK UP FOOTER BUTTONS */
+  flex: 1;
   flex-direction: column;
   position: relative;
 }
@@ -450,21 +475,59 @@ export default {
   justify-content: space-between;
   background-color: white;
   padding: 5px;
-  border-bottom: #ee7623 solid 2px;
+  /* border-bottom: #ee7623 solid 2px; */
 }
 
+/* THIS IS THE FOOT MOCKUP */
+.footer-buttons2 {
+  width: 352px;
+  z-index: 10;
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding: 8px 5px;
+  border-bottom: #00263a solid 2px;
+}
+
+.footer-icon {
+  height: 28px;
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  right: 10px;
+}
+
+.footer-buttons2 button {
+  width: 70px;
+  font-size: 30px;
+  border: none;
+  color: #00263a;
+  background-color: white;
+  transition: 0.3s ease;
+  position: relative;
+}
+/* THIS IS THE FOOT MOCKUP END*/
+.footer-button-text {
+  font-size: 8px;
+  margin: 0;
+  position: absolute;
+  bottom: -4px;
+  left: 25px;
+}
 .footer-buttons button {
   width: 70px;
   font-size: 30px;
   border: none;
-  color: #ee7623;
+  color: #00263a;
   background-color: white;
   transition: 0.3s ease;
+  position: relative;
 }
 
 .footer-buttons button:hover {
   cursor: pointer;
-  color: #a35219;
+  color: #001825;
   transition: 0.3s ease;
 }
 
@@ -544,6 +607,12 @@ export default {
 @media screen and (max-width: 330px) {
   .wizard-components {
     width: 250px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .footer-buttons2 {
+    width: 100vw;
   }
 }
 </style>

@@ -1,11 +1,15 @@
 <template>
   <div class="pet-story">
     <transition-group name="slide-down">
-      <p v-if="pet.name && stage === 2" key="onlyname">
+      <p class="pet-story-top" v-if="pet.name && stage === 2" key="onlyname">
         My name is
         <span class="edit-link" @click="editStage(1)">{{ pet.name }}</span>
       </p>
-      <p v-if="pet.name && stage >= 3 && pet.animal" key="name">
+      <p
+        class="pet-story-top"
+        v-if="pet.name && stage >= 3 && pet.animal"
+        key="name"
+      >
         I'm a
         <transition name="slide-in">
           <span v-if="pet.gender && stage >= 3">
@@ -138,8 +142,16 @@ export default {
 </script>
 
 <style scoped>
+.pet-story {
+  margin-bottom: 20px;
+}
 .pet-story p {
-  margin: 5px 0;
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.pet-story-top {
+  margin-top: 0 !important;
 }
 
 .edit-link {
@@ -147,10 +159,10 @@ export default {
   /* border-bottom: 1px dashed #00263a; */
   cursor: pointer;
 
-  background-image: linear-gradient(to right, #00263a 75%, transparent 75%);
+  background-image: linear-gradient(to right, #789904 75%, transparent 75%);
   background-position: 0 1.04em;
   background-repeat: repeat-x;
-  background-size: 6px 2px;
+  background-size: 3px 2px;
 }
 
 .slide-down-enter-active {

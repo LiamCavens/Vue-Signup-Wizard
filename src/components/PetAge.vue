@@ -1,6 +1,6 @@
 <template>
   <div class="pet-age">
-    <h2>{{ name }}'s age</h2>
+    <h2>How old are you?</h2>
     <div class="pet-age-selects">
       <select
         class="pet-age-select"
@@ -31,7 +31,9 @@
         v-if="ageSubmitted"
         @click="handleNext"
         key="next-button"
-      >Next</button>
+      >
+        Next
+      </button>
     </transition>
   </div>
 </template>

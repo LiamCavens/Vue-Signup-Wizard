@@ -1,29 +1,39 @@
 <template>
   <div class="pet-breed">
-    <h2>{{ name }}'s breed</h2>
+    <h2>{{ name }}, What is your breed?</h2>
     <div class="pet-breed-buttons">
       <button
         class="pet-breed-button"
-        v-bind:class="{active: breed.type === 'pure'}"
+        v-bind:class="{ active: breed.type === 'pure' }"
         @click="checkForNext('pure')"
-      >Pure breed</button>
+      >
+        Pure breed
+      </button>
       <button
         v-if="animal === 'dog'"
         class="pet-breed-button"
-        v-bind:class="{active: breed.type === 'cross'}"
+        v-bind:class="{ active: breed.type === 'cross' }"
         @click="checkForNext('cross')"
-      >Cross breed</button>
+      >
+        Cross breed
+      </button>
       <button
         class="pet-breed-button"
-        v-bind:class="{active: breed.type === 'dontknow'}"
+        v-bind:class="{ active: breed.type === 'dontknow' }"
         @click="checkForNext('dontknow')"
-      >Don't know</button>
+      >
+        Don't know {{ breed.type === "dontknow" ? "& proud" : "" }}
+      </button>
     </div>
     <transition-group name="slide-fade">
-      <div class="breed-select" v-if="breed.type === 'pure'" key="purebreed-select">
+      <div
+        class="breed-select"
+        v-if="breed.type === 'pure'"
+        key="purebreed-select"
+      >
         <v-select
           class="breed-chooser"
-          placeholder="Choose Breed"
+          placeholder="Choose breed"
           :options="breeds"
           v-model="breed.parent1"
           @input="breedSubmit('pure')"
@@ -32,21 +42,25 @@
         />
       </div>
 
-      <div class="breed-parents" v-if="breed.type === 'cross'" key="crossbreed-select">
+      <div
+        class="breed-parents"
+        v-if="breed.type === 'cross'"
+        key="crossbreed-select"
+      >
         <p class="pet-breed-label">Mother's Breed</p>
         <v-select
           class="parent-chooser"
-          placeholder="Choose Breed"
+          placeholder="Choose breed"
           :options="breeds"
           v-model="breed.parent1"
           @input="breedSubmit('cross')"
           append-to-body
           :calculate-position="withPopper"
         />
-        <p class="pet-breed-label">Fathers's Breed</p>
+        <p class="pet-breed-label">Father's Breed</p>
         <v-select
           class="parent-chooser"
-          placeholder="Choose Breed"
+          placeholder="Choose breed"
           :options="breeds"
           v-model="breed.parent2"
           @input="breedSubmit('cross')"
@@ -61,7 +75,9 @@
         v-if="genderSubmitted"
         @click="handleNext"
         key="next-button"
-      >Next</button>
+      >
+        Next
+      </button>
     </transition>
   </div>
 </template>
@@ -253,7 +269,7 @@ export default {
 
 .pet-breed-button:hover {
   border: 1px solid #789904;
-  color: #789904;
+  /* color: #789904; */
 }
 
 .pet-breed-button:focus {
@@ -338,8 +354,8 @@ export default {
   width: 289px;
   background: #ffffff;
   color: #00263a;
-  text-transform: lowercase;
-  font-variant: small-caps;
+  /* text-transform: lowercase;
+  font-variant: small-caps; */
   font-family: Montserrat;
 }
 
