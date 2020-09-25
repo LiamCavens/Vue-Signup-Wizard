@@ -81,7 +81,7 @@ export default {
 
 .pet-animal-text {
   font-family: Montserrat;
-  font-size: 22px;
+  font-size: 16px;
   margin: auto;
 }
 
