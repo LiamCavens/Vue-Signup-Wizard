@@ -25,6 +25,18 @@
         <option v-for="n in 11" :key="n.id" :value="n">{{ n }} Months</option>
       </select>
     </div>
+
+    <div class="input-date">
+      <h3>Or your date of birth?</h3>
+      <v-date-picker
+        id="date-picker-age"
+        v-model="age.dob"
+        :max-date="new Date()"
+        :input-props="inputProps"
+        :popover="calendarPopover"
+      />
+    </div>
+
     <transition name="fade">
       <button
         class="btn-green next-button"
@@ -46,11 +58,19 @@ export default {
     age: {
       years: Number,
       months: Number,
+      dob: Date,
     },
   },
   data: () => {
     return {
       ageSubmitted: false,
+      inputProps: {
+        placeholder: "Please enter your birthday",
+      },
+      calendarPopover: {
+        placement: "bottom",
+        labelClass: "popover",
+      },
     };
   },
   methods: {
@@ -65,6 +85,12 @@ export default {
   },
   mounted() {
     if (this.age.years && this.age.months) this.ageSubmitted = true;
+  },
+  watch: {
+    age: function (val) {
+      console.log("Liam: val");
+      console.log(val);
+    },
   },
 };
 </script>
@@ -103,7 +129,7 @@ export default {
 }
 
 .next-button {
-  margin: 10px auto;
+  margin: 20px auto;
   width: 238px;
 }
 
@@ -117,5 +143,20 @@ export default {
 
 .fade-enter {
   opacity: 0;
+}
+</style>
+
+<style>
+#date-picker-age {
+  display: flex;
+  justify-content: center;
+}
+#date-picker-age .vc-w-full {
+  width: auto;
+  flex: 1;
+}
+
+.popover {
+  font-family: Montserrat;
 }
 </style>

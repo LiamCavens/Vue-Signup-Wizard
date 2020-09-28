@@ -222,7 +222,7 @@ export default {
     return {
       help: false,
       transitionName: "slide-fade",
-      stage: 1,
+      stage: 6,
       user: {
         email: "",
         experience: "",
@@ -332,6 +332,7 @@ export default {
         activity: 0,
         working: "",
         age: {
+          dob: "",
           years: "",
           months: "0",
         },
@@ -611,6 +612,14 @@ export default {
 }
 
 @media screen and (max-width: 400px) {
+  .wizard-components {
+    position: initial;
+  }
+
+  .help-button {
+    top: 8px;
+  }
+
   .footer-buttons2 {
     width: 100vw;
   }

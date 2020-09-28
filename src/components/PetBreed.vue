@@ -307,7 +307,7 @@ export default {
 }
 
 .next-button {
-  margin: 10px auto;
+  margin: 20px auto;
   width: 300px;
 }
 

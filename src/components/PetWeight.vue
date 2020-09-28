@@ -16,11 +16,10 @@
         @keyup="checkInput"
         autofocus
       />
-      <select name="pet-weight-units" id="weight-units" v-model="weight.unit">
+      <!-- <select name="pet-weight-units" id="weight-units" v-model="weight.unit">
         <option class="unit-option" value="kg" default>Kilograms</option>
-        <!-- <option v-else-if="animal === 'cat'" class="unit-option" value="g" default>Grams</option> -->
         <option class="unit-option" value="lb">Pounds</option>
-      </select>
+      </select> -->
     </div>
     <transition name="fade">
       <button
@@ -92,15 +91,16 @@ export default {
   box-shadow: 1px 1px 4px #ebebeb;
   border-radius: 3px;
   height: 50px;
-  width: 200px;
-  padding: 7px;
+  width: 100%;
+  padding: 7px 10px;
   margin: 0 10px;
   outline: none;
   transition: 0.2s linear;
+  font-size: 14px;
 }
 
 .next-button {
-  margin: 10px auto;
+  margin: 20px auto;
   padding: 5px 0;
   width: 315px;
 }
@@ -112,6 +112,21 @@ export default {
 
 .weight-inputs {
   display: flex;
+  position: relative;
+}
+
+.weight-inputs::after {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  transition: all 0.05s ease-in-out;
+  content: "kg";
+  font-size: 14px;
+}
+
+.weight-inputs:hover::after,
+.weight-inputs:focus-within::after {
+  right: 40px;
 }
 
 .weight-inputs select {
@@ -123,6 +138,12 @@ export default {
 
 .weight-inputs select:focus {
   outline: none;
+}
+
+@supports (-moz-appearance: none) {
+  .weight-inputs::after {
+    right: 1.5em;
+  }
 }
 
 .fade-enter-active,
@@ -138,7 +159,7 @@ export default {
 
 @media screen and (max-width: 340px) {
   .pet-weight-input {
-    width: 180px;
+    /* width: 180px; */
     margin: 0 5% 0 0;
   }
 

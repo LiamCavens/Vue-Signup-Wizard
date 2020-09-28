@@ -97,7 +97,7 @@ export default {
 
 .pet-gender-text {
   font-family: Montserrat;
-  font-size: 16px;
+  font-size: 14px;
   margin: auto;
 }
 

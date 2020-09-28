@@ -94,10 +94,6 @@ export default {
   margin: 20px 5%;
 }
 
-.next-button:hover {
-  cursor: pointer;
-}
-
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s linear;
