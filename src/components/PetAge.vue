@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import { differenceInYears } from "date-fns";
 export default {
   name: "PetAge",
   props: {
@@ -87,9 +88,13 @@ export default {
     if (this.age.years && this.age.months) this.ageSubmitted = true;
   },
   watch: {
-    age: function (val) {
-      console.log("Liam: val");
-      console.log(val);
+    age: {
+      handler(val) {
+        let years = differenceInYears(new Date(), val.dob);
+        console.log("Liam: years");
+        console.log(years);
+      },
+      deep: true,
     },
   },
 };

@@ -222,7 +222,7 @@ export default {
     return {
       help: false,
       transitionName: "slide-fade",
-      stage: 1,
+      stage: 0,
       user: {
         email: "",
         experience: "",
