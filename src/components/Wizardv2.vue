@@ -130,6 +130,7 @@
         <MealPlanNutrtionReviews
           v-if="stage === 13"
           :name="currentPet.name"
+          :openAccordian="openAccordian"
           key="recommendation"
           @handleNext="nextStage"
         />
@@ -164,7 +165,7 @@
         <Save class="footer-icon" iconColor="#00263a" />
         <p class="footer-button-text">save</p>
       </button>
-      <button id="hidden" @click="help = !help">
+      <button @click="sendToReviews">
         <font-awesome-icon :icon="['far', 'comment-dots']" />
       </button>
     </div>
@@ -224,6 +225,7 @@ export default {
       help: false,
       transitionName: "slide-fade",
       stage: 1,
+      openAccordian: "nutrition",
       user: {
         email: "",
         experience: "",
@@ -307,6 +309,10 @@ export default {
       console.log("Liam: weight");
       console.log(weight);
       this.currentPet.weight.amount = weight;
+    },
+    sendToReviews() {
+      this.stage = 13;
+      this.openAccordian = "reviews";
     },
     openHelp() {
       this.transitionName = "help-transition";

@@ -49,6 +49,7 @@ export default {
   },
   props: {
     name: String,
+    openAccordian: String,
   },
   data: () => {
     return {
@@ -82,6 +83,10 @@ export default {
           break;
       }
     },
+  },
+  mounted() {
+    if (this.openAccordian === "nutrition") this.showAccordian1 = true;
+    if (this.openAccordian === "reviews") this.showAccordian3 = true;
   },
 };
 </script>
