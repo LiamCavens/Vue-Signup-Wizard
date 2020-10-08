@@ -28,7 +28,7 @@ export default {
       activatedDiv: "",
       activeLevels: [
         { value: 1, label: "Couch potato" },
-        { value: 2, label: "Little exersize" },
+        { value: 2, label: "Little exercise" },
         { value: 3, label: "Normal" },
         { value: 4, label: "Active" },
         { value: 5, label: "Very active" },

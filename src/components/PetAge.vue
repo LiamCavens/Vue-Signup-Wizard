@@ -28,48 +28,50 @@
 
     <div class="input-date">
       <h3>Or your date of birth?</h3>
-      <select
-        class="dob-day-select"
-        name="days"
-        id="dob-days"
-        v-model="dobDay"
-        @change="dateChange('day')"
-      >
-        <option value disabled selected>Day</option>
-        <option v-for="day in daysOfMonth" :key="day.id" :value="day.value">
-          {{ day.label }}
-        </option>
-      </select>
-
-      <select
-        class="dob-day-select"
-        name="days"
-        id="dob-days"
-        v-model="dobDay"
-        @change="dateChange('day')"
-      >
-        <option value disabled selected>Day</option>
-        <option v-for="day in daysOfMonth" :key="day.id" :value="day.value">
-          {{ day.label }}
-        </option>
-      </select>
-
-      <select
-        class="dob-month-select"
-        name="months"
-        id="dob-months"
-        v-model="dobMonth"
-        @change="dateChange('month')"
-      >
-        <option value disabled selected>Day</option>
-        <option
-          v-for="month in monthsOfYear"
-          :key="month.id"
-          :value="month.value"
+      <div class="dob-selects">
+        <select
+          class="pet-age-select"
+          name="days"
+          id="dob-days"
+          v-model="dobDay"
+          @change="dateChange()"
         >
-          {{ month.label }}
-        </option>
-      </select>
+          <option value disabled selected>Day</option>
+          <option v-for="day in daysOfMonth" :key="day.id" :value="day.value">
+            {{ day.label }}
+          </option>
+        </select>
+
+        <select
+          class="pet-age-select"
+          name="months"
+          id="dob-months"
+          v-model="dobMonth"
+          @change="dateChange()"
+        >
+          <option value disabled selected>Month</option>
+          <option
+            v-for="month in monthsOfYear"
+            :key="month.id"
+            :value="month.value"
+          >
+            {{ month.label }}
+          </option>
+        </select>
+
+        <select
+          class="pet-age-select"
+          name="years"
+          id="dob-years"
+          v-model="dobYear"
+          @change="dateChange()"
+        >
+          <option value disabled selected>Year</option>
+          <option v-for="year in years" :key="year.id" :value="year">
+            {{ year }}
+          </option>
+        </select>
+      </div>
       <!-- <v-date-picker
         id="date-picker-age"
         v-model="age.dob"
@@ -93,7 +95,7 @@
 </template>
 
 <script>
-import { differenceInYears } from "date-fns";
+import { differenceInYears, differenceInMonths } from "date-fns";
 export default {
   name: "PetAge",
   props: {
@@ -243,6 +245,57 @@ export default {
           label: "31st",
         },
       ],
+      monthsOfYear: [
+        {
+          value: 0,
+          label: "January",
+        },
+        {
+          value: 1,
+          label: "February",
+        },
+        {
+          value: 2,
+          label: "March",
+        },
+        {
+          value: 3,
+          label: "April",
+        },
+        {
+          value: 4,
+          label: "May",
+        },
+        {
+          value: 5,
+          label: "June",
+        },
+        {
+          value: 6,
+          label: "July",
+        },
+        {
+          value: 7,
+          label: "August",
+        },
+        {
+          value: 8,
+          label: "September",
+        },
+        {
+          value: 9,
+          label: "October",
+        },
+        {
+          value: 10,
+          label: "November",
+        },
+        {
+          value: 11,
+          label: "December",
+        },
+      ],
+      years: [],
     };
   },
   methods: {
@@ -254,9 +307,28 @@ export default {
     handleNext() {
       this.$emit("ageSubmit");
     },
+    getLastYears() {
+      const yearNow = new Date().getUTCFullYear();
+      this.years = Array(yearNow - (yearNow - 21))
+        .fill("")
+        .map((value, index) => yearNow - index);
+    },
+    dateChange() {
+      if (this.dobDay && this.dobMonth && this.dobYear) {
+        let ageMonths = differenceInMonths(
+          new Date(),
+          new Date(this.dobYear, this.dobMonth, this.dobDay)
+        );
+        this.age.years = Math.floor(ageMonths / 12);
+        this.age.months = ageMonths % 12;
+      }
+    },
   },
   mounted() {
     if (this.age.years && this.age.months) this.ageSubmitted = true;
+  },
+  beforeMount() {
+    this.getLastYears();
   },
   watch: {
     age: {
@@ -302,6 +374,11 @@ export default {
 .pet-age-select:focus {
   border: 1px solid #00263a;
   transition: 0.2s linear;
+}
+
+.dob-selects {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .next-button {

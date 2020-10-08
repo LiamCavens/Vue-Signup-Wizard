@@ -191,18 +191,14 @@ export default {
 }
 
 .experience-radio label {
-  cursor: pointer;
-  display: block;
+  display: flex;
+  justify-content: start;
   position: relative;
-  padding: 2px 0px 5px 25px;
+  padding: 2px 0px 5px 70px;
   font-size: 14px;
   z-index: 9;
   cursor: pointer;
   transition: all 0.25s linear;
-}
-
-.experience-radio label:hover {
-  /* color: #789904; */
 }
 
 .experience-radio {
