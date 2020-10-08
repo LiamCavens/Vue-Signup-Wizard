@@ -13,6 +13,11 @@
       required
       autofocus
     />
+    <p class="info-text">
+      Enter the name of your first pet and we can get started designing their
+      ideal diet. You will be able to enter other pets later. BTW, we only feed
+      cats and dogs at the moment; goldfish coming soon.
+    </p>
     <transition name="fade">
       <button
         class="btn-green next-button"
@@ -83,6 +88,10 @@ export default {
   padding: 7px;
   outline: none;
   transition: 0.2s linear;
+}
+
+.info-text {
+  font-size: 12px;
 }
 
 .pet-name-input:focus {

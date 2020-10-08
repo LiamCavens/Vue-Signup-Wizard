@@ -82,6 +82,7 @@
           :animal="currentPet.animal"
           :weight.sync="currentPet.weight"
           @weightSubmit="handleWeight"
+          @weightAmountQuickPick="pickWeight"
           key="weight"
         />
         <DogBodyType
@@ -301,6 +302,11 @@ export default {
     },
     handleExperience() {
       this.nextStage();
+    },
+    pickWeight(weight) {
+      console.log("Liam: weight");
+      console.log(weight);
+      this.currentPet.weight.amount = weight;
     },
     openHelp() {
       this.transitionName = "help-transition";

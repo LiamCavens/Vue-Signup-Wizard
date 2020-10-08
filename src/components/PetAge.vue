@@ -28,13 +28,55 @@
 
     <div class="input-date">
       <h3>Or your date of birth?</h3>
-      <v-date-picker
+      <select
+        class="dob-day-select"
+        name="days"
+        id="dob-days"
+        v-model="dobDay"
+        @change="dateChange('day')"
+      >
+        <option value disabled selected>Day</option>
+        <option v-for="day in daysOfMonth" :key="day.id" :value="day.value">
+          {{ day.label }}
+        </option>
+      </select>
+
+      <select
+        class="dob-day-select"
+        name="days"
+        id="dob-days"
+        v-model="dobDay"
+        @change="dateChange('day')"
+      >
+        <option value disabled selected>Day</option>
+        <option v-for="day in daysOfMonth" :key="day.id" :value="day.value">
+          {{ day.label }}
+        </option>
+      </select>
+
+      <select
+        class="dob-month-select"
+        name="months"
+        id="dob-months"
+        v-model="dobMonth"
+        @change="dateChange('month')"
+      >
+        <option value disabled selected>Day</option>
+        <option
+          v-for="month in monthsOfYear"
+          :key="month.id"
+          :value="month.value"
+        >
+          {{ month.label }}
+        </option>
+      </select>
+      <!-- <v-date-picker
         id="date-picker-age"
         v-model="age.dob"
         :max-date="new Date()"
         :input-props="inputProps"
         :popover="calendarPopover"
-      />
+      /> -->
     </div>
 
     <transition name="fade">
@@ -64,6 +106,9 @@ export default {
   },
   data: () => {
     return {
+      dobDay: "",
+      dobMonth: "",
+      dobYear: "",
       ageSubmitted: false,
       inputProps: {
         placeholder: "Please enter your birthday",
@@ -72,6 +117,132 @@ export default {
         placement: "bottom",
         labelClass: "popover",
       },
+      daysOfMonth: [
+        {
+          value: 1,
+          label: "1st",
+        },
+        {
+          value: 2,
+          label: "2nd",
+        },
+        {
+          value: 3,
+          label: "3rd",
+        },
+        {
+          value: 4,
+          label: "4th",
+        },
+        {
+          value: 5,
+          label: "5th",
+        },
+        {
+          value: 6,
+          label: "6th",
+        },
+        {
+          value: 7,
+          label: "7th",
+        },
+        {
+          value: 8,
+          label: "8th",
+        },
+        {
+          value: 9,
+          label: "9th",
+        },
+        {
+          value: 10,
+          label: "10th",
+        },
+        {
+          value: 11,
+          label: "11th",
+        },
+        {
+          value: 12,
+          label: "12th",
+        },
+        {
+          value: 13,
+          label: "13th",
+        },
+        {
+          value: 14,
+          label: "14th",
+        },
+        {
+          value: 15,
+          label: "15th",
+        },
+        {
+          value: 16,
+          label: "16th",
+        },
+        {
+          value: 17,
+          label: "17th",
+        },
+        {
+          value: 18,
+          label: "18th",
+        },
+        {
+          value: 19,
+          label: "19th",
+        },
+        {
+          value: 20,
+          label: "20th",
+        },
+        {
+          value: 21,
+          label: "21st",
+        },
+        {
+          value: 22,
+          label: "22nd",
+        },
+        {
+          value: 23,
+          label: "23rd",
+        },
+        {
+          value: 24,
+          label: "24th",
+        },
+        {
+          value: 25,
+          label: "25th",
+        },
+        {
+          value: 26,
+          label: "26th",
+        },
+        {
+          value: 27,
+          label: "27th",
+        },
+        {
+          value: 28,
+          label: "28th",
+        },
+        {
+          value: 29,
+          label: "29th",
+        },
+        {
+          value: 30,
+          label: "30th",
+        },
+        {
+          value: 31,
+          label: "31st",
+        },
+      ],
     };
   },
   methods: {

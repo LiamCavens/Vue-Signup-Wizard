@@ -21,6 +21,31 @@
         <option class="unit-option" value="lb">Pounds</option>
       </select> -->
     </div>
+
+    <BnDAccordian icon="icon_weight_white" :show="showWeightChoices">
+      <div slot="header">Easy weight picker</div>
+      <!-- <div slot="header-desc">Quick & Easy</div> -->
+      <div class="weight-items">
+        <button
+          class="dog-weight-item"
+          v-for="(weightChoice, index) in weightChoices"
+          :key="index"
+          @click="handleBodyWeight(weightChoice.value, index)"
+          :class="{ active: activatedDiv === index }"
+        >
+          <img
+            class="dog-weight-image"
+            src="../assets/icon_dog_white.png"
+            alt="weightImage"
+          />
+          <div class="dog-weight-item-text">
+            <p class="dog-weight-item-label">{{ weightChoice.label }}</p>
+            <p class="dog-weight-item-desc">{{ weightChoice.description }}</p>
+          </div>
+        </button>
+      </div>
+    </BnDAccordian>
+
     <transition name="fade">
       <button
         class="btn-green next-button"
@@ -34,8 +59,12 @@
 </template>
 
 <script>
+import BnDAccordian from "./BnDComponents/BnDAccordian";
 export default {
   name: "PetWeight",
+  components: {
+    BnDAccordian,
+  },
   props: {
     name: String,
     weight: Object,
@@ -45,6 +74,35 @@ export default {
     return {
       inputError: false,
       errorMessage: "",
+      activatedDiv: "",
+      showWeightChoices: false,
+      weightChoices: [
+        {
+          value: 2,
+          label: "Tiny",
+          description: "Can pick up with my hand",
+        },
+        {
+          value: 8,
+          label: "Small",
+          description: "Can fire under my arm",
+        },
+        {
+          value: 12,
+          label: "Medium",
+          description: "Two arms needed",
+        },
+        {
+          value: 18,
+          label: "Large",
+          description: "Need to practice my squats",
+        },
+        {
+          value: 26,
+          label: "Humongous",
+          description: "My dog carries me",
+        },
+      ],
     };
   },
   methods: {
@@ -66,6 +124,11 @@ export default {
       if (this.weight.amount > 0) {
         this.inputError = false;
       }
+    },
+    handleBodyWeight(bodyWeight, index) {
+      this.showWeightChoices = true;
+      this.activatedDiv = index;
+      this.$emit("weightAmountQuickPick", bodyWeight);
     },
   },
   mounted() {
@@ -113,6 +176,7 @@ export default {
 .weight-inputs {
   display: flex;
   position: relative;
+  margin-bottom: 25px;
 }
 
 .weight-inputs::after {
@@ -138,6 +202,62 @@ export default {
 
 .weight-inputs select:focus {
   outline: none;
+}
+
+.weight-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.dog-weight-item {
+  font-family: Montserrat;
+  display: flex;
+  margin: 3px;
+  padding: 3px 3px 3px 12px;
+  border: 1px solid #00263a;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.dog-weight-item:hover,
+.active {
+  cursor: pointer;
+  border: 2px solid #789904;
+  /* color: #789904; */
+  margin: 2px;
+}
+
+.dog-weight-item:hover .dog-weight-image,
+.active .dog-weight-image {
+  border: 2px solid #789904;
+}
+
+.dog-weight-item-text {
+  text-align: left;
+  padding-left: 20px;
+  max-width: 228px;
+}
+
+.dog-weight-item:focus {
+  outline: 1px #789904 auto;
+}
+
+.dog-weight-item-label {
+  margin: 10px 0 0 0;
+  font-weight: 700;
+}
+
+.dog-weight-item-desc {
+  margin: 2px 0 0 0;
+  font-size: 12px;
+}
+
+.dog-weight-image {
+  height: 50px;
+  width: 50px;
+  border: 2px #00263a solid;
+  border-radius: 50%;
 }
 
 @supports (-moz-appearance: none) {
