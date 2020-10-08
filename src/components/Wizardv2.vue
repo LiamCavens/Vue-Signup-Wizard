@@ -130,6 +130,8 @@
         <MealPlanNutrtionReviews
           v-if="stage === 13"
           :name="currentPet.name"
+          :gender="currentPet.gender"
+          :flavours="currentPet.flavours"
           :openAccordian="openAccordian"
           key="recommendation"
           @handleNext="nextStage"
@@ -224,7 +226,7 @@ export default {
     return {
       help: false,
       transitionName: "slide-fade",
-      stage: 1,
+      stage: 13,
       openAccordian: "nutrition",
       user: {
         email: "",
@@ -334,7 +336,7 @@ export default {
     },
     addNewPet() {
       let newPet = {
-        name: "",
+        name: "Jacob",
         body: 0,
         animal: "",
         gender: "",
@@ -343,6 +345,15 @@ export default {
         neutered: "",
         activity: 0,
         working: "",
+        flavours: [
+          "Chicken",
+          "Beef",
+          "Lamb",
+          "White Fish",
+          "Duck",
+          "Turkey",
+          "Salmon",
+        ],
         age: {
           dob: "",
           years: "",

@@ -7,27 +7,24 @@
         src="../assets/BeefShot.png"
       />
     </div>
-    <p class="recommendation-meal">{{ name }}'s meal plan</p>
     <p class="recommendation-meal">Premium Complete</p>
-    <p class="recommendation-amount">{{ numberGrams }}g of food per day</p>
-    <transition name="slide-down-read">
-      <div class="recommendation-read" v-if="readMore">
-        <p>
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </div>
-    </transition>
-    <!-- <a class="link recommendation-read-more" href="#" @click="readMore = !readMore">
-      Tell me {{ readMore ? "less" : "more" }}
-      <font-awesome-icon v-if="!readMore" :icon="['fas', 'chevron-down']" />
-      <font-awesome-icon v-if="readMore" :icon="['fas', 'chevron-up']" />
-    </a> -->
+    <p class="recommendation-amount">
+      Based on everything you have told us about <b>{{ name }}</b
+      >, we recommend a daily diet of <b>{{ numberGrams }}g</b> per day of
+      <b>Premium Complete</b>.
+      <br />
+      <br />
+      Our Premium range is designed to give <b>{{ name }}</b> all the nutrition
+      <b>{{ gender === "male" ? "he" : "she" }}</b> needs. You don’t need to add
+      anything else to the diet. We took our standard range and upgraded to
+      provide an excellent balance of proteins, carbs, fibre with all the
+      minerals and fats <b>{{ name }}</b> needs and however hard you search you
+      won’t find any fillers, grains or nasty extras in our food.
+      <br />
+      <br />
+      Quite literally, 100% nutrition. You can read all about the nutrition
+      characteristics of the food below and what other customers think.
+    </p>
   </div>
 </template>
 
@@ -36,6 +33,7 @@ export default {
   name: "Recommendation",
   props: {
     name: String,
+    gender: String,
   },
   data: () => {
     return {
@@ -66,30 +64,21 @@ export default {
   justify-content: center;
 }
 .recommendation-logo {
-  margin: 20px 10px 10px;
+  margin: 10px;
   align-self: center;
-  width: 225px;
-  height: 225px;
+  width: 106px;
+  height: 106px;
   border-radius: 50%;
 }
 .recommendation-meal {
   font-family: Montserrat-Bold;
-  font-size: 26px;
+  font-size: 16px;
   margin: 0px;
 }
 
 .recommendation-amount {
-  margin: 2px;
-}
-
-.recommendation-read {
-  width: 250px;
-  align-self: center;
-}
-
-.recommendation-read-more {
-  margin: 10px 0 20px;
-  align-self: center;
+  font-size: 12px;
+  margin: 15px;
 }
 </style>
 

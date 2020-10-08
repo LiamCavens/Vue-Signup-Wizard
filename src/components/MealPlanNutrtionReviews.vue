@@ -6,26 +6,35 @@
       :show="showAccordian1"
       @opened="handleOpen(1)"
     >
-      <div slot="header">Jimmy's meal plan</div>
-      <div slot="header-desc">Cheese & Beans</div>
-      <Recommendation name="Jimmy" key="recommendation" />
+      <div slot="header">The plan for {{ name }}</div>
+      <!-- <div slot="header-desc">Cheese & Beans</div> -->
+      <Recommendation :name="name" key="recommendation" />
     </BnDAccordian>
     <BnDAccordian
-      icon="icon_healthy_heart_white"
+      icon="icon_meat_and_veg_white"
       :show="showAccordian2"
       @opened="handleOpen(2)"
     >
-      <div slot="header">Jimmy's nutrition</div>
-      <div slot="header-desc">All the good bits</div>
-      <Nutrition name="Jimmy" />
+      <div slot="header">Manage flavours</div>
+      <!-- <div slot="header-desc">All the good bits</div> -->
+      <FlavourManage :flavours="flavours" />
     </BnDAccordian>
     <BnDAccordian
-      icon="icon_dog_white"
+      icon="icon_healthy_heart_white"
       :show="showAccordian3"
       @opened="handleOpen(3)"
     >
-      <div slot="header">Customer Testimonials</div>
-      <div slot="header-desc">What people say</div>
+      <div slot="header">{{ name }}'s nutrition</div>
+      <!-- <div slot="header-desc">All the good bits</div> -->
+      <Nutrition :name="name" />
+    </BnDAccordian>
+    <BnDAccordian
+      icon="icon_dog_white"
+      :show="showAccordian4"
+      @opened="handleOpen(4)"
+    >
+      <div slot="header">Customer experiences</div>
+      <!-- <div slot="header-desc">What people say</div> -->
       <Reviews />
     </BnDAccordian>
     <button class="btn-green next-button" @click="handleNext">Next</button>
@@ -37,6 +46,7 @@ import BnDAccordian from "./BnDComponents/BnDAccordian";
 
 import Reviews from "./Reviews";
 import Nutrition from "./Nutrition";
+import FlavourManage from "./FlavourManage";
 import Recommendation from "./Recommendation";
 
 export default {
@@ -45,17 +55,20 @@ export default {
     BnDAccordian,
     Reviews,
     Nutrition,
+    FlavourManage,
     Recommendation,
   },
   props: {
     name: String,
     openAccordian: String,
+    flavours: Array,
   },
   data: () => {
     return {
       showAccordian1: false,
-      showAccordian2: false,
+      showAccordian2: true,
       showAccordian3: false,
+      showAccordian4: false,
     };
   },
   methods: {
@@ -85,8 +98,8 @@ export default {
     },
   },
   mounted() {
-    if (this.openAccordian === "nutrition") this.showAccordian1 = true;
-    if (this.openAccordian === "reviews") this.showAccordian3 = true;
+    // if (this.openAccordian === "nutrition") this.showAccordian1 = true;
+    if (this.openAccordian === "reviews") this.showAccordian4 = true;
   },
 };
 </script>
