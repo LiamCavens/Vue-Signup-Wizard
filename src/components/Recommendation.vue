@@ -66,13 +66,13 @@ export default {
 .recommendation-logo {
   margin: 10px;
   align-self: center;
-  width: 106px;
-  height: 106px;
+  width: 132px;
+  height: 132px;
   border-radius: 50%;
 }
 .recommendation-meal {
   font-family: Montserrat-Bold;
-  font-size: 16px;
+  font-size: 20px;
   margin: 0px;
 }
 

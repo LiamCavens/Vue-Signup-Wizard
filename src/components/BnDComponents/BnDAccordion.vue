@@ -32,7 +32,7 @@
 
 <script>
 export default {
-  name: "BnDAccordian",
+  name: "BnDAccordion",
   props: {
     theme: String,
     icon: String,
@@ -127,15 +127,16 @@ export default {
 }
 
 .rotate {
-  transform: rotate(180deg);
+  transform: rotate(180deg) !important;
   transition-duration: 0.3s;
 }
 
-.accordion.purple {
-  background-color: #8c618d;
+.accordion.noBorder {
+  border: none !important;
 }
 
-.accordion.purple .body {
-  border-color: #8c618d;
+.accordion.noBorder .header {
+  height: 25px;
+  margin-top: 5px;
 }
 </style>

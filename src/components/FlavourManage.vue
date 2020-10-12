@@ -17,7 +17,7 @@
           <span>
             <span class="list-span">{{ flavour.value }}</span>
             <font-awesome-icon v-if="!flavour.active" :icon="['fas', 'plus']" />
-            <font-awesome-icon v-if="flavour.active" :icon="['fas', 'times']" />
+            <font-awesome-icon v-if="flavour.active" :icon="['fas', 'minus']" />
           </span>
         </li>
       </ul>

@@ -127,17 +127,24 @@
           @experienceSubmit="handleExperience"
           key="experience"
         />
-        <MealPlanNutrtionReviews
+        <MealPlan
           v-if="stage === 13"
           :name="currentPet.name"
           :gender="currentPet.gender"
           :flavours="currentPet.flavours"
-          :openAccordian="openAccordian"
+          :openAccordion="openAccordion"
           key="recommendation"
           @handleNext="nextStage"
         />
-        <UserDetails
+        <PlanSummary
           v-if="stage === 14"
+          :pets="pets"
+          key="summary"
+          :deliverySize="deliverySize"
+          @deliverySizeSubmit="handleDeliverySize"
+        />
+        <UserDetails
+          v-if="stage === 15"
           key="userdetails"
           :title.sync="user.title"
           :firstName.sync="user.firstName"
@@ -150,13 +157,10 @@
           :city.sync="user.address.city"
           :country.sync="user.address.country"
           :email.sync="user.email"
-        />
-        <Delivery
-          v-if="stage === 15"
-          key="delivery"
           @handleNext="nextStage"
-          @handlePrev="prevStage"
         />
+        <Delivery v-if="stage === 16" key="delivery" @handleNext="nextStage" />
+        <Payment v-if="stage === 17" key="payment" :pets="pets" />
       </transition-group>
 
       <!-- <div class="footer-buttons">
@@ -182,7 +186,7 @@
         <Save class="footer-icon" iconColor="#00263a" />
         <p class="footer-button-text">save</p>
       </button>
-      <button @click="sendToReviews">
+      <button id="hidden">
         <font-awesome-icon :icon="['far', 'comment-dots']" />
       </button>
     </div>
@@ -205,11 +209,13 @@ import DogActivity from "./DogActivity";
 import DogBehaviour from "./DogBehaviour";
 
 import UserDetails from "./UserDetails";
+import PlanSummary from "./PlanSummary";
+import Payment from "./Payment";
 
 import Help from "./Help";
 import Delivery from "./Delivery";
 import RawExperience from "./RawExperience";
-import MealPlanNutrtionReviews from "./MealPlanNutrtionReviews";
+import MealPlan from "./MealPlan";
 
 // ICONS
 import BackArrow from "../assets/svgicons/backArrow";
@@ -232,10 +238,12 @@ export default {
     DogActivity,
     DogBehaviour,
     UserDetails,
+    PlanSummary,
     Help,
     Delivery,
     RawExperience,
-    MealPlanNutrtionReviews,
+    Payment,
+    MealPlan,
     BackArrow,
     Save,
   },
@@ -245,7 +253,7 @@ export default {
       help: false,
       transitionName: "slide-fade",
       stage: 14,
-      openAccordian: "nutrition",
+      openAccordion: "nutrition",
       user: {
         email: "test@bellaandduke.com",
         experience: "",
@@ -262,6 +270,14 @@ export default {
           city: "",
           country: "",
         },
+      },
+      deliverySize: {
+        icon: "icon_freezer_8kg.png",
+        size: "8kg",
+        drawers: "1 freezer drawer",
+        daysOfFood: 16,
+        price: 32.99,
+        chosen: true,
       },
       currentPet: {},
       pets: [],
@@ -337,6 +353,10 @@ export default {
     handleExperience() {
       this.nextStage();
     },
+    handleDeliverySize(deliverySize) {
+      this.deliverySize = deliverySize;
+      this.nextStage();
+    },
     pickWeight(weight) {
       console.log("Liam: weight");
       console.log(weight);
@@ -344,7 +364,7 @@ export default {
     },
     sendToReviews() {
       this.stage = 13;
-      this.openAccordian = "reviews";
+      this.openAccordion = "reviews";
     },
     openHelp() {
       this.transitionName = "help-transition";
@@ -375,6 +395,8 @@ export default {
         neutered: "",
         activity: 0,
         working: "",
+        range: "Premium range",
+        dailyFeed: "200g",
         flavours: [
           "Chicken",
           "Beef",
@@ -399,6 +421,11 @@ export default {
           amount: "",
         },
       };
+      this.pets.push({
+        name: "John",
+        range: "Working dog",
+        dailyFeed: "150g",
+      });
       this.pets.push(newPet);
       this.currentPet = this.pets[this.pets.length - 1];
     },

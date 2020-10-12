@@ -22,7 +22,7 @@
       </select> -->
     </div>
 
-    <BnDAccordian icon="icon_weight_white" :show="showWeightChoices">
+    <BnDAccordion icon="icon_weight_white" :show="showWeightChoices">
       <div slot="header">Easy weight picker</div>
       <!-- <div slot="header-desc">Quick & Easy</div> -->
       <div class="weight-items">
@@ -44,7 +44,7 @@
           </div>
         </button>
       </div>
-    </BnDAccordian>
+    </BnDAccordion>
 
     <transition name="fade">
       <button
@@ -59,11 +59,11 @@
 </template>
 
 <script>
-import BnDAccordian from "./BnDComponents/BnDAccordian";
+import BnDAccordion from "./BnDComponents/BnDAccordion";
 export default {
   name: "PetWeight",
   components: {
-    BnDAccordian,
+    BnDAccordion,
   },
   props: {
     name: String,

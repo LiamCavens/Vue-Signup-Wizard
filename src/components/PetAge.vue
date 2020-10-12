@@ -322,6 +322,7 @@ export default {
         this.age.years = Math.floor(ageMonths / 12);
         this.age.months = ageMonths % 12;
       }
+      this.ageSubmit();
     },
   },
   mounted() {

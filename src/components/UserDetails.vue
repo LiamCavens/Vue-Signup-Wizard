@@ -49,7 +49,8 @@
           class="password-input pass-1 detail-input"
           v-bind:class="{ 'input-error': inputErrorPassword }"
           type="password"
-          :value="passwordCopy"
+          @input="$emit('update:password', $event.target.value)"
+          :value="password"
           required
         />
         <input
@@ -57,11 +58,11 @@
           class="password-input pass-2 detail-input"
           v-bind:class="{ 'input-error': inputErrorPassword }"
           type="password"
-          :value="password"
-          @input="$emit('update:password', $event.target.value)"
+          @blur="checkForCopy($event.target.value)"
           required
         />
       </div>
+      {{ inputErrorPassword }}
       <div class="email-form">
         <input
           id="email"
@@ -155,7 +156,6 @@ export default {
       inputErrorCity: false,
       inputErrorTitle: false,
       inputErrorPasswordCopy: false,
-      passwordCopy: "",
       titles: ["Mr", "Mrs", "Miss", "Mz", "Mx"],
     };
   },
@@ -164,6 +164,13 @@ export default {
       this.addressLine1 = "75 Test Place";
       this.addressLine2 = "Test Line 2";
       this.city = "Glasgow";
+    },
+    checkForCopy(passwordCopy) {
+      if (this.password !== passwordCopy) {
+        this.inputErrorPassword = this.inputErrorPasswordCopy = true;
+      } else {
+        this.inputErrorPassword = this.inputErrorPasswordCopy = false;
+      }
     },
     confirmDetails() {
       if (!this.title) this.inputErrorTitle = true;
@@ -174,8 +181,10 @@ export default {
       else this.inputErrorSurname = false;
       if (!this.phoneNumber) this.inputErrorPhone = true;
       else this.inputErrorPhone = false;
-      if (!this.password) this.inputErrorPassword = true;
-      else this.inputErrorPassword = false;
+      if (!this.password || this.password !== this.passwordCopy) {
+        this.inputErrorPassword = true;
+        this.inputErrorPasswordCopy(this.passwordCopy);
+      } else this.inputErrorPassword = false;
       if (!this.email) this.inputErrorEmail = true;
       else this.inputErrorEmail = false;
       if (!this.postcode) this.inputErrorPostcode = true;
@@ -186,13 +195,6 @@ export default {
       else this.inputErrorCity = false;
       if (!this.title) this.inputErrorTitle = true;
       else this.inputErrorTitle = false;
-      if (this.password !== this.passwordCopy) {
-        this.inputErrorPassword = true;
-        this.inputErrorPasswordCopy = true;
-      } else {
-        this.inputErrorPassword = false;
-        this.inputErrorPasswordCopy = false;
-      }
     },
   },
 };

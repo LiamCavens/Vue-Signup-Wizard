@@ -22,7 +22,7 @@
 
     <label class="email-checkbox" for="email">
       Send me emails related to my order
-      <input id="email" type="checkbox" />
+      <input id="email" type="checkbox" checked />
       <span class="check"></span>
     </label>
 
@@ -146,7 +146,7 @@ export default {
   display: flex;
   align-items: center;
   user-select: none;
-  font-size: 14px;
+  font-size: 10px;
   cursor: pointer;
 }
 
@@ -164,8 +164,8 @@ export default {
   transform: scale(1);
 }
 .email-checkbox .check {
-  width: 15px;
-  height: 15px;
+  width: 10px;
+  height: 10px;
   margin-left: 10px;
   display: flex;
   justify-content: center;
