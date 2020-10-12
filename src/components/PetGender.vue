@@ -6,7 +6,7 @@
         <button @click="handleGender('female')">
           <img
             class="pet-gender-image cat-image"
-            src="../assets/icon_potatoes_white.png"
+            src="../assets/icon_female_white.png"
             alt="Female Image"
           />
         </button>
@@ -16,7 +16,7 @@
         <button @click="handleGender('male')">
           <img
             class="pet-gender-image pet-image"
-            src="../assets/icon_corn_white.png"
+            src="../assets/icon_male_white.png"
             alt="Male Image"
           />
         </button>

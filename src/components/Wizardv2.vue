@@ -1,7 +1,7 @@
 <template>
   <div class="wizard">
     <div class="wizard-components">
-      <div v-if="stage != 2" class="help-button">
+      <div v-if="stage != 2 && stage != 14" class="help-button">
         <button @click="openHelp">
           <p class="help-text">HELP</p>
           <span class="help-icon">
@@ -136,8 +136,23 @@
           key="recommendation"
           @handleNext="nextStage"
         />
-        <Delivery
+        <UserDetails
           v-if="stage === 14"
+          key="userdetails"
+          :title.sync="user.title"
+          :firstName.sync="user.firstName"
+          :surname.sync="user.surname"
+          :phoneNumber.sync="user.phoneNumber"
+          :password.sync="user.password"
+          :postcode.sync="user.address.postcode"
+          :addressLine1.sync="user.address.line1"
+          :addressLine2.sync="user.address.line2"
+          :city.sync="user.address.city"
+          :country.sync="user.address.country"
+          :email.sync="user.email"
+        />
+        <Delivery
+          v-if="stage === 15"
           key="delivery"
           @handleNext="nextStage"
           @handlePrev="prevStage"
@@ -189,6 +204,8 @@ import DogBodyType from "./DogBodyType";
 import DogActivity from "./DogActivity";
 import DogBehaviour from "./DogBehaviour";
 
+import UserDetails from "./UserDetails";
+
 import Help from "./Help";
 import Delivery from "./Delivery";
 import RawExperience from "./RawExperience";
@@ -214,6 +231,7 @@ export default {
     DogBodyType,
     DogActivity,
     DogBehaviour,
+    UserDetails,
     Help,
     Delivery,
     RawExperience,
@@ -226,12 +244,24 @@ export default {
     return {
       help: false,
       transitionName: "slide-fade",
-      stage: 13,
+      stage: 14,
       openAccordian: "nutrition",
       user: {
-        email: "",
+        email: "test@bellaandduke.com",
         experience: "",
         foodPreference: "noPref",
+        title: "",
+        firstName: "",
+        surname: "",
+        phoneNumber: "",
+        password: "",
+        address: {
+          postcode: "",
+          line1: "",
+          line2: "",
+          city: "",
+          country: "",
+        },
       },
       currentPet: {},
       pets: [],
