@@ -35,7 +35,9 @@
         >
           <img
             class="dog-weight-image"
-            src="../assets/icon_dog_white.png"
+            :src="
+              require(`../assets/icon_dogweight_${weightChoice.imageUrl}.png`)
+            "
             alt="weightImage"
           />
           <div class="dog-weight-item-text">
@@ -79,28 +81,39 @@ export default {
       weightChoices: [
         {
           value: 2,
+          imageUrl: "XS",
           label: "Tiny",
           description: "Can pick up with my hand",
         },
         {
           value: 8,
+          imageUrl: "S",
           label: "Small",
           description: "Can fire under my arm",
         },
         {
           value: 12,
+          imageUrl: "M",
           label: "Medium",
           description: "Two arms needed",
         },
         {
           value: 18,
+          imageUrl: "L",
           label: "Large",
           description: "Need to practice my squats",
         },
         {
           value: 26,
-          label: "Humongous",
+          imageUrl: "XL",
+          label: "Extra Large",
           description: "My dog carries me",
+        },
+        {
+          value: 36,
+          imageUrl: "XXL",
+          label: "Humongous",
+          description: "My dog is my horse",
         },
       ],
     };

@@ -10,7 +10,7 @@
     >
       <img
         class="dog-body-image"
-        src="../assets/icon_dog_white.png"
+        :src="require(`../assets/icon_bodycomp_${bodyType.imageUrl}`)"
         alt="Dob Body Image"
       />
       <div class="dog-body-item-text">
@@ -34,26 +34,31 @@ export default {
       bodyTypes: [
         {
           value: 1,
+          imageUrl: "Veryunderweight.png",
           label: "Very underweight",
           description: "and thats why I need Bella & Duke food?",
         },
         {
           value: 2,
+          imageUrl: "Underweight.png",
           label: "Slightly underweight",
           description: "and svelte and elegant and hungry",
         },
         {
           value: 3,
+          imageUrl: "Normal.png",
           label: "Standard",
           description: "and absolutely happy",
         },
         {
           value: 4,
+          imageUrl: "Overweight.png",
           label: "Slightly overweight",
           description: "but will soon be back in shape with raw",
         },
         {
           value: 5,
+          imageUrl: "Obese.png",
           label: "Very overweight",
           description: "and want to get to happiness with your food",
         },
