@@ -62,7 +62,6 @@
           required
         />
       </div>
-      {{ inputErrorPassword }}
       <div class="email-form">
         <input
           id="email"
