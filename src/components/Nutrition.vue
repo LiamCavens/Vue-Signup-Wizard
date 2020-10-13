@@ -10,7 +10,7 @@
       insensitivities or damage the gut. We source all our ingredients locally
       from the human food-chain suppliers.
     </p>
-    <h5>{{ name }}'s healthy energy sources</h5>
+    <h5 class="energy-text">{{ name }}'s healthy energy sources</h5>
     <BnDPictorialChart />
     <p class="rowan-text">Our Nutritionist, Rowan, explains</p>
     <BnDNutritionalVideo />
@@ -61,6 +61,9 @@ export default {
   margin: 0 0 10px;
 }
 
+.energy-text {
+  margin-bottom: 0;
+}
 .nutrition-meal {
   font-family: Montserrat-Bold;
   font-size: 26px;
