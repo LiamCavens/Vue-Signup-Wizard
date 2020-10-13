@@ -65,7 +65,7 @@ export default {
   data: () => {
     return {
       showAccordion1: false,
-      showAccordion2: true,
+      showAccordion2: false,
       showAccordion3: false,
       showAccordion4: false,
     };

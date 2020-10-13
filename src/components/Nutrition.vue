@@ -1,38 +1,26 @@
 <template>
   <div class="nutrition">
-    <!-- <div class="nutrition-meal-statement">
-      <p class="nutrition-meal">{{ name }}'s nutritional plan</p>
-      <p class="nutrition-statement">100% natural & nutritious</p>
-    </div> -->
+    <p class="nutrition-text">
+      Our nutrition team are constantly working to improve the nutritional
+      characteristics of our food. We never add ingredients to our food that are
+      unnecessary and bring no benefit. We exclude all the typical dog food
+      ingredients that can give rise to insensitivities or damage the gut. We
+      source all our ingredients locally from the human food-chain suppliers.
+    </p>
     <BnDPictorialChart />
-    <transition name="slide-down-read">
-      <div class="nutrition-read" v-if="readMore">
-        <p>
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </div>
-    </transition>
-    <!-- <a class="link nutrition-read-more" href="#" @click="readMore = !readMore">
-      Tell me {{ readMore ? "less" : "more" }}
-      <font-awesome-icon v-if="!readMore" :icon="['fas', 'chevron-down']" />
-      <font-awesome-icon v-if="readMore" :icon="['fas', 'chevron-up']" />
-    </a> -->
+    <BnDNutritionalVideo />
   </div>
 </template>
 
 <script>
 import BnDPictorialChart from "./BnDComponents/BnDPictorialChart";
+import BnDNutritionalVideo from "./BnDComponents/BnDNutritionVideo";
 
 export default {
   name: "Nutrition",
   components: {
     BnDPictorialChart,
+    BnDNutritionalVideo,
   },
   props: {
     name: String,
@@ -59,13 +47,8 @@ export default {
   flex-direction: column;
 }
 
-.nutrition-next-statement {
-  display: flex;
-}
-
-.nutrition-meal-statement {
-  display: flex;
-  flex-direction: column;
+.nutrition-text {
+  font-size: 12px;
 }
 
 .nutrition-meal {

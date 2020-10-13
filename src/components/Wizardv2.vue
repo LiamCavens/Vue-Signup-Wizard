@@ -607,6 +607,7 @@ export default {
   background-color: white;
   transition: 0.3s ease;
   position: relative;
+  cursor: pointer;
 }
 /* THIS IS THE FOOT MOCKUP END*/
 .footer-button-text {
