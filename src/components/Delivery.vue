@@ -36,6 +36,7 @@
         is-inline
       />
     </div>
+    <button class="btn-green next-button" @click="handleDelivery">Next</button>
   </div>
 </template>
 
@@ -44,7 +45,9 @@ import { format, add, addBusinessDays } from "date-fns";
 
 export default {
   name: "Delivery",
-  props: {},
+  props: {
+    deliveryDate: String,
+  },
   data: () => {
     return {
       format,
@@ -87,6 +90,10 @@ export default {
       this.datePicking = false;
       this.attributes[0].dates = this.delivery1;
       this.loading = false;
+    },
+    handleDelivery() {
+      console.log(this.delivery1);
+      this.$emit("deliverySubmit", this.delivery1);
     },
   },
   beforeMount() {},
@@ -149,6 +156,11 @@ export default {
 .delivery-button-group {
   display: flex;
   width: 350px;
+}
+
+.next-button {
+  margin-top: 25px;
+  width: 100%;
 }
 </style>
 <style>

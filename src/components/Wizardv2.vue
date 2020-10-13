@@ -146,6 +146,10 @@
         <UserDetails
           v-if="stage === 15"
           key="userdetails"
+          :user="user"
+          @userSubmit="handleUser"
+        />
+        <!--
           :title.sync="user.title"
           :firstName.sync="user.firstName"
           :surname.sync="user.surname"
@@ -156,10 +160,13 @@
           :addressLine2.sync="user.address.line2"
           :city.sync="user.address.city"
           :country.sync="user.address.country"
-          :email.sync="user.email"
-          @handleNext="nextStage"
+          :email.sync="user.email" -->
+        <Delivery
+          v-if="stage === 16"
+          key="delivery"
+          :deliveryDate="deliveryDate"
+          @deliverySubmit="handleDelivery"
         />
-        <Delivery v-if="stage === 16" key="delivery" @handleNext="nextStage" />
         <Payment v-if="stage === 17" key="payment" :pets="pets" />
       </transition-group>
 
@@ -271,6 +278,7 @@ export default {
           country: "",
         },
       },
+      deliveryDate: "",
       deliverySize: {
         icon: "icon_freezer_8kg.png",
         size: "8kg",
@@ -357,14 +365,31 @@ export default {
       this.deliverySize = deliverySize;
       this.nextStage();
     },
+    handleDelivery(deliveryDate) {
+      this.deliveryDate = deliveryDate;
+      this.nextStage();
+    },
     pickWeight(weight) {
-      console.log("Liam: weight");
-      console.log(weight);
       this.currentPet.weight.amount = weight;
     },
     sendToReviews() {
       this.stage = 13;
       this.openAccordion = "reviews";
+    },
+    handleUser(userDetails) {
+      console.log(userDetails);
+      this.user.email = userDetails.email;
+      this.user.title = userDetails.title;
+      this.user.firstName = userDetails.firstName;
+      this.user.surname = userDetails.surname;
+      this.user.phoneNumber = userDetails.phoneNumber;
+      this.user.password = userDetails.password;
+      this.user.address.postcode = userDetails.postcode;
+      this.user.address.line1 = userDetails.addressLine1;
+      this.user.address.line2 = userDetails.addressLine2;
+      this.user.address.city = userDetails.city;
+      this.user.address.country = "United Kingdom";
+      this.nextStage();
     },
     openHelp() {
       this.transitionName = "help-transition";

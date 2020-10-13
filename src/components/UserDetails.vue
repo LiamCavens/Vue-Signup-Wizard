@@ -4,7 +4,7 @@
     <div class="user-details-inputs">
       <v-select
         class="title-chooser"
-        v-bind:class="{ 'input-error': inputErrorTitle }"
+        v-bind:class="{ 'input-error': errorsArray.some((t) => t === 'title') }"
         placeholder="Title"
         :options="titles"
         v-model="title"
@@ -13,67 +13,85 @@
         <input
           placeholder="First name"
           class="user-name-input first-name detail-input"
-          v-bind:class="{ 'input-error': inputErrorName }"
+          v-bind:class="{
+            'input-error': errorsArray.some((t) => t === 'firstName'),
+          }"
           type="text"
-          :value="firstName"
-          @input="$emit('update:firstName', $event.target.value)"
-          required
+          v-model="firstName"
+          @input="checkInput('firstName')"
         />
 
         <input
           placeholder="Surname"
           class="user-name-input surname detail-input"
-          v-bind:class="{ 'input-error': inputErrorSurname }"
+          v-bind:class="{
+            'input-error': errorsArray.some((t) => t === 'surname'),
+          }"
           type="text"
-          :value="surname"
-          @input="$emit('update:surname', $event.target.value)"
-          required
+          v-model="surname"
+          @input="checkInput('surname')"
         />
       </div>
       <input
         placeholder="Phone Number"
         class="detail-input"
-        v-bind:class="{ 'input-error': inputErrorPhone }"
+        v-bind:class="{
+          'input-error': errorsArray.some((t) => t === 'phoneNumber'),
+        }"
         type="tel"
         pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-        :value="phoneNumber"
-        @input="$emit('update:phoneNumber', $event.target.value)"
-        required
+        v-model="phoneNumber"
+        @input="checkInput('phoneNumber')"
       />
-      <span id="password-required" v-show="inputErrorPasswordCopy"
-        >passwords do not match</span
-      >
-      <div class="password-inputs">
-        <input
-          placeholder="Create password"
-          class="password-input pass-1 detail-input"
-          v-bind:class="{ 'input-error': inputErrorPassword }"
-          type="password"
-          @input="$emit('update:password', $event.target.value)"
-          :value="password"
-          required
-        />
-        <input
-          placeholder="Confirm password"
-          class="password-input pass-2 detail-input"
-          v-bind:class="{ 'input-error': inputErrorPassword }"
-          type="password"
-          @blur="checkForCopy($event.target.value)"
-          required
-        />
-      </div>
       <div class="email-form">
         <input
           id="email"
           placeholder="Confirm Email"
           class="detail-input"
-          v-bind:class="{ 'input-error': inputErrorEmail }"
+          v-bind:class="{
+            'input-error': errorsArray.some((t) => t === 'email'),
+          }"
           type="email"
-          :value="email"
-          @input="$emit('update:firstName', $event.target.value)"
-          required
+          v-model="email"
+          @input="checkInput('email')"
         />
         <label class="email-label" for="email">Confirm Email</label>
+      </div>
+      <span id="password-required" v-show="inputErrorPasswordCopy"
+        >passwords do not match</span
+      >
+      <span id="password-required" v-show="inputErrorPasswordLength"
+        >password must be 8 or more characters</span
+      >
+      <div class="password-inputs">
+        <input
+          placeholder="Create password"
+          class="password-input pass-1 detail-input"
+          v-bind:class="{
+            'input-error': errorsArray.some((t) => t === 'password'),
+          }"
+          type="password"
+          v-model="password"
+          @input="checkInput('password')"
+        />
+        <input
+          placeholder="Confirm password"
+          class="password-input pass-2 detail-input"
+          v-bind:class="{
+            'input-error': errorsArray.some((t) => t === 'password'),
+          }"
+          type="password"
+          @blur="checkForCopy($event.target.value)"
+          v-model="passwordCopy"
+          required
+        />
+      </div>
+      <div class="email-info">
+        <p>
+          - email and password is needed to login to your member portol in the
+          future.
+        </p>
+        <p>- password must be at least 8 characters long</p>
       </div>
       <h3 class="billing-text">Billing Address</h3>
       <div class="postcode">
@@ -81,120 +99,222 @@
           id="postcode"
           placeholder="Postcode"
           class="postcode-input detail-input"
-          v-bind:class="{ 'input-error': inputErrorPostcode }"
-          type="email"
-          :value="postcode"
-          @input="$emit('update:postcode', $event.target.value)"
-          required
+          v-bind:class="{
+            'input-error': errorsArray.some((t) => t === 'postcode'),
+          }"
+          type="text"
+          v-model="postcode"
+          @input="checkInput('postcode')"
         />
         <button class="btn-green postcode-btn" @click="findPostcode">
           Find address
         </button>
       </div>
-      <div class="address">
+      <div class="address" v-if="postcodeFound">
         <input
           placeholder="Address Line 1"
           class="detail-input"
-          v-bind:class="{ 'input-error': inputErrorAddress }"
+          v-bind:class="{
+            'input-error': errorsArray.some((t) => t === 'addressLine1'),
+          }"
           type="text"
-          :value="addressLine1"
-          @input="$emit('update:addressLine1', $event.target.value)"
-          required
+          v-model="addressLine1"
+          @input="checkInput('addressLine1')"
         />
       </div>
-      <div class="address">
+      <div class="address" v-if="postcodeFound">
         <input
           placeholder="Address Line 2"
           class="detail-input"
           type="text"
-          :value="addressLine2"
-          @input="$emit('update:addressLine2', $event.target.value)"
-          required
+          v-model="addressLine2"
         />
       </div>
-      <div class="address">
+      <div class="address" v-if="postcodeFound">
         <input
           placeholder="City"
           class="detail-input"
-          v-bind:class="{ 'input-error': inputErrorCity }"
+          v-bind:class="{
+            'input-error': errorsArray.some((t) => t === 'city'),
+          }"
           type="text"
-          :value="city"
-          @input="$emit('update:city', $event.target.value)"
-          required
+          v-model="city"
+          @input="checkInput('city')"
         />
       </div>
     </div>
+    <p
+      class="address-error"
+      v-if="
+        errorsArray.some((t) => t === 'city') &&
+        errorsArray.some((t) => t === 'addressLine1')
+      "
+    >
+      you must find address before continuing
+    </p>
     <button class="btn-green next-button" @click="confirmDetails">Next</button>
   </div>
 </template>
 
 <script>
+import _ from "lodash";
 export default {
   name: "UserDetails",
   props: {
-    title: String,
-    firstName: String,
-    surname: String,
-    phoneNumber: String,
-    password: String,
-    postcode: String,
-    addressLine1: String,
-    addressLine2: String,
-    email: String,
-    city: String,
+    user: Object,
   },
   data: () => {
     return {
-      inputErrorName: false,
-      inputErrorSurname: false,
-      inputErrorPhone: false,
-      inputErrorPassword: false,
-      inputErrorEmail: false,
-      inputErrorPostcode: false,
-      inputErrorAddress: false,
-      inputErrorCity: false,
-      inputErrorTitle: false,
+      errorsArray: [],
+      postcodeFound: false,
       inputErrorPasswordCopy: false,
+      inputErrorPasswordLength: false,
       titles: ["Mr", "Mrs", "Miss", "Mz", "Mx"],
+      title: "",
+      firstName: "",
+      surname: "",
+      phoneNumber: "",
+      password: "",
+      passwordCopy: "",
+      postcode: "",
+      addressLine1: "",
+      addressLine2: "",
+      email: "",
+      city: "",
     };
   },
   methods: {
     findPostcode() {
-      this.addressLine1 = "75 Test Place";
-      this.addressLine2 = "Test Line 2";
-      this.city = "Glasgow";
+      if (!this.postcode) return this.errorsArray.push("postcode");
+      else {
+        _.remove(this.errorsArray, (e) => {
+          return e === "postcode";
+        });
+        this.addressLine1 = "75 Test Place";
+        this.addressLine2 = "Test Line 2";
+        this.city = "Glasgow";
+        this.postcodeFound = true;
+      }
+    },
+    checkInput(field) {
+      _.remove(this.errorsArray, (e) => {
+        return e === field;
+      });
     },
     checkForCopy(passwordCopy) {
       if (this.password !== passwordCopy) {
-        this.inputErrorPassword = this.inputErrorPasswordCopy = true;
+        this.inputErrorPasswordCopy = true;
+        this.errorsArray.push("password");
       } else {
-        this.inputErrorPassword = this.inputErrorPasswordCopy = false;
+        this.inputErrorPasswordCopy = false;
+        _.remove(this.errorsArray, (e) => {
+          return e === "password";
+        });
       }
     },
     confirmDetails() {
-      if (!this.title) this.inputErrorTitle = true;
-      else this.inputErrorTitle = false;
-      if (!this.firstName) this.inputErrorName = true;
-      else this.inputErrorName = false;
-      if (!this.surname) this.inputErrorSurname = true;
-      else this.inputErrorSurname = false;
-      if (!this.phoneNumber) this.inputErrorPhone = true;
-      else this.inputErrorPhone = false;
-      if (!this.password || this.password !== this.passwordCopy) {
-        this.inputErrorPassword = true;
-        this.inputErrorPasswordCopy(this.passwordCopy);
-      } else this.inputErrorPassword = false;
-      if (!this.email) this.inputErrorEmail = true;
-      else this.inputErrorEmail = false;
-      if (!this.postcode) this.inputErrorPostcode = true;
-      else this.inputErrorPostcode = false;
-      if (!this.addressLine1) this.inputErrorAddress = true;
-      else this.inputErrorAddress = false;
-      if (!this.city) this.inputErrorCity = true;
-      else this.inputErrorCity = false;
-      if (!this.title) this.inputErrorTitle = true;
-      else this.inputErrorTitle = false;
+      if (!this.title) this.errorsArray.push("title");
+      else {
+        _.remove(this.errorsArray, (e) => {
+          return e === "title";
+        });
+      }
+      if (!this.firstName) this.errorsArray.push("firstName");
+      else {
+        _.remove(this.errorsArray, (e) => {
+          return e === "firstName";
+        });
+      }
+      if (!this.surname) this.errorsArray.push("surname");
+      else {
+        _.remove(this.errorsArray, (e) => {
+          return e === "surname";
+        });
+      }
+      if (!this.phoneNumber) this.errorsArray.push("phoneNumber");
+      else {
+        _.remove(this.errorsArray, (e) => {
+          return e === "phoneNumber";
+        });
+      }
+      if (
+        !this.password ||
+        this.password !== this.passwordCopy ||
+        this.password.length < 8
+      ) {
+        if (this.password !== this.passwordCopy) {
+          this.inputErrorPasswordCopy = true;
+        } else {
+          this.inputErrorPasswordCopy = false;
+        }
+        if (this.password.length < 8) {
+          this.inputErrorPasswordLength = true;
+        } else {
+          this.inputErrorPasswordLength = false;
+        }
+        this.errorsArray.push("password");
+      } else {
+        this.inputErrorPasswordCopy = false;
+        this.inputErrorPasswordLength = false;
+        _.remove(this.errorsArray, (e) => {
+          return e === "password";
+        });
+      }
+      if (!this.email) this.errorsArray.push("email");
+      else {
+        _.remove(this.errorsArray, (e) => {
+          return e === "email";
+        });
+      }
+      if (!this.postcode) this.errorsArray.push("postcode");
+      else {
+        _.remove(this.errorsArray, (e) => {
+          return e === "postcode";
+        });
+      }
+      if (!this.addressLine1) this.errorsArray.push("addressLine1");
+      else {
+        _.remove(this.errorsArray, (e) => {
+          return e === "addressLine1";
+        });
+      }
+      if (!this.city) this.errorsArray.push("city");
+      else {
+        _.remove(this.errorsArray, (e) => {
+          return e === "city";
+        });
+      }
+      if (this.errorsArray.length) return;
+      else
+        this.$emit("userSubmit", {
+          title: this.title,
+          firstName: this.firstName,
+          surname: this.surname,
+          phoneNumber: this.phoneNumber,
+          password: this.password,
+          postcode: this.postcode,
+          addressLine1: this.addressLine1,
+          addressLine2: this.addressLine2,
+          email: this.email,
+          city: this.city,
+        });
     },
+  },
+  beforeMount() {
+    if (this.user.title) this.title = this.user.title;
+    if (this.user.firstName) this.firstName = this.user.firstName;
+    if (this.user.surname) this.surname = this.user.surname;
+    if (this.user.phoneNumber) this.phoneNumber = this.user.phoneNumber;
+    if (this.user.password) this.password = this.user.password;
+    if (this.user.password) this.passwordCopy = this.user.password;
+    if (this.user.email) this.email = this.user.email;
+    if (this.user.addressLine1) this.addressLine1 = this.user.addressLine1;
+    if (this.user.addressLine2) this.addressLine2 = this.user.addressLine2;
+    if (this.user.city) this.city = this.user.city;
+    if (this.user.postcode) {
+      this.postcodeFound = true;
+      this.postcode = this.user.postcode;
+    }
   },
 };
 </script>
@@ -266,6 +386,22 @@ export default {
   top: -5px;
   left: 0;
   font-size: 10px;
+}
+
+.address-error {
+  font-size: 10px;
+  text-align: end;
+  margin: 0;
+  color: #e1251b;
+}
+
+.email-info {
+  font-size: 10px;
+  text-align: start;
+}
+
+.email-info p {
+  margin-top: 0;
 }
 
 .next-button {
