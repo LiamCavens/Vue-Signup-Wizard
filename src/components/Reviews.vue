@@ -1,9 +1,9 @@
 <template>
   <div class="reviews">
-    <div class="reviews-header">
+    <!-- <div class="reviews-header">
       <p class="reviews-ourword">Don't take our word for it</p>
       <p class="reviews-happydogs">57,000 happy dogs uk-wide</p>
-    </div>
+    </div> -->
     <div class="reviews-carousel">
       <div v-for="(review, index) in reviews" :key="index">
         <transition name="fade-down">
@@ -191,6 +191,7 @@ export default {
   padding: 5px 15px;
   margin: 5px;
   max-width: 300px;
+  font-size: 12px;
 }
 
 .reviews-controls {
