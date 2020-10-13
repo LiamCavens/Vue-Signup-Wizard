@@ -99,6 +99,15 @@ export default {
           then lick each other’s bowls clean and then lick each other’s faces . Their coats are gleaming, 
           I’m so happy with the results even after such a short time`,
         },
+        {
+          name: "Lola & Lucy, Southend-on-sea",
+          imageUrl: "Lola.jpg",
+          description: `My little Lola is a rescue from Cyprus. When she arrived she was fed purely on 
+          kibble. Her coat wasn’t shiny and she was really itchy. Since we’ve swapped her over to 
+          Bella and Duke premium complete, not only does she get REALLY excited about her food, 
+          her coat is so so shiny and soft, she is no longer itchy, there’s no dog smell (or dog breath) 
+          and she’s super muscular and lean!! It’s like magic in a bowl! Lucy Yates`,
+        },
       ],
     };
   },

@@ -44,7 +44,7 @@ export default {
         },
         {
           value: 3,
-          label: "Normal",
+          label: "Standard",
           description: "and absolutely happy",
         },
         {
