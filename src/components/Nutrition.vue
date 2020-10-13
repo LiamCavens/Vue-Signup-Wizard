@@ -3,11 +3,17 @@
     <p class="nutrition-text">
       Our nutrition team are constantly working to improve the nutritional
       characteristics of our food. We never add ingredients to our food that are
-      unnecessary and bring no benefit. We exclude all the typical dog food
-      ingredients that can give rise to insensitivities or damage the gut. We
-      source all our ingredients locally from the human food-chain suppliers.
+      unnecessary and bring no benefit.
+      <br />
+      <br />
+      We exclude all the typical dog food ingredients that can give rise to
+      insensitivities or damage the gut. We source all our ingredients locally
+      from the human food-chain suppliers.
     </p>
     <BnDPictorialChart />
+
+    <h4>{{ name }}'s Healthy Energy Sources</h4>
+    <p class="rowan-text">Our Nutritionist, Rowan, explains</p>
     <BnDNutritionalVideo />
   </div>
 </template>
@@ -49,6 +55,11 @@ export default {
 
 .nutrition-text {
   font-size: 12px;
+}
+
+.rowan-text {
+  font-size: 14px;
+  margin: 0 0 10px;
 }
 
 .nutrition-meal {

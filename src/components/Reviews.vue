@@ -46,12 +46,29 @@ export default {
       currentReview: 0,
       reviews: [
         {
+          name: "Pepper & Sarah, Edinburgh",
+          imageUrl: "Pepper.jpg",
+          description: `Our rescue dog Pepper was disinterested at mealtimes and struggled 
+          with high levels of anxiety. Since switching to Premium Adult Bella & Duke mealtimes 
+          are totally different. As soon as she hears her bowl her tail starts wagging and the 
+          dinner dance begins. Her bowl is always clean and we've noticed her anxiety levels have 
+          improved as well as her coat and her energy levels. We couldn't be happier and neither 
+          could Pepper!`,
+        },
+        {
           name: "Smithy, Ozzy & Paul, Norf",
           imageUrl: "PaulPit.jpg",
           description: `I now feed both my dogs B&D Raw dog food, 
           its the best thing ever, sometimes I help myself to some! 
           I no longer suffer from tummy aches and I feel more energetic than ever, 
           the dogs look more shiny too`,
+        },
+        {
+          name: "Alfie & Janice, London",
+          imageUrl: "Alfie.jpg",
+          description: `Alfie is new to Bella and Duke but he LOVES the premium Adult. 
+          We’ve tried so many different foods to get on top of his itching and it feels 
+          like we’ve finally found the perfect food! Thank you!`,
         },
         {
           name: "Dexter & Ross, Jervie",
@@ -61,11 +78,26 @@ export default {
             I cannot recommend any more`,
         },
         {
+          name: "Bertie & Maureen, Portsmouth",
+          imageUrl: "Bertie.jpg",
+          description: `This is Bertie he is 17 months old and on his 2nd order of Bella 
+          and duke premium and he loves it....i was nervous at first but he is absolutely 
+          loving it....he has so much energy his coat is shiny and he is happy..Maureen Skillander`,
+        },
+        {
           name: "Babe & Jim, The Globe",
           imageUrl: "JimDog.jpg",
           description: `I can honestly say after a few days, Babe was a different dog, 
             her stool is so firm I can now pick it up and throw it, 
             it makes it a lot of fun taking the dog for longer walks, I rate 8/8`,
+        },
+        {
+          name: "Frankie, Beau & Liz, Scunthorpe",
+          imageUrl: "Frankie&Beau.jpg",
+          description: `Our two new rescue French bulldogs, Frankie and Beau have loved 
+          the Premium range and the chicken treats. They look lick their bowls clean, 
+          then lick each other’s bowls clean and then lick each other’s faces . Their coats are gleaming, 
+          I’m so happy with the results even after such a short time`,
         },
       ],
     };
