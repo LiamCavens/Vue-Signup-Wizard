@@ -21,7 +21,7 @@
     </div>
     <div class="total-price"><span>Total Price</span> <span>£45.00*</span></div>
 
-    <h4>Check out using:</h4>
+    <h4>Checkout using:</h4>
     <div>
       <ul class="payment-list">
         <li>
@@ -31,7 +31,7 @@
               id="paypal"
               name="paymentRadio"
               value="paypal"
-              v-model="paymentMethod"
+              v-model="payment"
             />
             <label for="paypal"
               ><img src="../assets/paypalpayment.png" alt="Paypal Payment"
@@ -47,7 +47,7 @@
               id="cardPayment"
               name="paymentRadio"
               value="card"
-              v-model="paymentMethod"
+              v-model="payment"
             />
             <label for="cardPayment"
               ><img src="../assets/cardpayments.png" alt="Card Payment"
@@ -58,6 +58,9 @@
         </li>
       </ul>
     </div>
+    <button class="btn-green next-button" @click="handlePaymentMethod">
+      Checkout
+    </button>
   </div>
 </template>
 
@@ -67,14 +70,24 @@ export default {
   name: "Payment",
   props: {
     pets: Array,
+    paymentMethod: String,
   },
   components: {
     BnDAccordion,
   },
   data: () => {
-    return {};
+    return {
+      payment: "",
+    };
   },
-  methods: {},
+  methods: {
+    handlePaymentMethod() {
+      this.$emit("submitPaymentMethod", this.payment);
+    },
+  },
+  mounted() {
+    if (this.paymentMethod) this.payment = this.paymentMethod;
+  },
 };
 </script>
 
@@ -140,6 +153,7 @@ export default {
   justify-content: start;
   position: relative;
   padding: 2px 0px 5px 70px;
+  height: 30px;
   font-size: 14px;
   z-index: 9;
   cursor: pointer;

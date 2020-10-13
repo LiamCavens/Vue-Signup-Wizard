@@ -104,6 +104,8 @@ export default {
     // this.attributes[0].dates = this.delivery1;
     // this.attributes[1].dates = this.delivery2;
 
+    if (this.deliveryDate) this.delivery1 = this.deliveryDate;
+
     this.loading = false;
     setTimeout(() => {
       calendarFix.style.height = "270px";

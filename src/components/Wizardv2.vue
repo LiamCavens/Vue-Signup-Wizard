@@ -167,7 +167,13 @@
           :deliveryDate="deliveryDate"
           @deliverySubmit="handleDelivery"
         />
-        <Payment v-if="stage === 17" key="payment" :pets="pets" />
+        <Payment
+          v-if="stage === 17"
+          key="payment"
+          :paymentMethod="user.paymentMethod"
+          :pets="pets"
+          @submitPaymentMethod="handlePaymentMethod"
+        />
       </transition-group>
 
       <!-- <div class="footer-buttons">
@@ -265,6 +271,7 @@ export default {
         email: "",
         experience: "",
         foodPreference: "noPref",
+        paymentMethod: "paypal",
         title: "",
         firstName: "",
         surname: "",
@@ -368,6 +375,9 @@ export default {
     handleDelivery(deliveryDate) {
       this.deliveryDate = deliveryDate;
       this.nextStage();
+    },
+    handlePaymentMethod(paymentMethod) {
+      this.paymentMethod = paymentMethod;
     },
     pickWeight(weight) {
       this.currentPet.weight.amount = weight;
