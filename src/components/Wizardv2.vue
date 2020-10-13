@@ -252,10 +252,10 @@ export default {
     return {
       help: false,
       transitionName: "slide-fade",
-      stage: 14,
+      stage: 0,
       openAccordion: "nutrition",
       user: {
-        email: "test@bellaandduke.com",
+        email: "",
         experience: "",
         foodPreference: "noPref",
         title: "",
@@ -386,7 +386,7 @@ export default {
     },
     addNewPet() {
       let newPet = {
-        name: "Jacob",
+        name: "",
         body: 0,
         animal: "",
         gender: "",
@@ -421,11 +421,11 @@ export default {
           amount: "",
         },
       };
-      this.pets.push({
-        name: "John",
-        range: "Working dog",
-        dailyFeed: "150g",
-      });
+      //   this.pets.push({
+      //     name: "John",
+      //     range: "Working dog",
+      //     dailyFeed: "150g",
+      //   });
       this.pets.push(newPet);
       this.currentPet = this.pets[this.pets.length - 1];
     },
