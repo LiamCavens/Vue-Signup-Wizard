@@ -4,7 +4,7 @@
       <img
         class="recommendation-logo"
         alt="recommendation image"
-        src="../assets/BeefShot.png"
+        src="../assets/BeefShot.jpg"
       />
     </div>
     <p class="recommendation-meal">Premium Complete</p>

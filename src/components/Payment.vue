@@ -10,7 +10,7 @@
           <img
             class="meal-logo"
             alt="recommendation image"
-            src="../assets/BeefShot.png"
+            src="../assets/BeefShot.jpg"
           />
           <div class="meal-plan-text">
             <p>{{ pet.dailyFeed }} per day</p>
