@@ -254,6 +254,7 @@ export default {
   data: () => {
     return {
       help: false,
+      backToSummary: false,
       transitionName: "slide-fade",
       stage: 0,
       openAccordion: "nutrition",
@@ -304,6 +305,10 @@ export default {
     prevStage() {
       if (this.stage > 0) {
         this.stage--;
+      }
+      if (this.backToSummary) {
+        this.stage = 13;
+        this.backToSummary = false;
       }
       if (this.stage === 12 && this.currentPet.animal === "cat") {
         this.stage = 6;
@@ -408,6 +413,7 @@ export default {
       }, 0);
     },
     addAdditionalPet() {
+      this.backToSummary = true;
       this.addNewPet();
       this.stage = 1;
     },

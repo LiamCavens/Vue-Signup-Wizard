@@ -87,11 +87,8 @@
         />
       </div>
       <div class="email-info">
-        <p>
-          - email and password is needed to login to your member portol in the
-          future.
-        </p>
-        <p>- password must be at least 8 characters long</p>
+        <p>Please create a password for your member portal.</p>
+        <p>Please use at least 8 characters.</p>
       </div>
       <h3 class="billing-text">Billing Address</h3>
       <div class="postcode">

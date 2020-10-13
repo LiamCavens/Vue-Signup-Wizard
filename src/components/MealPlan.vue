@@ -32,7 +32,7 @@
       :show="showAccordion4"
       @opened="handleOpen(4)"
     >
-      <div slot="header">Customer experiences</div>
+      <div slot="header">What customers say</div>
       <!-- <div slot="header-desc">What people say</div> -->
       <Reviews />
     </BnDAccordion>

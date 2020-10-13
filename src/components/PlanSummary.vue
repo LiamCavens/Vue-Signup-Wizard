@@ -57,13 +57,11 @@
         </div>
       </div>
     </div>
-    <h3>Coupon referral code</h3>
-    <p class="coupon-text">
+    <p class="coupon-text" @click="openCouponInput">
       We have applied <b>{{ coupon }}</b> code.
       <span class="referral-link">Click here</span> to use a customer referral
       code instead.
     </p>
-    <h3>Add another pet</h3>
     <div class="add-pet-button" @click="addNewPet">
       <img
         src="../assets/icon_cat_dog_transparent.png"
@@ -129,6 +127,9 @@ export default {
   methods: {
     handleDeliverySize() {
       this.$emit("deliverySizeSubmit", this.chosenDelivery);
+    },
+    openCouponInput() {
+      console.log("clicked");
     },
     addNewPet() {
       this.$emit("addNewPet");
@@ -408,7 +409,7 @@ export default {
 
 .coupon-text {
   font-size: 12px;
-  margin-top: 0;
+  padding: 10px 5px;
 }
 
 .referral-link {

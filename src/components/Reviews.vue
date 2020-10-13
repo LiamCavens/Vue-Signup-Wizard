@@ -55,14 +55,14 @@ export default {
           improved as well as her coat and her energy levels. We couldn't be happier and neither 
           could Pepper!`,
         },
-        {
-          name: "Smithy, Ozzy & Paul, Norf",
-          imageUrl: "PaulPit.jpg",
-          description: `I now feed both my dogs B&D Raw dog food, 
-          its the best thing ever, sometimes I help myself to some! 
-          I no longer suffer from tummy aches and I feel more energetic than ever, 
-          the dogs look more shiny too`,
-        },
+        // {
+        //   name: "Smithy, Ozzy & Paul, Norf",
+        //   imageUrl: "PaulPit.jpg",
+        //   description: `I now feed both my dogs B&D Raw dog food,
+        //   its the best thing ever, sometimes I help myself to some!
+        //   I no longer suffer from tummy aches and I feel more energetic than ever,
+        //   the dogs look more shiny too`,
+        // },
         {
           name: "Alfie & Janice, London",
           imageUrl: "Alfie.jpg",
@@ -70,13 +70,13 @@ export default {
           We’ve tried so many different foods to get on top of his itching and it feels 
           like we’ve finally found the perfect food! Thank you!`,
         },
-        {
-          name: "Dexter & Ross, Jervie",
-          imageUrl: "RossCat.jpg",
-          description: `Duke & Bella's raw dog food is so good that I feed it to my cat, 
-            he suffered from explosive diarrhea over the carpets and now suffers no more, 
-            I cannot recommend any more`,
-        },
+        // {
+        //   name: "Dexter & Ross, Jervie",
+        //   imageUrl: "RossCat.jpg",
+        //   description: `Duke & Bella's raw dog food is so good that I feed it to my cat,
+        //     he suffered from explosive diarrhea over the carpets and now suffers no more,
+        //     I cannot recommend any more`,
+        // },
         {
           name: "Bertie & Maureen, Portsmouth",
           imageUrl: "Bertie.jpg",
@@ -84,13 +84,13 @@ export default {
           and duke premium and he loves it....i was nervous at first but he is absolutely 
           loving it....he has so much energy his coat is shiny and he is happy..Maureen Skillander`,
         },
-        {
-          name: "Babe & Jim, The Globe",
-          imageUrl: "JimDog.jpg",
-          description: `I can honestly say after a few days, Babe was a different dog, 
-            her stool is so firm I can now pick it up and throw it, 
-            it makes it a lot of fun taking the dog for longer walks, I rate 8/8`,
-        },
+        // {
+        //   name: "Babe & Jim, The Globe",
+        //   imageUrl: "JimDog.jpg",
+        //   description: `I can honestly say after a few days, Babe was a different dog,
+        //     her stool is so firm I can now pick it up and throw it,
+        //     it makes it a lot of fun taking the dog for longer walks, I rate 8/8`,
+        // },
         {
           name: "Frankie, Beau & Liz, Scunthorpe",
           imageUrl: "Frankie&Beau.jpg",
@@ -128,7 +128,7 @@ export default {
       this.isPlaying = true;
       this.playReviews = setInterval(() => {
         this.nextReview();
-      }, 7500);
+      }, 10000);
     },
     pauseReview() {
       clearInterval(this.playReviews);

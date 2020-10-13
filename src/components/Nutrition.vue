@@ -10,9 +10,8 @@
       insensitivities or damage the gut. We source all our ingredients locally
       from the human food-chain suppliers.
     </p>
+    <h5>{{ name }}'s healthy energy sources</h5>
     <BnDPictorialChart />
-
-    <h4>{{ name }}'s Healthy Energy Sources</h4>
     <p class="rowan-text">Our Nutritionist, Rowan, explains</p>
     <BnDNutritionalVideo />
   </div>

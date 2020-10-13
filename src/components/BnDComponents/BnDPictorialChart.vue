@@ -16,23 +16,15 @@ export default {
     chart.data = [
       {
         name: "Protein",
-        value: 50,
-      },
-      {
-        name: "Energy",
-        value: 50,
+        value: 30,
       },
       {
         name: "Carbs",
-        value: 50,
+        value: 5,
       },
       {
-        name: "Fats",
-        value: 50,
-      },
-      {
-        name: "Haggis",
-        value: 50,
+        name: "Fat",
+        value: 65,
       },
     ];
 
@@ -46,9 +38,9 @@ export default {
     series.alignLabels = true;
     series.maskSprite.path = dog;
     series.colors.list = [
-      am4core.color("#00263a"),
       am4core.color("#789904"),
       am4core.color("#e1251b"),
+      am4core.color("#00263a"),
       am4core.color("#ee7623"),
       am4core.color("#e1b77e"),
     ];
@@ -65,6 +57,7 @@ export default {
 .pic-chart {
   width: 300px;
   height: 185px;
+  font-size: 14px;
 }
 
 @media screen and (max-width: 380px) {
