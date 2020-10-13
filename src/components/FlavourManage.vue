@@ -56,7 +56,6 @@ export default {
           return i === flavour.value;
         });
       }
-      console.log(this.flavours);
     },
   },
   mounted() {

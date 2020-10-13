@@ -77,7 +77,6 @@ export default {
           return i === issue.value;
         });
       }
-      console.log(this.health);
     },
     handleHealthSubmit() {
       this.$emit("healthSubmit");

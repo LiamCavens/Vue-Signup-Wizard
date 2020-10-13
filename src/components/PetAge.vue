@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import { differenceInYears, differenceInMonths } from "date-fns";
+import { differenceInMonths } from "date-fns";
 export default {
   name: "PetAge",
   props: {
@@ -331,16 +331,16 @@ export default {
   beforeMount() {
     this.getLastYears();
   },
-  watch: {
-    age: {
-      handler(val) {
-        let years = differenceInYears(new Date(), val.dob);
-        console.log("Liam: years");
-        console.log(years);
-      },
-      deep: true,
-    },
-  },
+  //   watch: {
+  //     age: {
+  //       handler(val) {
+  //         let years = differenceInYears(new Date(), val.dob);
+  //         console.log("Liam: years");
+  //         console.log(years);
+  //       },
+  //       deep: true,
+  //     },
+  //   },
 };
 </script>
 

@@ -92,7 +92,6 @@ export default {
       this.loading = false;
     },
     handleDelivery() {
-      console.log(this.delivery1);
       this.$emit("deliverySubmit", this.delivery1);
     },
   },

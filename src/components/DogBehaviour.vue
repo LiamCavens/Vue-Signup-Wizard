@@ -55,7 +55,6 @@ export default {
           return i === issue.value;
         });
       }
-      console.log(this.behaviour);
     },
     handleBehaviourSubmit() {
       this.$emit("behaviourSubmit");

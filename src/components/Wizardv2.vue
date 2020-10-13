@@ -140,7 +140,9 @@
           v-if="stage === 14"
           :pets="pets"
           key="summary"
+          :coupon="coupon"
           :deliverySize="deliverySize"
+          @addNewPet="addAdditionalPet"
           @deliverySizeSubmit="handleDeliverySize"
         />
         <UserDetails
@@ -149,18 +151,6 @@
           :user="user"
           @userSubmit="handleUser"
         />
-        <!--
-          :title.sync="user.title"
-          :firstName.sync="user.firstName"
-          :surname.sync="user.surname"
-          :phoneNumber.sync="user.phoneNumber"
-          :password.sync="user.password"
-          :postcode.sync="user.address.postcode"
-          :addressLine1.sync="user.address.line1"
-          :addressLine2.sync="user.address.line2"
-          :city.sync="user.address.city"
-          :country.sync="user.address.country"
-          :email.sync="user.email" -->
         <Delivery
           v-if="stage === 16"
           key="delivery"
@@ -267,6 +257,7 @@ export default {
       transitionName: "slide-fade",
       stage: 0,
       openAccordion: "nutrition",
+      coupon: "TESTCODE50",
       user: {
         email: "",
         experience: "",
@@ -309,8 +300,6 @@ export default {
         this.stage = 13;
         return;
       }
-      console.log("Liam: this.$route");
-      console.log(this.$route);
     },
     prevStage() {
       if (this.stage > 0) {
@@ -387,7 +376,6 @@ export default {
       this.openAccordion = "reviews";
     },
     handleUser(userDetails) {
-      console.log(userDetails);
       this.user.email = userDetails.email;
       this.user.title = userDetails.title;
       this.user.firstName = userDetails.firstName;
@@ -418,6 +406,10 @@ export default {
         // let classToBlur = document.querySelector(".wizard-components");
         // classToBlur.style.filter = "blur(0)";
       }, 0);
+    },
+    addAdditionalPet() {
+      this.addNewPet();
+      this.stage = 1;
     },
     addNewPet() {
       let newPet = {
@@ -456,11 +448,6 @@ export default {
           amount: "",
         },
       };
-      //   this.pets.push({
-      //     name: "John",
-      //     range: "Working dog",
-      //     dailyFeed: "150g",
-      //   });
       this.pets.push(newPet);
       this.currentPet = this.pets[this.pets.length - 1];
     },
@@ -472,9 +459,7 @@ export default {
         .join(" ");
     },
   },
-  mounted() {
-    console.log(this.currentPet);
-  },
+  mounted() {},
   beforeMount() {
     this.addNewPet();
   },

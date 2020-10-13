@@ -4,7 +4,7 @@
     <div class="price-per-day">£1.15 per day | 40 days of food</div>
     <div class="pet-meal-plans">
       <BnDAccordion v-for="(pet, index) in pets" :key="index" theme="noBorder">
-        <div slot="header">{{ pet.name }} meal plan</div>
+        <div slot="header">{{ pet.name }}'s meal plan</div>
         <!-- <div slot="header-desc">What people say</div> -->
         <div class="meal-plan-detail">
           <img
@@ -57,6 +57,24 @@
         </div>
       </div>
     </div>
+    <h3>Coupon referral code</h3>
+    <p class="coupon-text">
+      We have applied <b>{{ coupon }}</b> code.
+      <span class="referral-link">Click here</span> to use a customer referral
+      code instead.
+    </p>
+    <h3>Add another pet</h3>
+    <div class="add-pet-button" @click="addNewPet">
+      <img
+        src="../assets/icon_cat_dog_transparent.png"
+        alt="cat and dog add button"
+        height="80px"
+      />
+      <div class="add-pet-text">
+        <p class="add-pet-big">Add another pet</p>
+        <p class="add-pet-small">More pets, more discount</p>
+      </div>
+    </div>
     <button class="btn-green next-button" @click="handleDeliverySize">
       Next
     </button>
@@ -69,6 +87,7 @@ export default {
   name: "PlanSummary",
   props: {
     pets: Array,
+    coupon: String,
     deliverySize: Object,
   },
   components: {
@@ -110,6 +129,9 @@ export default {
   methods: {
     handleDeliverySize() {
       this.$emit("deliverySizeSubmit", this.chosenDelivery);
+    },
+    addNewPet() {
+      this.$emit("addNewPet");
     },
     chooseDelivery(delivery) {
       this.chosenDelivery = delivery;
@@ -382,6 +404,51 @@ export default {
 .delivery-image {
   height: 72px;
   width: 72px;
+}
+
+.coupon-text {
+  font-size: 12px;
+  margin-top: 0;
+}
+
+.referral-link {
+  text-decoration-line: underline;
+  cursor: pointer;
+}
+
+.add-pet-button {
+  display: flex;
+  align-items: center;
+  border: solid 1px #00263a;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.add-pet-button:hover {
+  border: solid 1px #789904;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
+}
+
+.add-pet-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 20px 10px;
+}
+
+.add-pet-text p {
+  margin: 0;
+}
+
+.add-pet-big {
+  font-family: Montserrat-Bold;
+}
+
+.add-pet-small {
+  font-size: 10px;
 }
 
 .selected-item {
