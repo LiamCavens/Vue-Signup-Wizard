@@ -439,7 +439,7 @@ export default {
         body: 0,
         animal: "",
         gender: "",
-        health: ["foodSensitivity"],
+        health: [],
         behaviour: [],
         foodIntolerances: [],
         neutered: "",
