@@ -60,11 +60,22 @@
         </div>
       </div>
     </div>
-    <p class="coupon-text" @click="openCouponInput">
+    <p class="coupon-text" @click="openCoupon = true">
       We have applied <b>{{ coupon }}</b> code.
       <span class="referral-link">Click here</span> to use a customer referral
       code instead.
     </p>
+    <div v-if="openCoupon">
+      <input
+        placeholder="Referral code"
+        class="coupon-input"
+        type="text"
+        v-model="newCouponCode"
+        required
+        autofocus
+      />
+      <button class="apply-button" @click="applyCoupon">Apply</button>
+    </div>
     <div class="add-pet-button" @click="addNewPet">
       <img
         src="../assets/icon_cat_dog_transparent.png"
@@ -99,6 +110,8 @@ export default {
       showMealPlans: false,
       readMore: false,
       chosenDelivery: {},
+      openCoupon: false,
+      newCouponCode: "",
       deliverySizes: [
         {
           icon: "icon_freezer_4kg.png",
@@ -131,11 +144,13 @@ export default {
     handleDeliverySize() {
       this.$emit("deliverySizeSubmit", this.chosenDelivery);
     },
-    openCouponInput() {
-      console.log("clicked");
-    },
     addNewPet() {
       this.$emit("addNewPet");
+    },
+    applyCoupon() {
+      if (this.newCouponCode.length > 0) {
+        this.$emit("newCouponCode", this.newCouponCode);
+      }
     },
     chooseDelivery(delivery) {
       this.chosenDelivery = delivery;
@@ -459,6 +474,30 @@ export default {
   background-color: #789904;
   border-radius: 0 0 8px 8px;
   color: #fff;
+}
+
+.coupon-input {
+  box-sizing: border-box;
+  border: 1px solid #c2c2c2;
+  box-shadow: 1px 1px 4px #ebebeb;
+  border-radius: 3px;
+  padding: 7px;
+  outline: none;
+  transition: 0.2s linear;
+}
+
+.coupon-input:focus {
+  border: 1px solid #00263a;
+  transition: 0.2s linear;
+}
+
+.apply-button {
+  background-color: #789904;
+  border-radius: 500px;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  margin: 0 0 20px 10px;
 }
 
 .hidden {

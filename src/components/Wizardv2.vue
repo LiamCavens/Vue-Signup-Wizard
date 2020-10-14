@@ -140,6 +140,7 @@
           :coupon="coupon"
           :deliverySize="deliverySize"
           @addNewPet="addAdditionalPet"
+          @newCouponCode="handleCoupon"
           @deliverySizeSubmit="handleDeliverySize"
         />
         <UserDetails
@@ -409,6 +410,9 @@ export default {
       this.user.address.city = userDetails.city;
       this.user.address.country = "United Kingdom";
       this.nextStage();
+    },
+    handleCoupon(newCoupon) {
+      this.coupon = newCoupon.toUpperCase();
     },
     openHelp() {
       this.transitionName = "help-transition";
