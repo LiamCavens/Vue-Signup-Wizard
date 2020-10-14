@@ -102,7 +102,7 @@ export default {
           size: "4kg",
           drawers: "1/2 freezer drawer",
           daysOfFood: 8,
-          price: 22.99,
+          price: 15.99,
           chosen: false,
         },
         {
@@ -110,7 +110,7 @@ export default {
           size: "8kg",
           drawers: "1 freezer drawer",
           daysOfFood: 16,
-          price: 32.99,
+          price: 29.99,
           chosen: true,
         },
         {
@@ -118,7 +118,7 @@ export default {
           size: "12kg",
           drawers: "1 1/2 freezer drawer",
           daysOfFood: 24,
-          price: 32.99,
+          price: 41.99,
           chosen: false,
         },
       ],
@@ -148,7 +148,7 @@ export default {
               size: "4kg",
               drawers: "1/2 freezer drawer",
               daysOfFood: 8,
-              price: 22.99,
+              price: 15.99,
               chosen: true,
             },
             {
@@ -156,7 +156,7 @@ export default {
               size: "8kg",
               drawers: "1 freezer drawer",
               daysOfFood: 16,
-              price: 32.99,
+              price: 29.99,
               chosen: false,
             },
           ];
@@ -168,7 +168,7 @@ export default {
               size: "4kg",
               drawers: "1/2 freezer drawer",
               daysOfFood: 8,
-              price: 22.99,
+              price: 15.99,
               chosen: false,
             },
             {
@@ -176,7 +176,7 @@ export default {
               size: "8kg",
               drawers: "1 freezer drawer",
               daysOfFood: 16,
-              price: 32.99,
+              price: 29.99,
               chosen: true,
             },
             {
@@ -184,7 +184,7 @@ export default {
               size: "12kg",
               drawers: "1 1/2 freezer drawer",
               daysOfFood: 24,
-              price: 32.99,
+              price: 41.99,
               chosen: false,
             },
           ];
@@ -196,7 +196,7 @@ export default {
               size: "8kg",
               drawers: "1 freezer drawer",
               daysOfFood: 16,
-              price: 32.99,
+              price: 29.99,
               chosen: false,
             },
             {
@@ -204,15 +204,15 @@ export default {
               size: "12kg",
               drawers: "1 1/2 freezer drawer",
               daysOfFood: 24,
-              price: 32.99,
+              price: 41.99,
               chosen: true,
             },
             {
               icon: "icon_freezer_16kg.png",
               size: "16kg",
               drawers: "2 freezer drawer",
-              daysOfFood: 16,
-              price: 44.99,
+              daysOfFood: 32,
+              price: 48.99,
               chosen: false,
             },
           ];
@@ -224,7 +224,7 @@ export default {
               size: "12kg",
               drawers: "1 1/2 freezer drawer",
               daysOfFood: 24,
-              price: 32.99,
+              price: 41.99,
               chosen: false,
             },
             {
@@ -232,7 +232,7 @@ export default {
               size: "16kg",
               drawers: "2 freezer drawer",
               daysOfFood: 32,
-              price: 44.99,
+              price: 48.99,
               chosen: true,
             },
             {
@@ -240,7 +240,7 @@ export default {
               size: "20kg",
               drawers: "3 freezer drawer",
               daysOfFood: 40,
-              price: 56.99,
+              price: 52.99,
               chosen: false,
             },
           ];
@@ -252,7 +252,7 @@ export default {
               size: "16kg",
               drawers: "2 freezer drawer",
               daysOfFood: 32,
-              price: 44.99,
+              price: 48.99,
               chosen: false,
             },
             {
@@ -260,7 +260,7 @@ export default {
               size: "20kg",
               drawers: "3 freezer drawer",
               daysOfFood: 40,
-              price: 56.99,
+              price: 52.99,
               chosen: true,
             },
             {
@@ -280,7 +280,7 @@ export default {
               size: "20kg",
               drawers: "3 freezer drawer",
               daysOfFood: 24,
-              price: 56.99,
+              price: 52.99,
               chosen: false,
             },
             {
