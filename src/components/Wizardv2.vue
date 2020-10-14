@@ -284,7 +284,7 @@ export default {
         size: "8kg",
         drawers: "1 freezer drawer",
         daysOfFood: 16,
-        price: 32.99,
+        price: 29.99,
         chosen: true,
       },
       currentPet: {},

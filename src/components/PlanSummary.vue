@@ -1,7 +1,10 @@
 <template>
   <div class="plan-summary">
     <h2>Your price</h2>
-    <div class="price-per-day">£1.15 per day | 40 days of food</div>
+    <div class="price-per-day">
+      {{ (chosenDelivery.price / chosenDelivery.daysOfFood).toFixed(2) }} per
+      day | 40 days of food
+    </div>
     <div class="pet-meal-plans">
       <BnDAccordion v-for="(pet, index) in pets" :key="index" theme="noBorder">
         <div slot="header">{{ pet.name }}'s meal plan</div>
