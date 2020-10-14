@@ -48,8 +48,8 @@ export default {
           active: false,
         },
         { value: "cushings", label: "Cushing's Disease", active: false },
-        { value: "digestive", label: "Digestive problems", active: false },
         { value: "epilepsy", label: "Epilepsy", active: false },
+        { value: "foodSensitivity", label: "Food Sensitivity", active: false },
         {
           value: "arthiritis",
           label: "Joint issues/arthiritis",

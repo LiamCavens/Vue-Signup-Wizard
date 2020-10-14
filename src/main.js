@@ -27,7 +27,7 @@ const routes = [
     { path: "/", component: require("./components/UserEmail.vue").default },
     { path: "/name", component: require("./components/PetName.vue").default },
 ];
-const router = new VueRouter({ routes });
+const router = new VueRouter({ routes, mode: 'history' });
 
 new Vue({
     render: (h) => h(App),

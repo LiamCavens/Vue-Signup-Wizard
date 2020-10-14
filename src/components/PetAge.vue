@@ -95,7 +95,10 @@
 </template>
 
 <script>
-import { differenceInMonths } from "date-fns";
+import { differenceInMonths, getMonth, subMonths } from "date-fns";
+
+const yearNow = new Date().getUTCFullYear();
+
 export default {
   name: "PetAge",
   props: {
@@ -302,13 +305,15 @@ export default {
     ageSubmit() {
       if (this.age.years && this.age.months) {
         this.ageSubmitted = true;
+        // When year is submitted, take years away, and then months
+        this.dobYear = yearNow - this.age.years;
+        this.dobMonth = getMonth(subMonths(new Date(), this.age.months));
       }
     },
     handleNext() {
       this.$emit("ageSubmit");
     },
     getLastYears() {
-      const yearNow = new Date().getUTCFullYear();
       this.years = Array(yearNow - (yearNow - 21))
         .fill("")
         .map((value, index) => yearNow - index);

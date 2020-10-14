@@ -9,16 +9,6 @@
           </span>
         </button>
       </div>
-
-      <!-- <div v-if="stage >= 13 && stage <= 16" class="chevrons">
-        <button class="previous-chevron" @click="prevStage">
-          <font-awesome-icon :icon="['fas', 'chevron-left']" />
-        </button>
-        <button v-if="stage < 16" class="next-chevron" @click="nextStage">
-          <font-awesome-icon :icon="['fas', 'chevron-right']" />
-        </button>
-      </div> -->
-
       <transition-group v-bind:name="transitionName">
         <Help
           v-if="help"
@@ -113,22 +103,29 @@
           @healthSubmit="handleHealth"
           key="health"
         />
+        <FoodIntolerance
+          v-if="stage === 11"
+          :name="currentPet.name"
+          :foodIntolerances.sync="currentPet.foodIntolerances"
+          key="FoodIntolerance"
+          @intoleranceSubmit="handleIntolerances"
+        />
         <DogBehaviour
-          v-if="stage === 11 && currentPet.animal != 'cat'"
+          v-if="stage === 12 && currentPet.animal != 'cat'"
           :name="currentPet.name"
           :behaviour.sync="currentPet.behaviour"
           @behaviourSubmit="handleBehaviour"
           key="behaviour"
         />
         <RawExperience
-          v-if="stage === 12"
+          v-if="stage === 13"
           :experience.sync="user.experience"
           :foodPreference.sync="user.foodPreference"
           @experienceSubmit="handleExperience"
           key="experience"
         />
         <MealPlan
-          v-if="stage === 13"
+          v-if="stage === 14"
           :name="currentPet.name"
           :gender="currentPet.gender"
           :flavours="currentPet.flavours"
@@ -137,7 +134,7 @@
           @handleNext="nextStage"
         />
         <PlanSummary
-          v-if="stage === 14"
+          v-if="stage === 15"
           :pets="pets"
           key="summary"
           :coupon="coupon"
@@ -146,19 +143,19 @@
           @deliverySizeSubmit="handleDeliverySize"
         />
         <UserDetails
-          v-if="stage === 15"
+          v-if="stage === 16"
           key="userdetails"
           :user="user"
           @userSubmit="handleUser"
         />
         <Delivery
-          v-if="stage === 16"
+          v-if="stage === 17"
           key="delivery"
           :deliveryDate="deliveryDate"
           @deliverySubmit="handleDelivery"
         />
         <Payment
-          v-if="stage === 17"
+          v-if="stage === 18"
           key="payment"
           :paymentMethod="user.paymentMethod"
           :pets="pets"
@@ -197,6 +194,8 @@
 </template>
 
 <script>
+import _ from "lodash";
+
 import UserEmail from "./UserEmail";
 import PetAge from "./PetAge";
 import PetName from "./PetName";
@@ -210,6 +209,7 @@ import DogWorking from "./DogWorking";
 import DogBodyType from "./DogBodyType";
 import DogActivity from "./DogActivity";
 import DogBehaviour from "./DogBehaviour";
+import FoodIntolerance from "./FoodIntolerance";
 
 import UserDetails from "./UserDetails";
 import PlanSummary from "./PlanSummary";
@@ -240,6 +240,7 @@ export default {
     DogBodyType,
     DogActivity,
     DogBehaviour,
+    FoodIntolerance,
     UserDetails,
     PlanSummary,
     Help,
@@ -298,7 +299,14 @@ export default {
     nextStage() {
       this.stage++;
       if (this.stage === 7 && this.currentPet.animal === "cat") {
-        this.stage = 13;
+        this.stage = 14;
+        return;
+      }
+      if (
+        this.stage === 11 &&
+        !this.currentPet.health.includes("foodSensitivity")
+      ) {
+        this.stage = 12;
         return;
       }
     },
@@ -324,7 +332,6 @@ export default {
     },
     handleAnimal(animal) {
       this.currentPet.animal = animal;
-      //   this.currentPet.weight.unit = animal === "cat" ? "g" : "kg";
       this.nextStage();
     },
     handleGender(gender) {
@@ -354,6 +361,15 @@ export default {
       this.nextStage();
     },
     handleHealth() {
+      this.nextStage();
+    },
+    handleIntolerances() {
+      //Do stuff to change flavours chosen
+      _.forEach(this.currentPet.foodIntolerances, (foodIntolerance) => {
+        _.remove(this.currentPet.flavours, (flavour) => {
+          return flavour === foodIntolerance;
+        });
+      });
       this.nextStage();
     },
     handleBehaviour() {
@@ -423,8 +439,9 @@ export default {
         body: 0,
         animal: "",
         gender: "",
-        health: [],
+        health: ["foodSensitivity"],
         behaviour: [],
+        foodIntolerances: [],
         neutered: "",
         activity: 0,
         working: "",

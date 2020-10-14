@@ -23,7 +23,7 @@
         >.
       </p>
 
-      <p v-if="pet.age && stage >= 5" key="age">
+      <p v-if="pet.age.years && stage >= 5" key="age">
         I am
         <span class="edit-link" @click="editStage(4)"
           >{{ pet.age.years }} years</span
@@ -62,7 +62,7 @@
           <span class="edit-link" @click="editStage(5)">breed</span> I am.
         </span>
       </p>
-      <p v-if="pet.weight && stage >= 7" key="weight">
+      <p v-if="pet.weight.amount && stage >= 7" key="weight">
         I weigh
         <span class="edit-link" @click="editStage(6)"
           >{{ pet.weight.amount }}{{ pet.weight.unit }}</span
