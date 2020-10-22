@@ -36,10 +36,12 @@ export default {
   props: {
     theme: String,
     icon: String,
-    show: Boolean,
+    showThis: Boolean,
   },
   data: () => {
-    return {};
+    return {
+        show: false
+    };
   },
   methods: {
     getIconUrl(iconUrl) {
@@ -62,6 +64,9 @@ export default {
     leave: function (el) {
       el.style.height = "0";
     },
+  },
+  mounted() {
+      this.show = this.showThis;
   },
 };
 </script>

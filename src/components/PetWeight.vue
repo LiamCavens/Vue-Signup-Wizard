@@ -22,27 +22,36 @@
       </select> -->
     </div>
 
-    <BnDAccordion icon="icon_weight_white" :show="showWeightChoices">
+    <BnDAccordion icon="icon_weight_white" :showThis="showWeightChoices">
       <div slot="header">Easy weight picker</div>
       <!-- <div slot="header-desc">Quick & Easy</div> -->
-      <div class="weight-items">
+      <div class="weight-items" v-if="weightChoices">
         <button
-          class="dog-weight-item"
+          class="weight-item"
           v-for="(weightChoice, index) in weightChoices"
           :key="index"
           @click="handleBodyWeight(weightChoice.value, index)"
           :class="{ active: activatedDiv === index }"
         >
           <img
-            class="dog-weight-image"
+            class="weight-image"
+            v-if="animal === 'dog'"
             :src="
               require(`../assets/icon_dogweight_${weightChoice.imageUrl}.png`)
             "
             alt="weightImage"
           />
-          <div class="dog-weight-item-text">
-            <p class="dog-weight-item-label">{{ weightChoice.label }}</p>
-            <p class="dog-weight-item-desc">{{ weightChoice.description }}</p>
+                    <img
+            class="weight-image"
+            v-if="animal === 'cat'"
+            :src="
+              require(`../assets/cat_icon_${weightChoice.imageUrl}.png`)
+            "
+            alt="weightImage"
+          />
+          <div class="weight-item-text">
+            <p class="weight-item-label">{{ weightChoice.label }}</p>
+            <p class="weight-item-desc">{{ weightChoice.description }}</p>
           </div>
         </button>
       </div>
@@ -78,7 +87,28 @@ export default {
       errorMessage: "",
       activatedDiv: "",
       showWeightChoices: false,
-      weightChoices: [
+      weightChoices: [],
+      catWeightChoices: [
+                  {
+          value: 1,
+          imageUrl: "small",
+          label: "Small Cat",
+          description: "Small & Light",
+        },
+        {
+          value: 2,
+          imageUrl: "medium",
+          label: "Medium Cat",
+          description: "Still light and agile",
+        },
+        {
+          value: 4,
+          imageUrl: "large",
+          label: "Large Cat",
+          description: "A small chunker",
+        },
+      ],
+      dogWeightChoices: [
         {
           value: 2,
           imageUrl: "XS",
@@ -145,6 +175,7 @@ export default {
     },
   },
   mounted() {
+    this.weightChoices = this.animal === 'cat' ? this.catWeightChoices : this.dogWeightChoices;
     window.addEventListener("keyup", (event) => {
       if (event.keyCode === 13) {
         this.handleNext();
@@ -222,7 +253,7 @@ export default {
   flex-direction: column;
 }
 
-.dog-weight-item {
+.weight-item {
   font-family: Montserrat;
   display: flex;
   margin: 3px;
@@ -233,7 +264,7 @@ export default {
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-.dog-weight-item:hover,
+.weight-item:hover,
 .active {
   cursor: pointer;
   border: 2px solid #789904;
@@ -241,32 +272,32 @@ export default {
   margin: 2px;
 }
 
-.dog-weight-item:hover .dog-weight-image,
-.active .dog-weight-image {
+.weight-item:hover .weight-image,
+.active .weight-image {
   border: 2px solid #789904;
 }
 
-.dog-weight-item-text {
+.weight-item-text {
   text-align: left;
   padding-left: 20px;
   max-width: 228px;
 }
 
-.dog-weight-item:focus {
+.weight-item:focus {
   outline: 1px #789904 auto;
 }
 
-.dog-weight-item-label {
+.weight-item-label {
   margin: 10px 0 0 0;
   font-weight: 700;
 }
 
-.dog-weight-item-desc {
+.weight-item-desc {
   margin: 2px 0 0 0;
   font-size: 12px;
 }
 
-.dog-weight-image {
+.weight-image {
   height: 50px;
   width: 50px;
   border: 2px #00263a solid;

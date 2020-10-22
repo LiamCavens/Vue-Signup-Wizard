@@ -11,7 +11,7 @@
     <!-- </BnDAccordion> -->
     <BnDAccordion
       icon="icon_meat_and_veg_white"
-      :show="showAccordion2"
+      :showThis="showAccordion2"
       @opened="handleOpen(2)"
     >
       <div slot="header">Manage flavours</div>
@@ -20,7 +20,7 @@
     </BnDAccordion>
     <BnDAccordion
       icon="icon_healthy_heart_white"
-      :show="showAccordion3"
+      :showThis="showAccordion3"
       @opened="handleOpen(3)"
     >
       <div slot="header">{{ name }}'s nutrition</div>
@@ -29,7 +29,7 @@
     </BnDAccordion>
     <BnDAccordion
       icon="icon_dog_white"
-      :show="showAccordion4"
+      :showThis="showAccordion4"
       @opened="handleOpen(4)"
     >
       <div slot="header">What customers say</div>
