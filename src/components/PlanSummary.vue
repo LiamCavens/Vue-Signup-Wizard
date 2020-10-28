@@ -3,7 +3,7 @@
     <h2>Your price</h2>
     <div class="price-per-day">
       {{ (chosenDelivery.price / chosenDelivery.daysOfFood).toFixed(2) }} per
-      day | 40 days of food
+      day | {{ chosenDelivery.daysOfFood }} days of food
     </div>
     <div class="pet-meal-plans">
       <BnDAccordion v-for="(pet, index) in pets" :key="index" theme="noBorder">
@@ -34,31 +34,13 @@
     </p>
     <h3>Change Delivery size</h3>
     <div class="relative-container">
-      <div class="delivery-carousel">
-        <div
-          class="delivery-item"
-          :class="{ chosen: delivery.chosen, hidden: delivery.hidden }"
-          v-for="(delivery, index) in deliverySizes"
-          :key="index"
-          @click="chooseDelivery(delivery)"
-          :v-show="!delivery.hidden"
-        >
-          <img
-            class="delivery-image"
-            :src="delivery.hidden ? '' : require(`../assets/${delivery.icon}`)"
-            :alt="delivery.size + 'image'"
-          />
-          <p>{{ delivery.drawers }}</p>
-          <p>{{ delivery.daysOfFood }} days of food</p>
-          <p>£{{ delivery.price }}</p>
-          <p>
-            £{{ (delivery.price / delivery.daysOfFood).toFixed(2) }} per day
-          </p>
-          <div :class="{ 'selected-item': delivery.chosen }">
-            <p>{{ delivery.chosen ? "Selected" : "Select" }}</p>
-          </div>
-        </div>
-      </div>
+      <BnDDeliveryCarousel
+      v-if="loaded"
+        :items="deliverySizes"
+        :startIndex="deliveryIndex"
+        slideName="deliveries"
+        @chosenSize="chooseSize"
+      />
     </div>
     <p class="coupon-text" @click="openCoupon = true">
       We have applied <b>{{ coupon }}</b> code.
@@ -95,6 +77,7 @@
 
 <script>
 import BnDAccordion from "./BnDComponents/BnDAccordion";
+import BnDDeliveryCarousel from "./BnDComponents/BnDDeliveryCarousel";
 export default {
   name: "PlanSummary",
   props: {
@@ -104,10 +87,13 @@ export default {
   },
   components: {
     BnDAccordion,
+    BnDDeliveryCarousel,
   },
   data: () => {
     return {
       showMealPlans: false,
+      deliveryIndex: 1,
+      loaded: false,
       readMore: false,
       chosenDelivery: {},
       openCoupon: false,
@@ -127,7 +113,7 @@ export default {
           drawers: "1 freezer drawer",
           daysOfFood: 16,
           price: 29.99,
-          chosen: true,
+          chosen: false,
         },
         {
           icon: "icon_freezer_12kg.png",
@@ -137,10 +123,46 @@ export default {
           price: 41.99,
           chosen: false,
         },
+        {
+          icon: "icon_freezer_16kg.png",
+          size: "16kg",
+          drawers: "2 freezer drawer",
+          daysOfFood: 32,
+          price: 48.99,
+          chosen: false,
+        },
+        {
+          icon: "icon_freezer_20kg.png",
+          size: "20kg",
+          drawers: "3 freezer drawer",
+          daysOfFood: 40,
+          price: 52.99,
+          chosen: false,
+        },
+        {
+          icon: "icon_freezer_40kg.png",
+          size: "40kg",
+          drawers: "No space issue",
+          daysOfFood: 80,
+          price: 82.99,
+          chosen: false,
+        },
       ],
     };
   },
   methods: {
+    chooseSize(size) {
+      //   Take delivery and match it with delivery sizes, and make it active
+      this.deliverySizes.forEach((deliverySize) => {
+        if (deliverySize.size === size.size) {
+          deliverySize.chosen = true;
+          this.chosenDelivery = deliverySize;
+        } else {
+          deliverySize.chosen = false;
+        }
+      });
+      this.handleDeliverySize;
+    },
     handleDeliverySize() {
       this.$emit("deliverySizeSubmit", this.chosenDelivery);
     },
@@ -152,175 +174,11 @@ export default {
         this.$emit("newCouponCode", this.newCouponCode);
       }
     },
-    chooseDelivery(delivery) {
-      this.chosenDelivery = delivery;
-      if (delivery.chosen) return;
-      switch (delivery.size) {
-        case "4kg":
-          this.deliverySizes = [
-            {
-              hidden: true,
-            },
-            {
-              icon: "icon_freezer_4kg.png",
-              size: "4kg",
-              drawers: "1/2 freezer drawer",
-              daysOfFood: 8,
-              price: 15.99,
-              chosen: true,
-            },
-            {
-              icon: "icon_freezer_8kg.png",
-              size: "8kg",
-              drawers: "1 freezer drawer",
-              daysOfFood: 16,
-              price: 29.99,
-              chosen: false,
-            },
-          ];
-          break;
-        case "8kg":
-          this.deliverySizes = [
-            {
-              icon: "icon_freezer_4kg.png",
-              size: "4kg",
-              drawers: "1/2 freezer drawer",
-              daysOfFood: 8,
-              price: 15.99,
-              chosen: false,
-            },
-            {
-              icon: "icon_freezer_8kg.png",
-              size: "8kg",
-              drawers: "1 freezer drawer",
-              daysOfFood: 16,
-              price: 29.99,
-              chosen: true,
-            },
-            {
-              icon: "icon_freezer_12kg.png",
-              size: "12kg",
-              drawers: "1 1/2 freezer drawer",
-              daysOfFood: 24,
-              price: 41.99,
-              chosen: false,
-            },
-          ];
-          break;
-        case "12kg":
-          this.deliverySizes = [
-            {
-              icon: "icon_freezer_8kg.png",
-              size: "8kg",
-              drawers: "1 freezer drawer",
-              daysOfFood: 16,
-              price: 29.99,
-              chosen: false,
-            },
-            {
-              icon: "icon_freezer_12kg.png",
-              size: "12kg",
-              drawers: "1 1/2 freezer drawer",
-              daysOfFood: 24,
-              price: 41.99,
-              chosen: true,
-            },
-            {
-              icon: "icon_freezer_16kg.png",
-              size: "16kg",
-              drawers: "2 freezer drawer",
-              daysOfFood: 32,
-              price: 48.99,
-              chosen: false,
-            },
-          ];
-          break;
-        case "16kg":
-          this.deliverySizes = [
-            {
-              icon: "icon_freezer_12kg.png",
-              size: "12kg",
-              drawers: "1 1/2 freezer drawer",
-              daysOfFood: 24,
-              price: 41.99,
-              chosen: false,
-            },
-            {
-              icon: "icon_freezer_16kg.png",
-              size: "16kg",
-              drawers: "2 freezer drawer",
-              daysOfFood: 32,
-              price: 48.99,
-              chosen: true,
-            },
-            {
-              icon: "icon_freezer_20kg.png",
-              size: "20kg",
-              drawers: "3 freezer drawer",
-              daysOfFood: 40,
-              price: 52.99,
-              chosen: false,
-            },
-          ];
-          break;
-        case "20kg":
-          this.deliverySizes = [
-            {
-              icon: "icon_freezer_16kg.png",
-              size: "16kg",
-              drawers: "2 freezer drawer",
-              daysOfFood: 32,
-              price: 48.99,
-              chosen: false,
-            },
-            {
-              icon: "icon_freezer_20kg.png",
-              size: "20kg",
-              drawers: "3 freezer drawer",
-              daysOfFood: 40,
-              price: 52.99,
-              chosen: true,
-            },
-            {
-              icon: "icon_freezer_40kg.png",
-              size: "40kg",
-              drawers: "No space issue",
-              daysOfFood: 80,
-              price: 82.99,
-              chosen: false,
-            },
-          ];
-          break;
-        case "40kg":
-          this.deliverySizes = [
-            {
-              icon: "icon_freezer_20kg.png",
-              size: "20kg",
-              drawers: "3 freezer drawer",
-              daysOfFood: 24,
-              price: 52.99,
-              chosen: false,
-            },
-            {
-              icon: "icon_freezer_40kg.png",
-              size: "40kg",
-              drawers: "No space issue",
-              daysOfFood: 80,
-              price: 82.99,
-              chosen: true,
-            },
-            {
-              hidden: true,
-            },
-          ];
-          break;
-        default:
-          break;
-      }
-    },
   },
   mounted() {
-    if (this.deliverySize.size) this.chooseDelivery(this.deliverySize);
+    if (this.deliverySize.size) this.chooseSize(this.deliverySize);
+    this.deliveryIndex = this.deliverySizes.findIndex(size => size.chosen);
+    this.loaded = true;
   },
 };
 </script>

@@ -3,7 +3,7 @@
     <h2>Lets start with a name...</h2>
     <p v-if="inputError" class="error-message">* {{ errorMessage }}</p>
     <input
-      placeholder="Name"
+      placeholder="Enter your pets name"
       class="pet-name-input"
       v-bind:class="{ 'input-error': inputError }"
       type="text"
@@ -14,9 +14,12 @@
       autofocus
     />
     <p class="info-text">
-      Enter the name of your first pet and we can get started designing their
-      ideal diet. You will be able to enter other pets later. BTW, we only feed
-      cats and dogs at the moment; goldfish coming soon.
+      Enter the name of your <b>{{ numOfPets > 1 ? "first" : "" }} pet</b> and
+      we can get started designing their ideal diet.
+      <br />
+      <br />
+      You will be able to enter other pets later. BTW, we only feed cats and
+      dogs at the moment; goldfish coming soon.
     </p>
     <transition name="fade">
       <button
@@ -35,6 +38,7 @@ export default {
   name: "PetName",
   props: {
     name: String,
+    numOfPets: Number,
   },
   data: () => {
     return {

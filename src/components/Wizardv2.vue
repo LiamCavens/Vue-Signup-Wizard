@@ -33,6 +33,7 @@
         <PetName
           v-if="stage === 1"
           :name.sync="currentPet.name"
+          :numOfPets="pets.length"
           @nameSubmit="handleName"
           key="name"
         />
@@ -394,7 +395,7 @@ export default {
       this.currentPet.weight.amount = weight;
     },
     sendToReviews() {
-      this.stage = 13;
+      this.stage = 14;
       this.openAccordion = "reviews";
     },
     handleUser(userDetails) {

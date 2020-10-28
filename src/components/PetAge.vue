@@ -27,7 +27,8 @@
     </div>
 
     <div class="input-date">
-      <h3>Or your date of birth?</h3>
+      <h3>Or</h3>
+      <h3>your date of birth?</h3>
       <div class="dob-selects">
         <select
           class="pet-age-select"
@@ -335,17 +336,7 @@ export default {
   },
   beforeMount() {
     this.getLastYears();
-  },
-  //   watch: {
-  //     age: {
-  //       handler(val) {
-  //         let years = differenceInYears(new Date(), val.dob);
-  //         console.log("Liam: years");
-  //         console.log(years);
-  //       },
-  //       deep: true,
-  //     },
-  //   },
+  }
 };
 </script>
 

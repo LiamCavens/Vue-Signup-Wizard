@@ -69,19 +69,23 @@
           class="password-input pass-1 detail-input"
           v-bind:class="{
             'input-error': errorsArray.some((t) => t === 'password'),
+            'matching-pass' : passwordsMatch
           }"
           type="password"
           v-model="password"
           @input="checkInput('password')"
+          @keyup="checkMatch()"
         />
         <input
           placeholder="Confirm password"
           class="password-input pass-2 detail-input"
           v-bind:class="{
             'input-error': errorsArray.some((t) => t === 'password'),
+            'matching-pass' : passwordsMatch
           }"
           type="password"
           @blur="checkForCopy($event.target.value)"
+          @keyup="checkMatch()"
           v-model="passwordCopy"
           required
         />
@@ -164,6 +168,7 @@ export default {
     return {
       errorsArray: [],
       postcodeFound: false,
+      passwordsMatch: false,
       inputErrorPasswordCopy: false,
       inputErrorPasswordLength: false,
       titles: ["Mr", "Mrs", "Miss", "Mz", "Mx"],
@@ -197,6 +202,13 @@ export default {
       _.remove(this.errorsArray, (e) => {
         return e === field;
       });
+    },
+    checkMatch(){
+        if (this.password === this.passwordCopy){
+            this.passwordsMatch = true;
+        } else {
+            this.passwordsMatch = false;
+        }
     },
     checkForCopy(passwordCopy) {
       if (this.password !== passwordCopy) {
@@ -409,6 +421,12 @@ export default {
   align-self: flex-end;
   font-size: 10px;
   color: #e1251b;
+}
+
+.matching-pass {
+    border: 1px solid #789904 !important;
+    box-shadow: inset 0px 0px 4px 0px #789904 !important;
+    transition: 0.5s ease !important;
 }
 </style>
 

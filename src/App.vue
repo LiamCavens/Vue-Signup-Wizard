@@ -26,6 +26,7 @@ export default {
   font-family: Montserrat-Bold;
   src: local("Montserrat-Bold"), url(./fonts/Montserrat/Montserrat-SemiBold.ttf);
 }
+
 #app {
   font-family: Montserrat;
   -webkit-font-smoothing: antialiased;

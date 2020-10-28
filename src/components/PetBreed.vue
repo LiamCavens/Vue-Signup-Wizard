@@ -111,6 +111,8 @@ export default {
         "Alpine Dachsbracke",
         "American Bulldog",
         "American Bully",
+        "Border Collie",
+        "French Bulldog",
         "Hierran Wolfdog",
         "Hokkaido",
         "Hortaya borzaya",
@@ -128,6 +130,7 @@ export default {
         "Schapendoes",
         "Schillerstövare",
         "Schipperke",
+        "Yorkshire Terrier"
       ],
       catBreeds: [
         "Abyssinian",

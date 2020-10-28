@@ -7,7 +7,7 @@
       @opened="handleOpen(1)"
     >
       <div slot="header">The plan for {{ name }}</div> -->
-    <Recommendation :name="name" key="recommendation" />
+    <Recommendation :name="name" :gender="gender" key="recommendation" />
     <!-- </BnDAccordion> -->
     <BnDAccordion
       icon="icon_meat_and_veg_white"
@@ -59,6 +59,7 @@ export default {
   },
   props: {
     name: String,
+    gender: String,
     openAccordion: String,
     flavours: Array,
   },
