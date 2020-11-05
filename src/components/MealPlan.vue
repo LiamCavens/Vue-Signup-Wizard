@@ -3,16 +3,16 @@
     <h2>The plan for {{ name }}</h2>
     <!-- <BnDAccordion
       icon="icon_bowl_white"
-      :show="showAccordion1"
-      @opened="handleOpen(1)"
+      :showThis="currentAccordion === index"
+      @opened="currentAccordion = index"
     >
       <div slot="header">The plan for {{ name }}</div> -->
     <Recommendation :name="name" :gender="gender" key="recommendation" />
     <!-- </BnDAccordion> -->
     <BnDAccordion
       icon="icon_meat_and_veg_white"
-      :showThis="showAccordion2"
-      @opened="handleOpen(2)"
+      :showThis="currentAccordion === index"
+      @opened="currentAccordion = index"
     >
       <div slot="header">Manage flavours</div>
       <!-- <div slot="header-desc">All the good bits</div> -->
@@ -20,8 +20,8 @@
     </BnDAccordion>
     <BnDAccordion
       icon="icon_healthy_heart_white"
-      :showThis="showAccordion3"
-      @opened="handleOpen(3)"
+      :showThis="currentAccordion === index"
+      @opened="currentAccordion = index"
     >
       <div slot="header">{{ name }}'s nutrition</div>
       <!-- <div slot="header-desc">All the good bits</div> -->
@@ -29,8 +29,8 @@
     </BnDAccordion>
     <BnDAccordion
       icon="icon_dog_white"
-      :showThis="showAccordion4"
-      @opened="handleOpen(4)"
+      :showThis="currentAccordion === index"
+      @opened="currentAccordion = index"
     >
       <div slot="header">What customers say</div>
       <!-- <div slot="header-desc">What people say</div> -->
@@ -65,45 +65,12 @@ export default {
   },
   data: () => {
     return {
-      showAccordion1: false,
-      showAccordion2: false,
-      showAccordion3: false,
-      showAccordion4: false,
+      currentAccordion: -1,
     };
   },
   methods: {
     handleNext() {
       this.$emit("handleNext");
-    },
-    handleOpen(accordionNum) {
-      switch (accordionNum) {
-        case 1:
-          this.showAccordion1 = true;
-          this.showAccordion2 = false;
-          this.showAccordion3 = false;
-          this.showAccordion4 = false;
-          break;
-        case 2:
-          this.showAccordion1 = false;
-          this.showAccordion2 = true;
-          this.showAccordion3 = false;
-          this.showAccordion4 = false;
-          break;
-        case 3:
-          this.showAccordion1 = false;
-          this.showAccordion2 = false;
-          this.showAccordion3 = true;
-          this.showAccordion4 = false;
-          break;
-        case 4:
-          this.showAccordion1 = false;
-          this.showAccordion2 = false;
-          this.showAccordion3 = false;
-          this.showAccordion4 = true;
-          break;
-        default:
-          break;
-      }
     },
   },
   mounted() {

@@ -22,7 +22,7 @@
       </select> -->
     </div>
 
-    <BnDAccordion icon="icon_weight_white" :showThis="showWeightChoices">
+    <BnDAccordion icon="icon_weight_white" :showThis="false">
       <div slot="header">Easy weight picker</div>
       <!-- <div slot="header-desc">Quick & Easy</div> -->
       <div class="weight-items" v-if="weightChoices">
@@ -41,12 +41,10 @@
             "
             alt="weightImage"
           />
-                    <img
+          <img
             class="weight-image"
             v-if="animal === 'cat'"
-            :src="
-              require(`../assets/cat_icon_${weightChoice.imageUrl}.png`)
-            "
+            :src="require(`../assets/cat_icon_${weightChoice.imageUrl}.png`)"
             alt="weightImage"
           />
           <div class="weight-item-text">
@@ -89,7 +87,7 @@ export default {
       showWeightChoices: false,
       weightChoices: [],
       catWeightChoices: [
-                  {
+        {
           value: 1,
           imageUrl: "small",
           label: "Small Cat",
@@ -169,13 +167,13 @@ export default {
       }
     },
     handleBodyWeight(bodyWeight, index) {
-      this.showWeightChoices = true;
       this.activatedDiv = index;
       this.$emit("weightAmountQuickPick", bodyWeight);
     },
   },
   mounted() {
-    this.weightChoices = this.animal === 'cat' ? this.catWeightChoices : this.dogWeightChoices;
+    if (!this.animal) this.animal = "dog";
+    this.weightChoices = this.animal === "cat" ? this.catWeightChoices : this.dogWeightChoices;
     window.addEventListener("keyup", (event) => {
       if (event.keyCode === 13) {
         this.handleNext();

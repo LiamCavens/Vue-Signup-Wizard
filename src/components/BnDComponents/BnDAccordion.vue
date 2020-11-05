@@ -11,7 +11,7 @@
       <font-awesome-icon
         class="header-icon"
         :class="{ rotate: show }"
-        :icon="['fas', 'angle-down']"
+        :icon="defaultIcon"
       />
     </div>
     <transition
@@ -21,7 +21,7 @@
       v-on:before-leave="beforeLeave"
       v-on:leave="leave"
     >
-      <div class="body" v-show="show">
+      <div class="body" v-show="show" ref="accordionDynamic">
         <div class="body-inner">
           <slot></slot>
         </div>
@@ -37,10 +37,13 @@ export default {
     theme: String,
     icon: String,
     showThis: Boolean,
+    fasIcon: Array,
+    heightProp: Number,
+    accodionIndex: Number,
   },
   data: () => {
     return {
-        show: false
+      show: false,
     };
   },
   methods: {
@@ -66,7 +69,22 @@ export default {
     },
   },
   mounted() {
+    this.show = this.showThis;
+  },
+  computed: {
+    defaultIcon() {
+      if (!this.fasIcon) return ["fas", "angle-down"];
+      return this.fasIcon;
+    },
+  },
+  watch: {
+    heightProp: function () {
+      let el = this.$refs.accordionDynamic;
+      this.enter(el);
+    },
+    showThis: function () {
       this.show = this.showThis;
+    },
   },
 };
 </script>
@@ -93,11 +111,34 @@ export default {
 }
 
 .header-text {
+  position: relative;
   display: flex;
   flex-direction: column;
   margin: auto 0;
   font-weight: 700;
   font-size: 14px;
+}
+
+.header-text:hover {
+  color: #00263a;
+}
+
+.header-text::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #00263a;
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.header-text:hover::before {
+  visibility: visible;
+  transform: scaleX(1);
 }
 
 .header-image {
@@ -143,5 +184,24 @@ export default {
 .accordion.noBorder .header {
   height: 25px;
   margin-top: 5px;
+}
+
+.accordion.bottomBorder {
+  border-radius: 0;
+  border-top: none !important;
+  border-right: none !important;
+  border-left: none !important;
+
+  margin-bottom: 0;
+}
+
+.accordion.bottomBorder .header {
+  height: 25px;
+  padding: 10px 0;
+  /* margin-bottom: 5px; */
+}
+
+.accordion.bottomBorder .header-image {
+  display: none;
 }
 </style>

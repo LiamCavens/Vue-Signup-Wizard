@@ -14,8 +14,8 @@
       autofocus
     />
     <p class="info-text">
-      Enter the name of your <b>{{ numOfPets > 1 ? "first" : "" }} pet</b> and
-      we can get started designing their ideal diet.
+      Enter the name of your <span v-if="numOfPets < 2">first </span>
+      <b>pet</b> and we can get started designing their ideal diet.
       <br />
       <br />
       You will be able to enter other pets later. BTW, we only feed cats and
