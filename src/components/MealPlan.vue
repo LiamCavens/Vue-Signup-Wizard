@@ -11,16 +11,20 @@
     <!-- </BnDAccordion> -->
 
     <BnDAccordion
-      v-for="(component, index) in mealPlanComponents"
+      v-for="(component, index) in newMealPlanComponents"
       :key="index"
       :icon="component.icon"
       :showThis="currentAccordion === index"
       @opened="currentAccordion = index"
     >
-      <div v-if="component.component != 'Nutrition'" slot="header">{{ component.header }}</div>
-      <div v-if="component.component === 'Nutrition'" slot="header">{{name}}'s {{ component.header }}</div>
+      <div slot="header">
+        {{ component.header }}
+      </div>
       <!-- <div slot="header-desc">All the good bits</div> -->
-      <FlavourManage v-if="component.component === 'FlavourManage'" :flavours="flavours" />
+      <FlavourManage
+        v-if="component.component === 'FlavourManage'"
+        :flavours="flavours"
+      />
       <Nutrition v-if="component.component === 'Nutrition'" :name="name" />
       <Reviews v-if="component.component === 'Reviews'" />
     </BnDAccordion>
@@ -64,7 +68,7 @@ export default {
         {
           component: "Nutrition",
           icon: "icon_healthy_heart_white",
-          header: "nutrition",
+          header: `Nutrition`,
         },
         {
           component: "Reviews",
@@ -78,6 +82,13 @@ export default {
     handleNext() {
       this.$emit("handleNext");
     },
+  },
+  computed: {
+      newMealPlanComponents(){
+        let componentOptions = Object.assign({}, this.mealPlanComponents);
+        componentOptions[1].header = `${this.name}'s nutrition`;
+        return componentOptions;
+      }
   }
 };
 </script>
