@@ -9,33 +9,22 @@
       <div slot="header">The plan for {{ name }}</div> -->
     <Recommendation :name="name" :gender="gender" key="recommendation" />
     <!-- </BnDAccordion> -->
+
     <BnDAccordion
-      icon="icon_meat_and_veg_white"
+      v-for="(component, index) in mealPlanComponents"
+      :key="index"
+      :icon="component.icon"
       :showThis="currentAccordion === index"
       @opened="currentAccordion = index"
     >
-      <div slot="header">Manage flavours</div>
+      <div v-if="component.component != 'Nutrition'" slot="header">{{ component.header }}</div>
+      <div v-if="component.component === 'Nutrition'" slot="header">{{name}}'s {{ component.header }}</div>
       <!-- <div slot="header-desc">All the good bits</div> -->
-      <FlavourManage :flavours="flavours" />
+      <FlavourManage v-if="component.component === 'FlavourManage'" :flavours="flavours" />
+      <Nutrition v-if="component.component === 'Nutrition'" :name="name" />
+      <Reviews v-if="component.component === 'Reviews'" />
     </BnDAccordion>
-    <BnDAccordion
-      icon="icon_healthy_heart_white"
-      :showThis="currentAccordion === index"
-      @opened="currentAccordion = index"
-    >
-      <div slot="header">{{ name }}'s nutrition</div>
-      <!-- <div slot="header-desc">All the good bits</div> -->
-      <Nutrition :name="name" />
-    </BnDAccordion>
-    <BnDAccordion
-      icon="icon_dog_white"
-      :showThis="currentAccordion === index"
-      @opened="currentAccordion = index"
-    >
-      <div slot="header">What customers say</div>
-      <!-- <div slot="header-desc">What people say</div> -->
-      <Reviews />
-    </BnDAccordion>
+
     <button class="btn-green next-button" @click="handleNext">Next</button>
   </div>
 </template>
@@ -66,17 +55,30 @@ export default {
   data: () => {
     return {
       currentAccordion: -1,
+      mealPlanComponents: [
+        {
+          component: "FlavourManage",
+          icon: "icon_meat_and_veg_white",
+          header: "Manage flavours",
+        },
+        {
+          component: "Nutrition",
+          icon: "icon_healthy_heart_white",
+          header: "nutrition",
+        },
+        {
+          component: "Reviews",
+          icon: "icon_dog_white",
+          header: "What customers say",
+        },
+      ],
     };
   },
   methods: {
     handleNext() {
       this.$emit("handleNext");
     },
-  },
-  mounted() {
-    // if (this.openAccordion === "nutrition") this.showAccordion1 = true;
-    if (this.openAccordion === "reviews") this.showAccordion4 = true;
-  },
+  }
 };
 </script>
 
