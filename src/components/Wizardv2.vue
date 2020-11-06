@@ -163,6 +163,9 @@
           :pets="pets"
           @submitPaymentMethod="handlePaymentMethod"
         />
+        <FinalStage           
+        v-if="stage === 19"
+          key="final" />
       </transition-group>
 
       <!-- <div class="footer-buttons">
@@ -213,6 +216,8 @@ import DogActivity from "./DogActivity";
 import DogBehaviour from "./DogBehaviour";
 import FoodIntolerance from "./FoodIntolerance";
 
+import FinalStage from "./FinalStage";
+
 import UserDetails from "./UserDetails";
 import PlanSummary from "./PlanSummary";
 import Payment from "./Payment";
@@ -252,6 +257,7 @@ export default {
     MealPlan,
     BackArrow,
     Save,
+    FinalStage
   },
   props: {},
   data: () => {
@@ -390,6 +396,7 @@ export default {
     },
     handlePaymentMethod(paymentMethod) {
       this.paymentMethod = paymentMethod;
+      this.nextStage();
     },
     pickWeight(weight) {
       this.currentPet.weight.amount = weight;
