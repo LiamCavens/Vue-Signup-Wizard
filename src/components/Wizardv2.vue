@@ -22,7 +22,7 @@
           :stage.sync="stage"
           @changeStage="handleStage"
           key="story"
-          v-if="stage < 12"
+          v-if="stage < 15"
         />
         <UserEmail
           v-if="stage === 0"
@@ -265,7 +265,7 @@ export default {
       help: false,
       backToSummary: false,
       transitionName: "slide-fade",
-      stage: 0,
+      stage: 19,
       openAccordion: "nutrition",
       coupon: "TESTCODE50",
       user: {
