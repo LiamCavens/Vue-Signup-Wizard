@@ -265,7 +265,7 @@ export default {
       help: false,
       backToSummary: false,
       transitionName: "slide-fade",
-      stage: 19,
+      stage: 0,
       openAccordion: "nutrition",
       coupon: "TESTCODE50",
       user: {
