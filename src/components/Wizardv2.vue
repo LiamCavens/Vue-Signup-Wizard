@@ -1,7 +1,7 @@
 <template>
   <div class="wizard">
     <div class="wizard-components">
-      <div v-if="stage != 2 && stage != 14" class="help-button">
+      <div v-if="stage !== 2 && stage !== 14" class="help-button">
         <button @click="openHelp">
           <p class="help-text">HELP</p>
           <span class="help-icon">
@@ -77,14 +77,14 @@
           key="weight"
         />
         <DogBodyType
-          v-if="stage === 7 && currentPet.animal != 'cat'"
+          v-if="stage === 7 && currentPet.animal === 'dog'"
           :name="currentPet.name"
           :body.sync="currentPet.body"
           @bodySubmit="handleBody"
           key="bodytype"
         />
         <DogActivity
-          v-if="stage === 8 && currentPet.animal != 'cat'"
+          v-if="stage === 8 && currentPet.animal === 'dog'"
           :name="currentPet.name"
           :gender="currentPet.gender"
           :activity.sync="currentPet.activity"
@@ -92,13 +92,13 @@
           key="activity"
         />
         <DogWorking
-          v-if="stage === 9 && currentPet.animal != 'cat'"
+          v-if="stage === 9 && currentPet.animal === 'dog'"
           :working.sync="currentPet.working"
           @workingSubmit="handleWorking"
           key="activity"
         />
         <DogHealth
-          v-if="stage === 10 && currentPet.animal != 'cat'"
+          v-if="stage === 10 && currentPet.animal === 'dog'"
           :name="currentPet.name"
           :health.sync="currentPet.health"
           @healthSubmit="handleHealth"
@@ -112,7 +112,7 @@
           @intoleranceSubmit="handleIntolerances"
         />
         <DogBehaviour
-          v-if="stage === 12 && currentPet.animal != 'cat'"
+          v-if="stage === 12 && currentPet.animal === 'dog'"
           :name="currentPet.name"
           :behaviour.sync="currentPet.behaviour"
           @behaviourSubmit="handleBehaviour"
